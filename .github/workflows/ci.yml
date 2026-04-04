@@ -322,7 +322,7 @@ jobs:
         run: |
           exit 1
       - name: MicroCeph set up
-        if: ${{ matrix.julea.kv == 'ceph' }}
+        if: ${{ matrix.julea.object == 'ceph' }}
         run: |
           sudo snap install microceph 
           sudo microceph cluster bootstrap
