@@ -232,7 +232,7 @@ jobs:
           - object: gio
             kv: lmdb
             db: sqlite
-          - object: ceph
+          - object: rados
             kv: lmdb
             db: sqlite
           # KV backends
@@ -322,13 +322,14 @@ jobs:
         run: |
           exit 1
       - name: MicroCeph set up
-        if: ${{ matrix.julea.object == 'ceph' }}
+        if: ${{ matrix.julea.object == 'rados' }}
         run: |
           sudo snap install microceph 
           sudo microceph cluster bootstrap
           sudo microceph disk add loop,4G,3 
           sudo microceph enable rgw
           sudo microceph.ceph osd pool create julea
+          sudo microceph status
       - name: Configure and build
         env:
           CC: ${{ matrix.os.compiler }}
