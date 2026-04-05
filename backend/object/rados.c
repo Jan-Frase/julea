@@ -205,9 +205,32 @@ backend_write(gpointer backend_data, gpointer backend_object, gconstpointer buff
 	return TRUE;
 }
 
-/// \todo implement backend_get_all
-/// \todo implement backend_get_by_prefix
-/// \todo implement backend_iterate
+static gboolean
+backend_get_all(gpointer backend_data, gchar const* namespace, gpointer* backend_iterator)
+{
+	/// \todo implement backend_get_all
+	/// This function needs to exist for the check in `j_backend_load` to succeed.
+	g_critical("%s NOT implemented !!", G_STRLOC);
+	return FALSE;
+}
+
+static gboolean
+backend_get_by_prefix(gpointer backend_data, gchar const* namespace, gchar const* prefix, gpointer* backend_iterator)
+{
+	/// \todo implement backend_get_by_prefix
+	/// This function needs to exist for the check in `j_backend_load` to succeed.
+	g_critical("%s NOT implemented !!", G_STRLOC);
+	return FALSE;
+}
+
+static gboolean
+backend_iterate(gpointer backend_data, gpointer backend_iterator, gchar const** name)
+{
+	/// \todo implement backend_iterate
+	/// This function needs to exist for the check in `j_backend_load` to succeed.
+	g_critical("%s NOT implemented !!", G_STRLOC);
+	return FALSE;
+}
 
 static gboolean
 backend_init(gchar const* path, gpointer* backend_data)
@@ -289,7 +312,11 @@ static JBackend rados_backend = {
 		.backend_status = backend_status,
 		.backend_sync = backend_sync,
 		.backend_read = backend_read,
-		.backend_write = backend_write }
+		.backend_write = backend_write,
+		.backend_get_all = backend_get_all,
+		.backend_get_by_prefix = backend_get_by_prefix,
+		.backend_iterate = backend_iterate,
+	}
 };
 
 G_MODULE_EXPORT

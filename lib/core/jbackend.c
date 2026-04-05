@@ -240,7 +240,7 @@ unload:
 	*module = NULL;
 	*backend = NULL;
 
-	return TRUE;
+	return FALSE;
 
 error:
 	g_critical("Could not load %s backend %s.", type_str, name);

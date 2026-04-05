@@ -236,7 +236,9 @@ jd_load_and_init_backend(gchar const* host, gint port, JBackendType type, JBacke
 		return TRUE;
 	}
 
-	if (!j_backend_load(backend_name, J_BACKEND_COMPONENT_SERVER, type, module, backend))
+
+
+	if (!j_backend_load(backend_name, J_BACKEND_COMPONENT_SERVER, type, module, backend) && !j_backend_load(backend_name, J_BACKEND_COMPONENT_CLIENT, type, module, backend))
 	{
 		return FALSE;
 	}
