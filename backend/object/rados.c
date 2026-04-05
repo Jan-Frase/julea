@@ -262,7 +262,7 @@ backend_init(gchar const* path, gpointer* backend_data)
 	/* Read config file */
 	if (rados_conf_read_file(bd->backend_connection, bd->backend_config) != 0)
 	{
-		g_critical("Can not read RADOS config file %s.", bd->backend_config);
+		g_critical("Can not read RADOS config file `%s`.", bd->backend_config);
 	}
 
 	/* Connect to cluster */
