@@ -1,6 +1,6 @@
 /*
  * JULEA - Flexible storage framework
- * Copyright (C) 2010-2024 Michael Kuhn
+ * Copyright (C) 2010-2026 Michael Kuhn
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -66,6 +66,7 @@ main(int argc, char** argv)
 
 	// DB client
 	test_db_db();
+	test_db_parallel();
 
 	// Item client
 	test_item_collection();

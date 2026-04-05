@@ -1,6 +1,6 @@
 /*
  * JULEA - Flexible storage framework
- * Copyright (C) 2010-2024 Michael Kuhn
+ * Copyright (C) 2010-2026 Michael Kuhn
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -58,6 +58,7 @@ void test_kv_kv_iterator(void);
 void test_kv_parallel(void);
 
 void test_db_db(void);
+void test_db_parallel(void);
 
 void test_item_collection(void);
 void test_item_collection_iterator(void);

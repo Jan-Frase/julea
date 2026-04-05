@@ -1,5 +1,5 @@
 # JULEA - Flexible storage framework
-# Copyright (C) 2020-2024 Michael Kuhn
+# Copyright (C) 2020-2026 Michael Kuhn
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -536,6 +536,7 @@ julea_test_srcs = files([
 	'test/core/message.c',
 	'test/core/semantics.c',
 	'test/db/db.c',
+	'test/db/parallel.c',
 	'test/hdf5/hdf.c',
 	'test/hdf5/hdf-attribute.c',
 	'test/hdf5/hdf-dataset.c',

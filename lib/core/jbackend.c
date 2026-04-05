@@ -1,6 +1,6 @@
 /*
  * JULEA - Flexible storage framework
- * Copyright (C) 2017-2024 Michael Kuhn
+ * Copyright (C) 2017-2026 Michael Kuhn
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -406,6 +406,7 @@ j_backend_object_get_by_prefix(JBackend* backend, gchar const* namespace, gchar 
 
 	return ret;
 }
+
 gboolean
 j_backend_object_iterate(JBackend* backend, gpointer iterator, gchar const** name)
 {
@@ -703,6 +704,7 @@ j_backend_kv_get_by_prefix(JBackend* backend, gchar const* namespace, gchar cons
 
 	return ret;
 }
+
 gboolean
 j_backend_kv_iterate(JBackend* backend, gpointer iterator, gchar const** key, gconstpointer* value, guint32* value_len)
 {
