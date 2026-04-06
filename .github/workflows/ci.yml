@@ -232,6 +232,9 @@ jobs:
           - object: gio
             kv: lmdb
             db: sqlite
+          - object: rados
+            kv: lmdb
+            db: sqlite
           # KV backends
           - object: posix
             kv: gdbm
@@ -318,6 +321,15 @@ jobs:
         if: ${{ matrix.dependencies == 'spack' && steps.cache.outputs.cache-hit != 'true' }}
         run: |
           exit 1
+      - name: MicroCeph set up
+        if: ${{ matrix.julea.object == 'rados' }}
+        run: |
+          sudo snap install microceph 
+          sudo microceph cluster bootstrap
+          sudo microceph disk add loop,4G,3 
+          sudo microceph enable rgw
+          sudo microceph.ceph osd pool create julea
+          sudo microceph status
       - name: Configure and build
         env:
           CC: ${{ matrix.os.compiler }}
@@ -331,7 +343,7 @@ jobs:
           if test "${{ matrix.julea.kv }}" = 'mongodb'; then JULEA_KV_PATH='127.0.0.1:juleadb'; fi
           JULEA_DB_PATH="/tmp/julea/db/${{ matrix.julea.db }}"
           if test "${{ matrix.julea.db }}" = 'mysql'; then JULEA_DB_PATH='127.0.0.1:juleadb:julea:aeluj'; fi
-          julea-config --user --object-servers="$(hostname)" --kv-servers="$(hostname)" --db-servers="$(hostname)" --object-backend="${{ matrix.julea.object }}" --object-path="/tmp/julea/object/${{ matrix.julea.object }}" --kv-backend="${{ matrix.julea.kv }}" --kv-path="${JULEA_KV_PATH}" --db-backend="${{ matrix.julea.db }}" --db-path="${JULEA_DB_PATH}"
+          julea-config --user --object-servers="$(hostname)" --kv-servers="$(hostname)" --db-servers="$(hostname)" --object-backend="${{ matrix.julea.object }}" --object-path="/var/snap/microceph/current/conf/ceph.conf:julea" --kv-backend="${{ matrix.julea.kv }}" --kv-path="${JULEA_KV_PATH}" --db-backend="${{ matrix.julea.db }}" --db-path="${JULEA_DB_PATH}"
       - name: Tests
         run: |
           . scripts/environment.sh
