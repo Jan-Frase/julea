@@ -1,5 +1,5 @@
 # JULEA - Flexible storage framework
-# Copyright (C) 2019-2024 Michael Kuhn
+# Copyright (C) 2019-2026 Michael Kuhn
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -16,6 +16,9 @@
 
 name: CI
 on: [push, pull_request]
+defaults:
+  run:
+    shell: bash
 jobs:
   style:
     name: Style
@@ -35,48 +38,6 @@ jobs:
           ./scripts/check.sh
   dependencies:
     name: Dependencies
-    runs-on: ${{ matrix.os.dist }}
-    timeout-minutes: 180
-    strategy:
-      fail-fast: false
-      matrix:
-        os:
-          - dist: ubuntu-24.04
-            compiler: gcc
-            compiler_spack: gcc
-            compiler_version: 13.3.0
-          - dist: ubuntu-24.04
-            compiler: clang
-            compiler_spack: llvm
-            compiler_version: 18.1.3
-          - dist: ubuntu-22.04
-            compiler: gcc
-            compiler_spack: gcc
-            compiler_version: 11.4.0
-          - dist: ubuntu-22.04
-            compiler: clang
-            compiler_spack: llvm
-            compiler_version: 14.0.0
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-          show-progress: false
-      - name: Cache dependencies
-        id: cache
-        uses: actions/cache@v5
-        with:
-          path: dependencies
-          key: ${{ matrix.os.dist }}-${{ matrix.os.compiler }}-${{ matrix.os.compiler_version }}-${{ hashFiles('scripts/spack', 'scripts/install-dependencies.sh') }}
-      - name: Install dependencies
-        if: ${{ steps.cache.outputs.cache-hit != 'true' }}
-        env:
-          JULEA_SPACK_COMPILER: ${{ matrix.os.compiler_spack }}@${{ matrix.os.compiler_version }}
-        run: |
-          ./scripts/install-dependencies.sh
-  dependencies-containers:
-    name: Dependencies (Containers)
     runs-on: ubuntu-24.04
     container: ${{ matrix.os.registry }}/${{ matrix.os.image }}
     timeout-minutes: 180
@@ -84,110 +45,76 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - image: ubuntu:24.04
-            registry: docker.io/library
+          - image: ubuntu:24.04-base
+            registry: ghcr.io/parcio/julea
             compiler: gcc
             compiler_spack: gcc
             compiler_version: 13.3.0
-          - image: ubuntu:24.04
-            registry: docker.io/library
+          - image: ubuntu:24.04-base
+            registry: ghcr.io/parcio/julea
             compiler: clang
             compiler_spack: llvm
             compiler_version: 18.1.3
-          - image: ubuntu:22.04
-            registry: docker.io/library
-            compiler: gcc
-            compiler_spack: gcc
-            compiler_version: 11.4.0
-          - image: ubuntu:22.04
-            registry: docker.io/library
-            compiler: clang
-            compiler_spack: llvm
-            compiler_version: 14.0.0
+    env:
+      JULEA_SPACK_COMPILER: ${{ matrix.os.compiler_spack }}@${{ matrix.os.compiler_version }}
+      JULEA_SPACK_DIR: /julea-dependencies
     steps:
       - name: Checkout
         uses: actions/checkout@v6
         with:
           persist-credentials: false
           show-progress: false
-      - name: Install packages
-        if: ${{ matrix.os.image == 'ubuntu:24.04' || matrix.os.image == 'ubuntu:22.04' }}
-        run: |
-          apt update
-          apt --yes --no-install-recommends install build-essential zstd
-          apt --yes --no-install-recommends install ca-certificates git gnupg patchelf python3 unzip
-          if test "${{ matrix.os.compiler }}" = 'clang'
-          then
-            apt --yes --no-install-recommends install clang
-
-            if test "${{ matrix.os.image }}" = 'ubuntu:24.04'
-            then
-              apt --yes --no-install-recommends install libclang-rt-dev
-            fi
-          fi
       - name: Cache dependencies
         id: cache
         uses: actions/cache@v5
         with:
-          path: /dependencies
+          path: ${{ env.JULEA_SPACK_DIR }}
           key: ${{ matrix.os.image }}-${{ matrix.os.compiler }}-${{ matrix.os.compiler_version }}-${{ hashFiles('scripts/spack', 'scripts/install-dependencies.sh') }}
       - name: Install dependencies
         if: ${{ steps.cache.outputs.cache-hit != 'true' }}
-        env:
-          JULEA_SPACK_COMPILER: ${{ matrix.os.compiler_spack }}@${{ matrix.os.compiler_version }}
-          JULEA_SPACK_DIR: /dependencies
         run: |
           ./scripts/install-dependencies.sh
   build:
     name: Build
     needs: dependencies
-    runs-on: ${{ matrix.os.dist }}
+    runs-on: ubuntu-24.04
+    container: ${{ matrix.os.registry }}/${{ matrix.os.image }}
     timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
         os:
-          - dist: ubuntu-24.04
+          - image: ubuntu:24.04-base
+            registry: ghcr.io/parcio/julea
             compiler: gcc
             compiler_spack: gcc
             compiler_version: 13.3.0
-          - dist: ubuntu-24.04
+          - image: ubuntu:24.04-base
+            registry: ghcr.io/parcio/julea
             compiler: clang
             compiler_spack: llvm
             compiler_version: 18.1.3
-          - dist: ubuntu-22.04
-            compiler: gcc
-            compiler_spack: gcc
-            compiler_version: 11.4.0
-          - dist: ubuntu-22.04
-            compiler: clang
-            compiler_spack: llvm
-            compiler_version: 14.0.0
         dependencies: [system, spack]
+    env:
+      JULEA_SPACK_DIR: /julea-dependencies
     steps:
       - name: Checkout
         uses: actions/checkout@v6
         with:
           persist-credentials: false
           show-progress: false
-      - name: Clean up system packages
-        # We need to remove glib-network, otherwise libproxy might cause crashes.
-        run: |
-          sudo apt --yes purge glib-networking
-          sudo apt --yes --purge autoremove
-          sudo aa-remove-unknown || true
       - name: Install dependencies
         if: ${{ matrix.dependencies == 'system' }}
         run: |
-          sudo apt update || true
-          sudo apt --yes --no-install-recommends install meson ninja-build pkgconf libglib2.0-dev libbson-dev libfabric-dev libgdbm-dev liblmdb-dev libsqlite3-dev libleveldb-dev libmongoc-dev libmariadb-dev librocksdb-dev libfuse3-dev libopen-trace-format-dev librados-dev
+          apt update
+          apt --yes --no-install-recommends install meson ninja-build pkgconf libglib2.0-dev libbson-dev libfabric-dev libgdbm-dev liblmdb-dev libsqlite3-dev libleveldb-dev libmongoc-dev libmariadb-dev librocksdb-dev libfuse3-dev libopen-trace-format-dev librados-dev
       - name: Cache dependencies
         id: cache
         if: ${{ matrix.dependencies == 'spack' }}
         uses: actions/cache/restore@v5
         with:
-          path: dependencies
-          key: ${{ matrix.os.dist }}-${{ matrix.os.compiler }}-${{ matrix.os.compiler_version }}-${{ hashFiles('scripts/spack', 'scripts/install-dependencies.sh') }}
+          path: ${{ env.JULEA_SPACK_DIR }}
+          key: ${{ matrix.os.image }}-${{ matrix.os.compiler }}-${{ matrix.os.compiler_version }}-${{ hashFiles('scripts/spack', 'scripts/install-dependencies.sh') }}
       - name: Check dependencies
         if: ${{ matrix.dependencies == 'spack' && steps.cache.outputs.cache-hit != 'true' }}
         run: |
@@ -200,28 +127,23 @@ jobs:
   tests:
     name: Tests
     needs: dependencies
-    runs-on: ${{ matrix.os.dist }}
+    runs-on: ubuntu-24.04
+    container: ${{ matrix.os.registry }}/${{ matrix.os.image }}
     timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
         os:
-          - dist: ubuntu-24.04
+          - image: ubuntu:24.04-base
+            registry: ghcr.io/parcio/julea
             compiler: gcc
             compiler_spack: gcc
             compiler_version: 13.3.0
-          - dist: ubuntu-24.04
+          - image: ubuntu:24.04-base
+            registry: ghcr.io/parcio/julea
             compiler: clang
             compiler_spack: llvm
             compiler_version: 18.1.3
-          - dist: ubuntu-22.04
-            compiler: gcc
-            compiler_spack: gcc
-            compiler_version: 11.4.0
-          - dist: ubuntu-22.04
-            compiler: clang
-            compiler_spack: llvm
-            compiler_version: 14.0.0
         dependencies: [system, spack]
         julea:
           # Default
@@ -229,10 +151,10 @@ jobs:
             kv: lmdb
             db: sqlite
           # Object backends
-          - object: gio
+          - object: rados
             kv: lmdb
             db: sqlite
-          - object: rados
+          - object: gio
             kv: lmdb
             db: sqlite
           # KV backends
@@ -263,7 +185,7 @@ jobs:
         exclude:
           # FIXME Ubuntu 24.04's RocksDB triggers asan
           - os:
-              dist: ubuntu-24.04
+              image: ubuntu:24.04-base
             dependencies: system
             julea:
               kv: rocksdb
@@ -275,12 +197,8 @@ jobs:
           MARIADB_DATABASE: juleadb
           MARIADB_USER: julea
           MARIADB_PASSWORD: aeluj
-        ports:
-          - 3306:3306
       mongodb:
         image: ${{ matrix.julea.kv == 'mongodb' && 'docker.io/library/mongo' || '' }}
-        ports:
-          - 27017:27017
       mysql:
         image: ${{ matrix.julea.db == 'mysql' && matrix.julea.db-server == 'mysql' && 'docker.io/library/mysql' || '' }}
         env:
@@ -288,47 +206,38 @@ jobs:
           MYSQL_DATABASE: juleadb
           MYSQL_USER: julea
           MYSQL_PASSWORD: aeluj
-        ports:
-          - 3306:3306
+    env:
+      JULEA_SPACK_DIR: /julea-dependencies
     steps:
       - name: Checkout
         uses: actions/checkout@v6
         with:
           persist-credentials: false
           show-progress: false
-      - name: Clean up system packages
-        # We need to remove glib-network, otherwise libproxy might cause crashes.
-        # FIXME https://bugs.launchpad.net/ubuntu/+source/mariadb-10.1/+bug/1806263
-        # Ubuntu 22.04 and 24.04 have MySQL 8.0
-        run: |
-          sudo apt --yes purge glib-networking mysql-client mysql-client-8.0 mysql-server mysql-server-8.0
-          sudo apt --yes --purge autoremove
-          sudo aa-remove-unknown || true
-          sudo rm --recursive --force /var/lib/mysql
       - name: Install dependencies
         if: ${{ matrix.dependencies == 'system' }}
         run: |
-          sudo apt update || true
-          sudo apt --yes --no-install-recommends install meson ninja-build pkgconf libglib2.0-dev libbson-dev libfabric-dev libgdbm-dev liblmdb-dev libsqlite3-dev libleveldb-dev libmongoc-dev libmariadb-dev librocksdb-dev libfuse3-dev libopen-trace-format-dev librados-dev
+          apt update
+          apt --yes --no-install-recommends install meson ninja-build pkgconf libglib2.0-dev libbson-dev libfabric-dev libgdbm-dev liblmdb-dev libsqlite3-dev libleveldb-dev libmongoc-dev libmariadb-dev librocksdb-dev libfuse3-dev libopen-trace-format-dev librados-dev
       - name: Cache dependencies
         id: cache
         if: ${{ matrix.dependencies == 'spack' }}
         uses: actions/cache/restore@v5
         with:
-          path: dependencies
-          key: ${{ matrix.os.dist }}-${{ matrix.os.compiler }}-${{ matrix.os.compiler_version }}-${{ hashFiles('scripts/spack', 'scripts/install-dependencies.sh') }}
+          path: ${{ env.JULEA_SPACK_DIR }}
+          key: ${{ matrix.os.image }}-${{ matrix.os.compiler }}-${{ matrix.os.compiler_version }}-${{ hashFiles('scripts/spack', 'scripts/install-dependencies.sh') }}
       - name: Check dependencies
         if: ${{ matrix.dependencies == 'spack' && steps.cache.outputs.cache-hit != 'true' }}
         run: |
           exit 1
-      - name: MicroCeph set up
+      - name: Microceph set up
         if: ${{ matrix.julea.object == 'rados' }}
         run: |
           sudo snap install microceph 
           sudo microceph cluster bootstrap
           sudo microceph disk add loop,4G,3 
           sudo microceph enable rgw
-          sudo microceph.ceph osd pool create julea
+          sudo microceph.ceph osd pool create julea 
           sudo microceph status
       - name: Configure and build
         env:
@@ -336,13 +245,12 @@ jobs:
         run: |
           ./scripts/ci/build.sh debug "${{ matrix.dependencies }}"
       - name: Create configuration
-        # FIXME We need to use 127.0.0.1 because localhost tries to use the socket (/tmp/mysql.sock), which does not exist.
         run: |
           . scripts/environment.sh
           JULEA_KV_PATH="/tmp/julea/kv/${{ matrix.julea.kv }}"
-          if test "${{ matrix.julea.kv }}" = 'mongodb'; then JULEA_KV_PATH='127.0.0.1:juleadb'; fi
+          if test "${{ matrix.julea.kv }}" = 'mongodb'; then JULEA_KV_PATH='mongodb:juleadb'; fi
           JULEA_DB_PATH="/tmp/julea/db/${{ matrix.julea.db }}"
-          if test "${{ matrix.julea.db }}" = 'mysql'; then JULEA_DB_PATH='127.0.0.1:juleadb:julea:aeluj'; fi
+          if test "${{ matrix.julea.db }}" = 'mysql'; then JULEA_DB_PATH='${{ matrix.julea.db-server }}:juleadb:julea:aeluj'; fi
           julea-config --user --object-servers="$(hostname)" --kv-servers="$(hostname)" --db-servers="$(hostname)" --object-backend="${{ matrix.julea.object }}" --object-path="/var/snap/microceph/current/conf/ceph.conf:julea" --kv-backend="${{ matrix.julea.kv }}" --kv-path="${JULEA_KV_PATH}" --db-backend="${{ matrix.julea.db }}" --db-path="${JULEA_DB_PATH}"
       - name: Tests
         run: |
@@ -395,7 +303,7 @@ jobs:
         run: |
           doxygen
       - name: Upload doxygen
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: doxygen
           path: html
@@ -405,7 +313,10 @@ jobs:
     name: Coverage
     needs: dependencies
     runs-on: ubuntu-24.04
+    container: ghcr.io/parcio/julea/ubuntu:24.04-base
     timeout-minutes: 60
+    env:
+      JULEA_SPACK_DIR: /julea-dependencies
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -416,8 +327,8 @@ jobs:
         id: cache
         uses: actions/cache/restore@v5
         with:
-          path: dependencies
-          key: ubuntu-24.04-gcc-13.3.0-${{ hashFiles('scripts/spack', 'scripts/install-dependencies.sh') }}
+          path: ${{ env.JULEA_SPACK_DIR }}
+          key: ubuntu:24.04-base-gcc-13.3.0-${{ hashFiles('scripts/spack', 'scripts/install-dependencies.sh') }}
       - name: Check dependencies
         if: ${{ steps.cache.outputs.cache-hit != 'true' }}
         run: |
@@ -445,7 +356,7 @@ jobs:
           . scripts/environment.sh
           ninja -C bld coverage
       - name: Upload coverage
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: coverage
           path: bld/meson-logs/coveragereport
@@ -458,12 +369,12 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Download doxygen
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: doxygen
           path: doxygen
       - name: Download coverage
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: coverage
           path: coverage
