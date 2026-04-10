@@ -233,6 +233,8 @@ jobs:
       - name: Microceph set up
         if: ${{ matrix.julea.object == 'rados' }}
         run: |
+          apt-get install -y snapd
+          systemctl start snapd
           ./scripts/rados-util.sh bootstrap
       - name: Configure and build
         env:
