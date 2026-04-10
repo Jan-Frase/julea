@@ -23,29 +23,29 @@ SELF_BASE="${SELF_PATH##*/}"
 
 usage ()
 {
-	echo "Usage: ${SELF_BASE} bootstrap|teardown"
-	echo ""
-	echo "This file offers some convenience commands for bootstrapping a non-persistent ceph cluster and tearing it down again."
+  echo "Usage: sudo ${SELF_BASE} bootstrap|teardown"
+  echo ""
+  echo "This file offers some convenience commands for bootstrapping a non-persistent ceph cluster and tearing it down again."
   echo "It is used in the GitHub CI but can also be used for local testing."
   echo "However, do note that it assumes that snap is already installed on your system."
 
-	exit 1
+  exit 1
 }
 
 bootstrap ()
 {
-    sudo snap install microceph
-    sudo microceph cluster bootstrap
-    sudo microceph disk add loop,4G,3
-    sudo microceph enable rgw
-    sudo microceph.ceph osd pool create julea
-    sudo microceph status
-    sudo cat var/snap/microceph/current/config/ceph.keyring | sudo tee --append /var/snap/microceph/current/conf/ceph.conf > /dev/null
+    snap install microceph
+    microceph cluster bootstrap
+    microceph disk add loop,4G,3
+    microceph enable rgw
+    microceph.ceph osd pool create julea
+    microceph status
+    cat var/snap/microceph/current/config/ceph.keyring | tee --append /var/snap/microceph/current/conf/ceph.conf > /dev/null
 }
 
 teardown ()
 {
-  sudo snap remove microceph
+  snap remove microceph
 }
 
 
