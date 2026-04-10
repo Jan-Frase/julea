@@ -233,12 +233,7 @@ jobs:
       - name: Microceph set up
         if: ${{ matrix.julea.object == 'rados' }}
         run: |
-          sudo snap install microceph 
-          sudo microceph cluster bootstrap
-          sudo microceph disk add loop,4G,3 
-          sudo microceph enable rgw
-          sudo microceph.ceph osd pool create julea 
-          sudo microceph status
+          ./scripts/rados-util.sh bootstrap
       - name: Configure and build
         env:
           CC: ${{ matrix.os.compiler }}
