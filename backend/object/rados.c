@@ -206,29 +206,39 @@ backend_write(gpointer backend_data, gpointer backend_object, gconstpointer buff
 }
 
 static gboolean
-backend_get_all(/*gpointer backend_data, gchar const* namespace, gpointer* backend_iterator*/)
+backend_get_all(gpointer backend_data, gchar const* namespace, gpointer* backend_iterator)
 {
 	/// \todo implement backend_get_all
 	/// This function needs to exist for the check in `j_backend_load` to succeed.
 	g_critical("%s NOT implemented !!", G_STRLOC);
+	(void) backend_data;
+	(void) namespace;
+	(void) backend_iterator;
 	return FALSE;
 }
 
 static gboolean
-backend_get_by_prefix(/*gpointer backend_data, gchar const* namespace, gchar const* prefix, gpointer* backend_iterator*/)
+backend_get_by_prefix(gpointer backend_data, gchar const* namespace, gchar const* prefix, gpointer* backend_iterator)
 {
 	/// \todo implement backend_get_by_prefix
 	/// This function needs to exist for the check in `j_backend_load` to succeed.
 	g_critical("%s NOT implemented !!", G_STRLOC);
+	(void) backend_data;
+	(void) namespace;
+	(void) prefix;
+	(void) backend_iterator;
 	return FALSE;
 }
 
 static gboolean
-backend_iterate(/*gpointer backend_data, gpointer backend_iterator, gchar const** name*/)
+backend_iterate(gpointer backend_data, gpointer backend_iterator, gchar const** name)
 {
 	/// \todo implement backend_iterate
 	/// This function needs to exist for the check in `j_backend_load` to succeed.
 	g_critical("%s NOT implemented !!", G_STRLOC);
+	(void) backend_data;
+	(void) backend_iterator;
+	(void) name;
 	return FALSE;
 }
 
