@@ -34,7 +34,7 @@ usage ()
 
 bootstrap ()
 {
-    snap install microceph
+    # snap install microceph
     microceph cluster bootstrap
     microceph disk add loop,4G,3
     microceph enable rgw

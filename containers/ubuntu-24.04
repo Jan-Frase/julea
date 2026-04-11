@@ -6,6 +6,7 @@ RUN apt --yes --no-install-recommends install build-essential zstd
 RUN	apt --yes --no-install-recommends install ca-certificates git gnupg patchelf python3 unzip
 RUN	apt --yes --no-install-recommends install clang libclang-rt-dev
 RUN	apt --yes --no-install-recommends install snapd
+RUN snap install microceph
 RUN	apt --yes --purge autoremove
 RUN	apt clean
 RUN	apt distclean
