@@ -32,12 +32,12 @@ jobs:
       matrix:
         os:
           - image: ubuntu:24.04-base
-            registry: ghcr.io/${{ github.repository }}
+            registry: ghcr.io/jan-frase/julea
             compiler: gcc
             compiler_spack: gcc
             compiler_version: 13.3.0
           - image: ubuntu:24.04-base
-            registry: ghcr.io/${{ github.repository }}
+            registry: ghcr.io/jan-frase/julea
             compiler: clang
             compiler_spack: llvm
             compiler_version: 18.1.3
