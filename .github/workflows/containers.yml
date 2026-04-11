@@ -62,4 +62,4 @@ jobs:
           no-cache: true
           pull: true
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/{{ github.repository }}/ubuntu:24.04-base
+          tags: ghcr.io/${{ github.repository }}/ubuntu:24.04-base
