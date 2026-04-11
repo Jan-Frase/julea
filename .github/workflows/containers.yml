@@ -18,7 +18,8 @@ name: Containers
 on:
   push:
     branches:
-      - master, ceph-container
+      - master
+      - ceph-container
     paths:
       - '.github/workflows/containers.yml'
       - 'containers/*'
