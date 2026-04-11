@@ -1,11 +1,11 @@
 FROM docker.io/library/ubuntu:24.04
 
-RUN apt update && \
-	apt --yes --no-install-recommends full-upgrade && \
-	apt --yes --no-install-recommends install build-essential zstd && \
-	apt --yes --no-install-recommends install ca-certificates git gnupg patchelf python3 unzip && \
-	apt --yes --no-install-recommends install clang libclang-rt-dev && \
-	apt --yes --no-install-recommends install snapd \
-	apt --yes --purge autoremove && \
-	apt clean && \
-	apt distclean
+RUN apt update
+RUN apt --yes --no-install-recommends full-upgrade
+RUN apt --yes --no-install-recommends install build-essential zstd
+RUN	apt --yes --no-install-recommends install ca-certificates git gnupg patchelf python3 unzip
+RUN	apt --yes --no-install-recommends install clang libclang-rt-dev
+RUN	apt --yes --no-install-recommends install snapd
+RUN	apt --yes --purge autoremove
+RUN	apt clean
+RUN	apt distclean
