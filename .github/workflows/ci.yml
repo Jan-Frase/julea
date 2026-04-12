@@ -127,8 +127,7 @@ jobs:
   tests:
     name: Tests
     needs: dependencies
-    runs-on: ubuntu-24.04
-    container: ${{ matrix.os.registry }}/${{ matrix.os.image }}
+    runs-on: ${{ matrix.os.dist }}
     timeout-minutes: 60
     strategy:
       fail-fast: false
@@ -183,7 +182,7 @@ jobs:
         exclude:
           # FIXME Ubuntu 24.04's RocksDB triggers asan
           - os:
-              image: ubuntu:24.04-base
+              image: ubuntu:24.04
             dependencies: system
             julea:
               kv: rocksdb
