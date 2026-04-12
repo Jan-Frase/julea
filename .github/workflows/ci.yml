@@ -134,13 +134,11 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - image: ubuntu:24.04-base
-            registry: ghcr.io/parcio/julea
+          - dist: ubuntu:24.04
             compiler: gcc
             compiler_spack: gcc
             compiler_version: 13.3.0
-          - image: ubuntu:24.04-base
-            registry: ghcr.io/parcio/julea
+          - dist: ubuntu:24.04
             compiler: clang
             compiler_spack: llvm
             compiler_version: 18.1.3
@@ -233,13 +231,7 @@ jobs:
       - name: Microceph set up
         if: ${{ matrix.julea.object == 'rados' }}
         run: |
-          snap install microceph
-          microceph cluster bootstrap
-          microceph disk add loop,4G,3
-          microceph enable rgw
-          microceph.ceph osd pool create julea
-          microceph status
-          cat /var/snap/microceph/current/conf/ceph.keyring | tee --append /var/snap/microceph/current/conf/ceph.conf > /dev/null
+          ./.scripts/microceph.sh bootstrap
       - name: Configure and build
         env:
           CC: ${{ matrix.os.compiler }}
