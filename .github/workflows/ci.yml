@@ -133,13 +133,11 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - image: ubuntu:24.04-base
-            registry: ghcr.io/jan-frase/julea
+          - dist: ubuntu:24.04
             compiler: gcc
             compiler_spack: gcc
             compiler_version: 13.3.0
-          - image: ubuntu:24.04-base
-            registry: ghcr.io/jan-frase/julea
+          - dist: ubuntu:24.04
             compiler: clang
             compiler_spack: llvm
             compiler_version: 18.1.3
@@ -216,8 +214,8 @@ jobs:
       - name: Install dependencies
         if: ${{ matrix.dependencies == 'system' }}
         run: |
-          apt update || true
-          apt --yes --no-install-recommends install meson ninja-build pkgconf libglib2.0-dev libbson-dev libfabric-dev libgdbm-dev liblmdb-dev libsqlite3-dev libleveldb-dev libmongoc-dev libmariadb-dev librocksdb-dev libfuse3-dev libopen-trace-format-dev librados-dev
+          sudo apt update || true
+          sudo apt --yes --no-install-recommends install meson ninja-build pkgconf libglib2.0-dev libbson-dev libfabric-dev libgdbm-dev liblmdb-dev libsqlite3-dev libleveldb-dev libmongoc-dev libmariadb-dev librocksdb-dev libfuse3-dev libopen-trace-format-dev librados-dev
       - name: Cache dependencies
         id: cache
         if: ${{ matrix.dependencies == 'spack' }}
@@ -232,8 +230,8 @@ jobs:
       - name: Microceph set up
         if: ${{ matrix.julea.object == 'rados' }}
         run: |
-          snap install microceph
-          ./scripts/rados-util.sh bootstrap
+          sudo snap install microceph
+          sudo ./scripts/rados-util.sh bootstrap
       - name: Configure and build
         env:
           CC: ${{ matrix.os.compiler }}
