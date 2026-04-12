@@ -128,7 +128,9 @@ jobs:
     name: Tests
     needs: dependencies
     runs-on: ubuntu-24.04
-    container: ${{ matrix.os.registry }}/${{ matrix.os.image }}
+    container:
+      image: ${{ matrix.os.registry }}/${{ matrix.os.image }}
+      options: --privileged
     timeout-minutes: 60
     strategy:
       fail-fast: false
@@ -233,6 +235,8 @@ jobs:
       - name: Microceph set up
         if: ${{ matrix.julea.object == 'rados' }}
         run: |
+          /usr/lib/snapd/snapd &
+          sleep 5
           snap install microceph
           ./scripts/rados-util.sh bootstrap
       - name: Configure and build
