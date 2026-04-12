@@ -205,15 +205,49 @@ backend_write(gpointer backend_data, gpointer backend_object, gconstpointer buff
 	return TRUE;
 }
 
-/// \todo implement backend_get_all
-/// \todo implement backend_get_by_prefix
-/// \todo implement backend_iterate
+static gboolean
+backend_get_all(gpointer backend_data, gchar const* namespace, gpointer* backend_iterator)
+{
+	/// \todo implement backend_get_all
+	/// This function needs to exist for the check in `j_backend_load` to succeed.
+	g_critical("%s NOT implemented !!", G_STRLOC);
+	(void) backend_data;
+	(void) namespace;
+	(void) backend_iterator;
+	return FALSE;
+}
+
+static gboolean
+backend_get_by_prefix(gpointer backend_data, gchar const* namespace, gchar const* prefix, gpointer* backend_iterator)
+{
+	/// \todo implement backend_get_by_prefix
+	/// This function needs to exist for the check in `j_backend_load` to succeed.
+	g_critical("%s NOT implemented !!", G_STRLOC);
+	(void) backend_data;
+	(void) namespace;
+	(void) prefix;
+	(void) backend_iterator;
+	return FALSE;
+}
+
+static gboolean
+backend_iterate(gpointer backend_data, gpointer backend_iterator, gchar const** name)
+{
+	/// \todo implement backend_iterate
+	/// This function needs to exist for the check in `j_backend_load` to succeed.
+	g_critical("%s NOT implemented !!", G_STRLOC);
+	(void) backend_data;
+	(void) backend_iterator;
+	(void) name;
+	return FALSE;
+}
 
 static gboolean
 backend_init(gchar const* path, gpointer* backend_data)
 {
 	JBackendData* bd;
 	g_auto(GStrv) split = NULL;
+	int err = 0;
 
 	g_return_val_if_fail(path != NULL, FALSE);
 
@@ -231,28 +265,32 @@ backend_init(gchar const* path, gpointer* backend_data)
 	g_return_val_if_fail(bd->backend_config != NULL, FALSE);
 
 	/* Create cluster handle */
-	if (rados_create(&(bd->backend_connection), NULL) != 0)
+	err = rados_create(&(bd->backend_connection), NULL);
+	if (err != 0)
 	{
-		g_critical("Can not create a RADOS cluster handle.");
+		g_critical("Can not create a RADOS cluster handle. Error message:\n%s\n", strerror(-err));
 	}
 
 	/* Read config file */
-	if (rados_conf_read_file(bd->backend_connection, bd->backend_config) != 0)
+	err = rados_conf_read_file(bd->backend_connection, bd->backend_config);
+	if (err != 0)
 	{
-		g_critical("Can not read RADOS config file %s.", bd->backend_config);
+		g_critical("Can not read RADOS config file `%s`. Error message:\n%s\n", bd->backend_config, strerror(-err));
 	}
 
 	/* Connect to cluster */
-	if (rados_connect(bd->backend_connection) != 0)
+	err = rados_connect(bd->backend_connection);
+	if (err != 0)
 	{
-		g_critical("Can not connect to RADOS. Cluster online, config up-to-date and keyring correct linked?");
+		g_critical("Can not connect to RADOS. Cluster online, config up-to-date and keyring correct linked? Error message:\n%s\n", strerror(-err));
 	}
 
 	/* Initialize IO and select pool */
-	if (rados_ioctx_create(bd->backend_connection, bd->backend_pool, &(bd->backend_io)) != 0)
+	err = rados_ioctx_create(bd->backend_connection, bd->backend_pool, &(bd->backend_io));
+	if (err != 0)
 	{
 		rados_shutdown(bd->backend_connection);
-		g_critical("Can not connect to RADOS pool %s.", bd->backend_pool);
+		g_critical("Can not connect to RADOS pool %s. Error message:\n%s\n", bd->backend_pool, strerror(-err));
 	}
 
 	*backend_data = bd;
@@ -289,7 +327,11 @@ static JBackend rados_backend = {
 		.backend_status = backend_status,
 		.backend_sync = backend_sync,
 		.backend_read = backend_read,
-		.backend_write = backend_write }
+		.backend_write = backend_write,
+		.backend_get_all = backend_get_all,
+		.backend_get_by_prefix = backend_get_by_prefix,
+		.backend_iterate = backend_iterate,
+	}
 };
 
 G_MODULE_EXPORT
