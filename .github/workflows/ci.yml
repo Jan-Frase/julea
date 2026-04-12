@@ -233,6 +233,7 @@ jobs:
       - name: Microceph set up
         if: ${{ matrix.julea.object == 'rados' }}
         run: |
+          snap install microceph
           ./scripts/rados-util.sh bootstrap
       - name: Configure and build
         env:
