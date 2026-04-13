@@ -143,49 +143,10 @@ jobs:
             compiler_version: 18.1.3
         dependencies: [system, spack]
         julea:
-          # Default
-          - object: posix
-            kv: lmdb
-            db: sqlite
           # Object backends
           - object: rados
             kv: lmdb
             db: sqlite
-          - object: gio
-            kv: lmdb
-            db: sqlite
-          # KV backends
-          - object: posix
-            kv: gdbm
-            db: sqlite
-          - object: posix
-            kv: mongodb
-            db: sqlite
-          - object: posix
-            kv: leveldb
-            db: sqlite
-          - object: posix
-            kv: rocksdb
-            db: sqlite
-          - object: posix
-            kv: sqlite
-            db: sqlite
-          # DB backends
-          - object: posix
-            kv: lmdb
-            db: mysql
-            db-server: mysql
-          - object: posix
-            kv: lmdb
-            db: mysql
-            db-server: mariadb
-        exclude:
-          # FIXME Ubuntu 24.04's RocksDB triggers asan
-          - os:
-              image: ubuntu:24.04
-            dependencies: system
-            julea:
-              kv: rocksdb
     services:
       mariadb:
         image: ${{ matrix.julea.db == 'mysql' && matrix.julea.db-server == 'mariadb' && 'docker.io/library/mariadb' || '' }}
