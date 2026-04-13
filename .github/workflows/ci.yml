@@ -127,17 +127,17 @@ jobs:
   tests:
     name: Tests
     needs: dependencies
-    runs-on: ${{ matrix.os.dist }}
+    runs-on: ubuntu-24.04
     timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
         os:
-          - dist: ubuntu:24.04
+          - dist: ubuntu-24.04
             compiler: gcc
             compiler_spack: gcc
             compiler_version: 13.3.0
-          - dist: ubuntu:24.04
+          - dist: ubuntu-24.04
             compiler: clang
             compiler_spack: llvm
             compiler_version: 18.1.3
