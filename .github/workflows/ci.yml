@@ -313,7 +313,7 @@ jobs:
           exit 1
       - name: Microceph setup
         if: ${{ matrix.julea.object == 'rados' }}
-        run: ./scripts/rados-util.sh bootstrap
+        run: sudo ./scripts/rados-util.sh bootstrap
       - name: Configure and build
         env:
           CC: ${{ matrix.os.compiler }}
