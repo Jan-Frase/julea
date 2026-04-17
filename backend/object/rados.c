@@ -39,15 +39,6 @@ typedef struct JBackendData JBackendData;
 struct JBackendObject
 {
 	gchar* path;
-
-	// For other object backends, an object has to be created before it can be written.
-	// If an object is written to before creation, an error is supposed to be returned. See `object_noexist` in the object tests.
-	// However, rados does not enforce this. Instead, an object can be accessed perfectly fine without first creating it.
-	// To provide identical behavior for all backends, this boolean tracks if the current object was properly created.
-	//
-	// Unfortunately, due to memory alignment, the boolean causes the object to be twice as big as it was previously.
-	// I'm thus unsure if this is worth it.
-	gboolean is_created;
 };
 
 typedef struct JBackendObject JBackendObject;
@@ -68,7 +59,6 @@ backend_create(gpointer backend_data, gchar const* namespace, gchar const* path,
 
 	bo = g_new(JBackendObject, 1);
 	bo->path = full_path;
-	bo->is_created = TRUE;
 
 	*backend_object = bo;
 
@@ -91,9 +81,6 @@ backend_open(gpointer backend_data, gchar const* namespace, gchar const* path, g
 
 	bo = g_new(JBackendObject, 1);
 	bo->path = full_path;
-	// Note: This is not enforced. Fully enforcing this would require keeping track of all created rados objects on JULEAS end.
-	// The performance and implementation overhead of this do not seem worth it.
-	bo->is_created = TRUE;
 
 	*backend_object = bo;
 
@@ -106,11 +93,6 @@ backend_delete(gpointer backend_data, gpointer backend_object)
 	JBackendData* bd = backend_data;
 	JBackendObject* bo = backend_object;
 	gint ret = 0;
-
-	if (!bo->is_created)
-	{
-		return FALSE;
-	}
 
 	j_trace_file_begin(bo->path, J_TRACE_FILE_DELETE);
 	ret = rados_remove(bd->backend_io, bo->path);
@@ -126,11 +108,6 @@ static gboolean
 backend_close(gpointer backend_data, gpointer backend_object)
 {
 	JBackendObject* bo = backend_object;
-
-	if (!bo->is_created)
-	{
-		return FALSE;
-	}
 
 	(void)backend_data;
 
@@ -151,11 +128,6 @@ backend_status(gpointer backend_data, gpointer backend_object, gint64* modificat
 	gboolean ret = TRUE;
 	gint64 modification_time_ = 0;
 	guint64 size_ = 0;
-
-	if (!bo->is_created)
-	{
-		return FALSE;
-	}
 
 	if (modification_time != NULL || size != NULL)
 	{
@@ -183,11 +155,6 @@ backend_sync(gpointer backend_data, gpointer backend_object)
 {
 	JBackendObject* bo = backend_object;
 
-	if (!bo->is_created)
-	{
-		return FALSE;
-	}
-
 	(void)backend_data;
 
 	j_trace_file_begin(bo->path, J_TRACE_FILE_SYNC);
@@ -202,11 +169,6 @@ backend_read(gpointer backend_data, gpointer backend_object, gpointer buffer, gu
 	JBackendData* bd = backend_data;
 	JBackendObject* bo = backend_object;
 	gint ret = 0;
-
-	if (!bo->is_created)
-	{
-		return FALSE;
-	}
 
 	j_trace_file_begin(bo->path, J_TRACE_FILE_READ);
 	ret = rados_read(bd->backend_io, bo->path, buffer, length, offset);
@@ -228,11 +190,6 @@ backend_write(gpointer backend_data, gpointer backend_object, gconstpointer buff
 	JBackendData* bd = backend_data;
 	JBackendObject* bo = backend_object;
 	gint ret = 0;
-
-	if (!bo->is_created)
-	{
-		return FALSE;
-	}
 
 	j_trace_file_begin(bo->path, J_TRACE_FILE_WRITE);
 	ret = rados_write(bd->backend_io, bo->path, buffer, length, offset);
