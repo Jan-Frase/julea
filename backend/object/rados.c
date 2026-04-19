@@ -36,6 +36,14 @@ struct JBackendData
 
 typedef struct JBackendData JBackendData;
 
+struct JBackendIterator
+{
+	rados_list_ctx_t rados_list;
+	gchar* prefix;
+};
+
+typedef struct JBackendIterator JBackendIterator;
+
 struct JBackendObject
 {
 	gchar* path;
@@ -208,37 +216,79 @@ backend_write(gpointer backend_data, gpointer backend_object, gconstpointer buff
 static gboolean
 backend_get_all(gpointer backend_data, gchar const* namespace, gpointer* backend_iterator)
 {
-	/// \todo implement backend_get_all
-	/// This function needs to exist for the check in `j_backend_load` to succeed.
-	g_critical("%s NOT implemented !!", G_STRLOC);
-	(void) backend_data;
-	(void) namespace;
-	(void) backend_iterator;
-	return FALSE;
+	const JBackendData* bd = backend_data;
+	JBackendIterator* iterator = g_new(JBackendIterator, 1);
+	int err;
+
+	g_return_val_if_fail(backend_data != NULL, FALSE);
+	g_return_val_if_fail(namespace != NULL, FALSE);
+
+	iterator->prefix = NULL;
+
+	rados_ioctx_set_namespace(bd->backend_io, namespace);
+	err = rados_nobjects_list_open(bd->backend_io, &iterator->rados_list);
+	g_return_val_if_fail(err == 0, FALSE);
+
+	*backend_iterator = iterator;
+	return TRUE;
 }
 
 static gboolean
 backend_get_by_prefix(gpointer backend_data, gchar const* namespace, gchar const* prefix, gpointer* backend_iterator)
 {
-	/// \todo implement backend_get_by_prefix
-	/// This function needs to exist for the check in `j_backend_load` to succeed.
-	g_critical("%s NOT implemented !!", G_STRLOC);
-	(void) backend_data;
-	(void) namespace;
-	(void) prefix;
-	(void) backend_iterator;
-	return FALSE;
+	const JBackendData* bd = backend_data;
+	JBackendIterator* iterator = g_new(JBackendIterator, 1);
+	int err;
+
+	g_return_val_if_fail(backend_data != NULL, FALSE);
+	g_return_val_if_fail(namespace != NULL, FALSE);
+	g_return_val_if_fail(*backend_iterator != NULL, FALSE);
+
+	iterator->prefix = g_strdup(prefix);
+
+	rados_ioctx_set_namespace(bd->backend_io, namespace);
+	err = rados_nobjects_list_open(bd->backend_io, &iterator->rados_list);
+	g_return_val_if_fail(err == 0, FALSE);
+
+	*backend_iterator = iterator;
+	return TRUE;
 }
 
 static gboolean
 backend_iterate(gpointer backend_data, gpointer backend_iterator, gchar const** name)
 {
-	/// \todo implement backend_iterate
-	/// This function needs to exist for the check in `j_backend_load` to succeed.
-	g_critical("%s NOT implemented !!", G_STRLOC);
+	JBackendIterator* iterator = backend_iterator;
+	// The name returned by rados is a concatenation of namespace and object name.
+	gchar const* current_name;
+	gchar const* current_namespace;
+	gchar const* namespace_and_prefix = NULL;
+
+	// Avoid unused parameter warning :)
 	(void) backend_data;
-	(void) backend_iterator;
-	(void) name;
+
+	// If we have a prefix to filter by, loop until we have an object that matches
+	do {
+		const int err = rados_nobjects_list_next(iterator->rados_list, &current_name, NULL, &current_namespace);
+
+		if (err == -ENOENT) { goto end; } // No more objects
+		if (err != 0) // Something went wrong
+		{
+			g_error("rados_nobjects_list_next() failed: %s", strerror(-err));
+			goto end;
+		}
+
+		if (namespace_and_prefix == NULL) // On the first loop, store namespace + prefix
+		{
+			namespace_and_prefix = g_strconcat(current_namespace, "/", iterator->prefix, NULL);
+		}
+	} while (iterator->prefix != NULL && !g_str_has_prefix(current_name, namespace_and_prefix));
+
+	*name = current_name;
+	return TRUE;
+
+end:
+	rados_nobjects_list_close(iterator->rados_list);
+	g_free(iterator->prefix);
 	return FALSE;
 }
 
