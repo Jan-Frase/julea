@@ -432,7 +432,7 @@ j_object_read_exec(JList* operations, JSemantics* semantics)
 	gboolean ret = TRUE;
 
 	JBackend* object_backend;
-	g_autoptr(JListIterator) it;
+	g_autoptr(JListIterator) it = NULL;
 	g_autoptr(JMessage) message = NULL;
 	JObject* object;
 	gpointer object_handle;
