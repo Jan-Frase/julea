@@ -76,29 +76,23 @@ backend_create(gpointer backend_data, gchar const* namespace, gchar const* path,
 static gboolean
 backend_open(gpointer backend_data, gchar const* namespace, gchar const* path, gpointer* backend_object)
 {
-	JBackendData* bd = backend_data;
 	JBackendObject* bo;
 	gchar* full_path = g_strconcat(namespace, path, NULL);
-	gint bytes_read = 0;
-	char* buffer = NULL;
+	gint ret = 0;
+
+	(void)backend_data;
 
 	j_trace_file_begin(full_path, J_TRACE_FILE_OPEN);
-
-	bytes_read = rados_read(bd->backend_io, full_path, buffer, 0, 0);
-	free(buffer);
-	if (bytes_read < 0)
-	{
-		g_critical("rados_read() failed: %s", strerror(-bytes_read));
-	}
-
 	j_trace_file_end(full_path, J_TRACE_FILE_OPEN, 0, 0);
+
+	g_return_val_if_fail(ret == 0, FALSE);
 
 	bo = g_new(JBackendObject, 1);
 	bo->path = full_path;
 
 	*backend_object = bo;
 
-	return bytes_read >= 0;
+	return TRUE;
 }
 
 static gboolean
