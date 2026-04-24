@@ -471,7 +471,10 @@ j_object_read_exec(JList* operations, JSemantics* semantics)
 	else
 	{
 		ret = j_backend_object_open(object_backend, object->namespace, object->name, &object_handle) && ret;
-		if (object_handle == NULL) { return FALSE; }
+		if (object_handle == NULL)
+		{
+			return FALSE;
+		}
 	}
 
 	/*
@@ -567,7 +570,6 @@ j_object_read_exec(JList* operations, JSemantics* semantics)
 			operations_done += reply_operation_count;
 		}
 
-
 		j_connection_pool_push(J_BACKEND_TYPE_OBJECT, object->index, object_connection);
 	}
 	else
@@ -636,7 +638,10 @@ j_object_write_exec(JList* operations, JSemantics* semantics)
 	{
 		ret = j_backend_object_open(object_backend, object->namespace, object->name, &object_handle) && ret;
 		// If the object was not opened, we go to the end.
-		if (object_handle == NULL) { goto end;}
+		if (object_handle == NULL)
+		{
+			goto end;
+		}
 	}
 
 	/*
@@ -686,7 +691,6 @@ j_object_write_exec(JList* operations, JSemantics* semantics)
 
 		j_trace_file_end(object->name, J_TRACE_FILE_WRITE, length, offset);
 	}
-
 
 	if (object_backend == NULL)
 	{

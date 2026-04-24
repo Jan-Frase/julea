@@ -276,13 +276,17 @@ backend_iterate(gpointer backend_data, gpointer backend_iterator, gchar const** 
 	gchar const* namespace_and_prefix = NULL;
 
 	// Avoid unused parameter warning :)
-	(void) backend_data;
+	(void)backend_data;
 
 	// If we have a prefix to filter by, loop until we have an object that matches
-	do {
+	do
+	{
 		const int err = rados_nobjects_list_next(iterator->rados_list, &current_name, NULL, &current_namespace);
 
-		if (err == -ENOENT) { goto end; } // No more objects
+		if (err == -ENOENT)
+		{
+			goto end;
+		} // No more objects
 		if (err != 0) // Something went wrong
 		{
 			g_error("rados_nobjects_list_next() failed: %s", strerror(-err));
