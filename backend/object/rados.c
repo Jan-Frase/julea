@@ -76,16 +76,28 @@ backend_create(gpointer backend_data, gchar const* namespace, gchar const* path,
 static gboolean
 backend_open(gpointer backend_data, gchar const* namespace, gchar const* path, gpointer* backend_object)
 {
+	JBackendData* bd = backend_data;
 	JBackendObject* bo;
 	gchar* full_path = g_strconcat(namespace, path, NULL);
 	gint ret = 0;
 
-	(void)backend_data;
-
 	j_trace_file_begin(full_path, J_TRACE_FILE_OPEN);
+	ret = rados_stat(bd->backend_io, full_path, NULL, NULL);
 	j_trace_file_end(full_path, J_TRACE_FILE_OPEN, 0, 0);
 
-	g_return_val_if_fail(ret == 0, FALSE);
+	if (ret != 0)
+	{
+		// ENOENT (somehow) stands for "no such file or directory".
+		// It is an expected "error" here because we are using the stat command to check if the object exists.
+		// This is done to ensure that the object was created before opening it, just as it has to be done with other APIs.
+		// As such, we only print other error kinds.
+		if (ret != -ENOENT)
+		{
+			g_critical("rados_stat() failed: %s", strerror(-ret));
+		}
+		// In either case, we return false as we obviously weren't able to `open` to object :)
+		return FALSE;
+	}
 
 	bo = g_new(JBackendObject, 1);
 	bo->path = full_path;
