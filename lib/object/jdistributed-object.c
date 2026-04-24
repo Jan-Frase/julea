@@ -822,6 +822,7 @@ j_distributed_object_read_exec(JList* operations, JSemantics* semantics)
 	else
 	{
 		ret = j_backend_object_open(object_backend, object->namespace, object->name, &object_handle) && ret;
+		if (object_handle == NULL) { return FALSE; }
 	}
 
 	/*
@@ -1012,6 +1013,7 @@ j_distributed_object_write_exec(JList* operations, JSemantics* semantics)
 	else
 	{
 		ret = j_backend_object_open(object_backend, object->namespace, object->name, &object_handle) && ret;
+		if (object_handle == NULL) { return FALSE; }
 	}
 
 	/*

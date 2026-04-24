@@ -432,7 +432,7 @@ j_object_read_exec(JList* operations, JSemantics* semantics)
 	gboolean ret = TRUE;
 
 	JBackend* object_backend;
-	JListIterator* it;
+	g_autoptr(JListIterator) it;
 	g_autoptr(JMessage) message = NULL;
 	JObject* object;
 	gpointer object_handle;
@@ -471,7 +471,7 @@ j_object_read_exec(JList* operations, JSemantics* semantics)
 	else
 	{
 		ret = j_backend_object_open(object_backend, object->namespace, object->name, &object_handle) && ret;
-		if (object_handle == NULL) { goto end; }
+		if (object_handle == NULL) { return FALSE; }
 	}
 
 	/*
@@ -584,8 +584,6 @@ j_object_read_exec(JList* operations, JSemantics* semantics)
 		j_lock_free(lock);
 	}
 	*/
-end:
-	j_list_iterator_free(it);
 	return ret;
 }
 
