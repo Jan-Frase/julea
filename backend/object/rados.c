@@ -78,7 +78,7 @@ backend_open(gpointer backend_data, gchar const* namespace, gchar const* path, g
 {
 	JBackendData* bd = backend_data;
 	JBackendObject* bo;
-	gchar* full_path = g_strconcat(namespace, path, NULL);
+	g_autofree gchar* full_path = g_strconcat(namespace, path, NULL);
 	gint ret = 0;
 
 	j_trace_file_begin(full_path, J_TRACE_FILE_OPEN);
@@ -100,7 +100,7 @@ backend_open(gpointer backend_data, gchar const* namespace, gchar const* path, g
 	}
 
 	bo = g_new(JBackendObject, 1);
-	bo->path = full_path;
+	bo->path = g_steal_pointer(&full_path);
 
 	*backend_object = bo;
 
