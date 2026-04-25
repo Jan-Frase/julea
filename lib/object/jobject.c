@@ -598,7 +598,7 @@ j_object_write_exec(JList* operations, JSemantics* semantics)
 	gboolean ret = TRUE;
 
 	JBackend* object_backend;
-	JListIterator* it;
+	g_autofree JListIterator* it;
 	g_autoptr(JMessage) message = NULL;
 	JObject* object;
 	gpointer object_handle;
@@ -640,7 +640,7 @@ j_object_write_exec(JList* operations, JSemantics* semantics)
 		// If the object was not opened, we go to the end.
 		if (object_handle == NULL)
 		{
-			goto end;
+			return FALSE;
 		}
 	}
 
@@ -748,8 +748,6 @@ j_object_write_exec(JList* operations, JSemantics* semantics)
 	}
 	*/
 
-end:
-	j_list_iterator_free(it);
 	return ret;
 }
 
