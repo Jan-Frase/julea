@@ -40,7 +40,7 @@ bootstrap ()
     microceph enable rgw
     microceph.ceph osd pool create julea
     microceph status
-    cat /var/snap/microceph/current/conf/ceph.keyring | tee --append /var/snap/microceph/current/conf/ceph.conf > /dev/null
+    cat /var/snap/microceph/current/conf/ceph.keyring >> /var/snap/microceph/current/conf/ceph.conf
 }
 
 teardown ()
