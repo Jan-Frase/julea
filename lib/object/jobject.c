@@ -432,7 +432,7 @@ j_object_read_exec(JList* operations, JSemantics* semantics)
 	gboolean ret = TRUE;
 
 	JBackend* object_backend;
-	g_autoptr(JListIterator) it = NULL;
+	JListIterator* it;
 	g_autoptr(JMessage) message = NULL;
 	JObject* object;
 	gpointer object_handle;
@@ -452,7 +452,6 @@ j_object_read_exec(JList* operations, JSemantics* semantics)
 		g_assert(object != NULL);
 	}
 
-	it = j_list_iterator_new(operations);
 	object_backend = j_object_get_backend();
 
 	if (object_backend == NULL)
@@ -484,6 +483,7 @@ j_object_read_exec(JList* operations, JSemantics* semantics)
 	}
 	*/
 
+	it = j_list_iterator_new(operations);
 	while (j_list_iterator_next(it))
 	{
 		JObjectOperation* operation = j_list_iterator_get(it);
@@ -510,6 +510,8 @@ j_object_read_exec(JList* operations, JSemantics* semantics)
 
 		j_trace_file_end(object->name, J_TRACE_FILE_READ, length, offset);
 	}
+
+	j_list_iterator_free(it);
 
 	if (object_backend == NULL)
 	{
@@ -570,6 +572,7 @@ j_object_read_exec(JList* operations, JSemantics* semantics)
 			operations_done += reply_operation_count;
 		}
 
+		j_list_iterator_free(it);
 		j_connection_pool_push(J_BACKEND_TYPE_OBJECT, object->index, object_connection);
 	}
 	else
