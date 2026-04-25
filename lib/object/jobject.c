@@ -598,7 +598,7 @@ j_object_write_exec(JList* operations, JSemantics* semantics)
 	gboolean ret = TRUE;
 
 	JBackend* object_backend;
-	g_autofree JListIterator* it = NULL;
+	JListIterator* it;
 	g_autoptr(JMessage) message = NULL;
 	JObject* object;
 	gpointer object_handle;
@@ -618,7 +618,6 @@ j_object_write_exec(JList* operations, JSemantics* semantics)
 		g_assert(object != NULL);
 	}
 
-	it = j_list_iterator_new(operations);
 	object_backend = j_object_get_backend();
 
 	if (object_backend == NULL)
@@ -650,6 +649,8 @@ j_object_write_exec(JList* operations, JSemantics* semantics)
 		lock = j_lock_new("item", path);
 	}
 	*/
+
+	it = j_list_iterator_new(operations);
 
 	while (j_list_iterator_next(it))
 	{
@@ -691,6 +692,8 @@ j_object_write_exec(JList* operations, JSemantics* semantics)
 
 		j_trace_file_end(object->name, J_TRACE_FILE_WRITE, length, offset);
 	}
+
+	j_list_iterator_free(it);
 
 	if (object_backend == NULL)
 	{
