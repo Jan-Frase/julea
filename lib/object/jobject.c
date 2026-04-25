@@ -598,7 +598,7 @@ j_object_write_exec(JList* operations, JSemantics* semantics)
 	gboolean ret = TRUE;
 
 	JBackend* object_backend;
-	g_autofree JListIterator* it;
+	g_autofree JListIterator* it = NULL;
 	g_autoptr(JMessage) message = NULL;
 	JObject* object;
 	gpointer object_handle;
