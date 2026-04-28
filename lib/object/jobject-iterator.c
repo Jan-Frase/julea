@@ -174,11 +174,11 @@ j_object_iterator_new_for_index(guint32 index, gchar const* namespace, gchar con
 	{
 		if (prefix == NULL)
 		{
-			/// \todo j_backend_object_get_all(iterator->object_backend, namespace, &(iterator->cursor));
+			j_backend_object_get_all(iterator->object_backend, namespace, &(iterator->cursor));
 		}
 		else
 		{
-			/// \todo j_backend_object_get_by_prefix(iterator->object_backend, namespace, prefix, &(iterator->cursor));
+			j_backend_object_get_by_prefix(iterator->object_backend, namespace, prefix, &(iterator->cursor));
 		}
 	}
 
@@ -201,7 +201,6 @@ j_object_iterator_free(JObjectIterator* iterator)
 	}
 
 	g_free(iterator->replies);
-
 	g_free(iterator);
 }
 
