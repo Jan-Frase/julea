@@ -155,7 +155,6 @@ j_object_iterator_new(gchar const* namespace, gchar const* prefix)
 		// Iterate over the objects until we reach the end and keep all resulting names.
 		while (j_backend_object_iterate(iterator->object_backend, iterator->cursor, &curr_name))
 		{
-			printf("Object: %s\n", curr_name);
 			iterator->cached_names = g_array_append_val(iterator->cached_names, curr_name);
 		}
 	}
@@ -233,7 +232,16 @@ j_object_iterator_free(JObjectIterator* iterator)
 	}
 
 	g_free(iterator->replies);
-	g_array_free(iterator->cached_names, TRUE);
+	// Free duplicated names stored in cached_names
+	if (iterator->cached_names)
+	{
+		for (guint i = 0; i < iterator->cached_names->len; i++)
+		{
+			gchar* s = g_array_index(iterator->cached_names, gchar*, i);
+			g_free(s);
+		}
+		g_array_free(iterator->cached_names, TRUE);
+	}
 	g_free(iterator);
 }
 
