@@ -302,7 +302,7 @@ backend_iterate(gpointer backend_data, gpointer backend_iterator, gchar const** 
 		}
 	} while (iterator->prefix != NULL && !g_str_has_prefix(current_name, iterator->prefix));
 
-	*name = g_strdup(current_name);
+	*name = current_name;
 	return TRUE;
 end:
 	rados_nobjects_list_close(iterator->rados_list);
