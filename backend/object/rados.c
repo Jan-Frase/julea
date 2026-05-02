@@ -36,9 +36,6 @@ struct JBackendData
 
 typedef struct JBackendData JBackendData;
 
-// How to free? For all other backends the server takes care of it in loop.c
-// There it ALWAYS calls iterate aver creating the iterator which in turn frees it.
-// For the client side path I seem to need some `close_iterator` function but i dont wanna change the API...
 struct JBackendIterator
 {
 	rados_list_ctx_t rados_list;

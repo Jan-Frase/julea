@@ -314,6 +314,10 @@ jobs:
       - name: Microceph setup
         if: ${{ matrix.julea.object == 'rados' }}
         run: sudo ./scripts/rados-util.sh bootstrap
+      # Librados is not available in spack :/
+      - name: Install librados
+        if: ${{ matrix.dependencies == 'spack' }}
+        run: sudo apt-get install librados-dev
       - name: Configure and build
         env:
           CC: ${{ matrix.os.compiler }}
