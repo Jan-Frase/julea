@@ -431,11 +431,11 @@ j_object_read_exec(JList* operations, JSemantics* semantics)
 	/// \todo check return value for messages
 	gboolean ret = TRUE;
 
-	JBackend* object_backend;
-	JListIterator* it;
+	JBackend* object_backend = NULL;
+	JListIterator* it = NULL;
 	g_autoptr(JMessage) message = NULL;
-	JObject* object;
-	gpointer object_handle;
+	JObject* object = NULL;
+	gpointer object_handle = NULL;
 
 	/// \todo
 	//JLock* lock = NULL;
@@ -600,11 +600,11 @@ j_object_write_exec(JList* operations, JSemantics* semantics)
 	/// \todo check return value for messages
 	gboolean ret = TRUE;
 
-	JBackend* object_backend;
-	JListIterator* it;
+	JBackend* object_backend = NULL;
+	JListIterator* it = NULL;
 	g_autoptr(JMessage) message = NULL;
-	JObject* object;
-	gpointer object_handle;
+	JObject* object = NULL;
+	gpointer object_handle = NULL;
 
 	/// \todo
 	//JLock* lock = NULL;
@@ -639,7 +639,7 @@ j_object_write_exec(JList* operations, JSemantics* semantics)
 	else
 	{
 		ret = j_backend_object_open(object_backend, object->namespace, object->name, &object_handle) && ret;
-		// If the object was not opened, we go to the end.
+		// If the object was not opened, we return.
 		if (object_handle == NULL)
 		{
 			return FALSE;
