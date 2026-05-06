@@ -79,9 +79,7 @@ add_project_arguments(cc_args, language: 'c')
 sanitize_cflags = ''
 
 if get_option('b_sanitize') != 'none'
-	sanitize_cflags = '-fsanitize=' + get_option('b_sanitize')
-
-    add_languages('cpp')
+	sanitize_cflags = '-fsanitize=' + get_option('b_sanitize') + '-fno-sanitize=vptr'
 endif
 
 # FIXME rpath is not set for dependencies
