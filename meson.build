@@ -79,7 +79,20 @@ add_project_arguments(cc_args, language: 'c')
 sanitize_cflags = ''
 
 if get_option('b_sanitize') != 'none'
-	sanitize_cflags = '-fsanitize=' + get_option('b_sanitize') + '-fno-sanitize=vptr'
+	sanitize_cflags = '-fsanitize=' + get_option('b_sanitize')
+
+    add_project_arguments(
+        '-fno-omit-frame-pointer',
+        '-fno-sanitize=vptr',
+        language: 'c'
+    )
+    add_project_link_arguments(
+        '-fsanitize=address',
+        language: 'c'
+    )
+
+    add_languages('cpp')
+
 endif
 
 # FIXME rpath is not set for dependencies
@@ -557,6 +570,7 @@ julea_test_srcs = files([
 	'test/object/object.c',
 	'test/object/object-iterator.c',
 	'test/test.c',
+    'test/asan_link.cc',
 ])
 
 julea_test = executable('julea-test', julea_test_srcs,
