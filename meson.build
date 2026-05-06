@@ -80,6 +80,8 @@ sanitize_cflags = ''
 
 if get_option('b_sanitize') != 'none'
 	sanitize_cflags = '-fsanitize=' + get_option('b_sanitize')
+
+    add_languages('cpp')
 endif
 
 # FIXME rpath is not set for dependencies
@@ -770,8 +772,6 @@ if fuse_dep.found()
 		install: true,
 	)
 endif
-
-#add_languages('cpp')
 
 #foreach lang: ['c', 'cc']
 #	executable('hello-word-@0@'.format(lang), files('example/hello-world.@0@'.format(lang)),
