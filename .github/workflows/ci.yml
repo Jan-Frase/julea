@@ -190,6 +190,8 @@ jobs:
             julea:
               kv: rocksdb
     services:
+      ceph:
+        image: ${{ matrix.julea.object == 'rados' && 'quay.io/ceph/ceph:v20.2.1' || '' }}
       mariadb:
         image: ${{ matrix.julea.db == 'mysql' && matrix.julea.db-server == 'mariadb' && 'docker.io/library/mariadb' || '' }}
         env:
@@ -209,6 +211,9 @@ jobs:
     env:
       JULEA_SPACK_DIR: /julea-dependencies
     steps:
+      - name: Ceph Check
+        if: ${{ matrix.julea.object == 'rados' }}
+        run: ceph -s
       - name: Checkout
         uses: actions/checkout@v6
         with:
@@ -233,9 +238,6 @@ jobs:
         if: ${{ matrix.dependencies == 'spack' && steps.cache.outputs.cache-hit != 'true' }}
         run: |
           exit 1
-      - name: Microceph setup
-        if: ${{ matrix.julea.object == 'rados' }}
-        run: sudo ./scripts/rados-util.sh bootstrap
       - name: Configure and build
         env:
           CC: ${{ matrix.os.compiler }}
@@ -251,6 +253,7 @@ jobs:
           if test "${{ matrix.julea.db }}" = 'mysql'; then JULEA_DB_PATH='${{ matrix.julea.db-server }}:juleadb:julea:aeluj'; fi
 
           JULEA_OBJECT_PATH="/tmp/julea/object/${{ matrix.julea.object }}"
+          # TODO: Adjust this!
           if test "${{ matrix.julea.object }}" = 'rados'; then JULEA_OBJECT_PATH="/var/snap/microceph/current/conf/ceph.conf:julea"; fi
 
           julea-config --user --object-servers="$(hostname)" --kv-servers="$(hostname)" --db-servers="$(hostname)" --object-backend="${{ matrix.julea.object }}" --object-path="${JULEA_OBJECT_PATH}" --kv-backend="${{ matrix.julea.kv }}" --kv-path="${JULEA_KV_PATH}" --db-backend="${{ matrix.julea.db }}" --db-path="${JULEA_DB_PATH}"
