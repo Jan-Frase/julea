@@ -27,7 +27,7 @@ spack_clone ()
 {
 	local spack_packages_commit
 
-	spack_packages_commit='72bee2ad114cde374f8931991045011d106a9c1a'
+	spack_packages_commit='eebf27ac6110ff9b9d9d6bf87ef55e749d3bf578'
 
 	test -n "${JULEA_SPACK_DIR}" || return 1
 
@@ -202,6 +202,8 @@ spack_install_dependencies ()
 		# FIXME We currently need this for JULEA to find all dependencies
 		spack_cmd config --scope spack add 'modules:prefix_inspections:lib:[LD_LIBRARY_PATH]'
 		spack_cmd config --scope spack add 'modules:prefix_inspections:lib64:[LD_LIBRARY_PATH]'
+
+		spack_cmd compiler list
 
 		if test -n "${CI}"
 		then
