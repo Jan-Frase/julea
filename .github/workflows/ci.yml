@@ -213,18 +213,23 @@ jobs:
     env:
       JULEA_SPACK_DIR: /julea-dependencies
     steps:
+      - name: Get Docker
+        if: ${{matrix.julea.object == 'rados' }}
+        run: |
+          apt --yes --no-install-recommends install curl
+          curl -fsSL https://get.docker.com -o get-docker.sh
+          sh get-docker.sh
       - name: Get cephadm
         if: ${{matrix.julea.object == 'rados' }}
         run: |
           apt update
-          apt --yes --no-install-recommends install libyaml-dev
+          apt --yes --no-install-recommends install python3-yaml python3-jinja2 
           apt --yes --no-install-recommends install cephadm
-          apt --yes --no-install-recommends install curl
-          curl -fsSL https://get.docker.com -o get-docker.sh 
-          sh get-docker.sh
       - name: Bootstraph ceph
         if: ${{matrix.julea.object == 'rados' }}
-        run: cephadm --docker bootstrap \
+        run: |
+          python -m pip install pyyaml
+          cephadm --docker bootstrap \
               --mon-ip 127.0.01 \
               --single-host-defaults \
               --skip-mon-network \
@@ -233,7 +238,7 @@ jobs:
       - name: Add loop devices
         if: ${{matrix.julea.object == 'rados' }}
         run: |
-
+          echo "Loop :)"
       - name: Checkout
         uses: actions/checkout@v6
         with:
