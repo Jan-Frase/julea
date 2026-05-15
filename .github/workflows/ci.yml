@@ -229,7 +229,6 @@ jobs:
       - name: Bootstraph ceph
         if: ${{matrix.julea.object == 'rados' }}
         run: |
-          python -m pip install pyyaml
           cephadm --docker bootstrap \
               --mon-ip 127.0.01 \
               --single-host-defaults \
