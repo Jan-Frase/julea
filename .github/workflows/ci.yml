@@ -228,8 +228,7 @@ jobs:
               --skip-mon-network \
               --skip-dashboard \
               --skip-firewalld \
-              --skip-prepare-host \ 
-              --skip-monitoring-stack
+              --skip-prepare-host
       - name: Add loop devices
         if: ${{matrix.julea.object == 'rados' }}
         run: |
