@@ -217,8 +217,8 @@ jobs:
         if: ${{matrix.julea.object == 'rados' }}
         run: |
           apt update
-          apt --yes --no-install-recommends install python3-yaml python3-jinja2 podman fuse-overlayfs
-          apt --yes install cephadm
+          apt --yes --no-install-recommends install python3-yaml python3-jinja2 
+          apt --yes install cephadm podman fuse-overlayfs catatonit
       - name: Bootstraph ceph
         if: ${{matrix.julea.object == 'rados' }}
         run: |
