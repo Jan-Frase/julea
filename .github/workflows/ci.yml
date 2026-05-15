@@ -217,12 +217,12 @@ jobs:
         if: ${{matrix.julea.object == 'rados' }}
         run: |
           apt update
-          apt --yes --no-install-recommends install python3-yaml python3-jinja2 
+          apt --yes --no-install-recommends install python3-yaml python3-jinja2 podman
           apt --yes install cephadm
       - name: Bootstraph ceph
         if: ${{matrix.julea.object == 'rados' }}
         run: |
-          cephadm --docker bootstrap \
+          cephadm --podman bootstrap \
               --mon-ip 127.0.0.1 \
               --single-host-defaults \
               --skip-mon-network \
