@@ -225,7 +225,7 @@ jobs:
       - name: Bootstraph ceph
         if: ${{matrix.julea.object == 'rados' }}
         run: |
-          ./cephadm --no-cgroups-split bootstrap \
+          ./cephadm bootstrap \
               --mon-ip 127.0.0.1 \
               --single-host-defaults \
               --skip-mon-network \
