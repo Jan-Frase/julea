@@ -222,12 +222,13 @@ jobs:
       - name: Bootstraph ceph
         if: ${{matrix.julea.object == 'rados' }}
         run: |
-          cephadm bootstrap \
+          cephadm --no-cgroups-split bootstrap \
               --mon-ip 127.0.0.1 \
               --single-host-defaults \
               --skip-mon-network \
               --skip-dashboard \
-              --skip-firewalld
+              --skip-firewalld \
+              --skip-prepare-host
       - name: Add loop devices
         if: ${{matrix.julea.object == 'rados' }}
         run: |
