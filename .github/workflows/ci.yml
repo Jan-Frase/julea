@@ -219,6 +219,7 @@ jobs:
           apt update
           apt --yes --no-install-recommends install libyaml-dev
           apt --yes --no-install-recommends install cephadm
+          apt --yes --no-install-recommends install curl
           curl -fsSL https://get.docker.com -o get-docker.sh 
           sh get-docker.sh
       - name: Bootstraph ceph
