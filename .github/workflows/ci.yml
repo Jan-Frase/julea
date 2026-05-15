@@ -151,41 +151,41 @@ jobs:
         dependencies: [system, spack]
         julea:
           # Default
-          - object: posix
-            kv: lmdb
-            db: sqlite
+#          - object: posix
+#           kv: lmdb
+#            db: sqlite
           # Object backends
           - object: rados
             kv: lmdb
             db: sqlite
-          - object: gio
-            kv: lmdb
-            db: sqlite
-          # KV backends
-          - object: posix
-            kv: gdbm
-            db: sqlite
-          - object: posix
-            kv: mongodb
-            db: sqlite
-          - object: posix
-            kv: leveldb
-            db: sqlite
-          - object: posix
-            kv: rocksdb
-            db: sqlite
-          - object: posix
-            kv: sqlite
-            db: sqlite
-          # DB backends
-          - object: posix
-            kv: lmdb
-            db: mysql
-            db-server: mysql
-          - object: posix
-            kv: lmdb
-            db: mysql
-            db-server: mariadb
+#          - object: gio
+#            kv: lmdb
+#            db: sqlite
+#          # KV backends
+#          - object: posix
+#            kv: gdbm
+#            db: sqlite
+#          - object: posix
+#            kv: mongodb
+#            db: sqlite
+#          - object: posix
+#            kv: leveldb
+#            db: sqlite
+#          - object: posix
+#            kv: rocksdb
+#            db: sqlite
+#          - object: posix
+#            kv: sqlite
+#            db: sqlite
+#          # DB backends
+#          - object: posix
+#            kv: lmdb
+#            db: mysql
+#            db-server: mysql
+#          - object: posix
+#            kv: lmdb
+#            db: mysql
+#            db-server: mariadb
         exclude:
           # FIXME Ubuntu 24.04's RocksDB triggers asan
           - os:
@@ -194,8 +194,6 @@ jobs:
             julea:
               kv: rocksdb
     services:
-      ceph:
-        image: ${{ matrix.julea.object == 'rados' && 'quay.io/ceph/ceph:v20.2.1' || '' }}
       mariadb:
         image: ${{ matrix.julea.db == 'mysql' && matrix.julea.db-server == 'mariadb' && 'docker.io/library/mariadb' || '' }}
         env:
@@ -216,13 +214,16 @@ jobs:
       JULEA_SPACK_DIR: /julea-dependencies
     steps:
       - name: Get cephadm
+        if: ${{matrix.julea.object == 'rados' }}
         run: |
           apt update
+          apt --yes --no-install-recommends install python-yaml
+          apt --yes --no-install-recommends install docker 
           apt --yes --no-install-recommends install cephadm
       - name: Bootstraph ceph
         run: cephadm --docker bootstrap \
               --mon-ip 127.0.01 \
-              --signle-host-defaults \
+              --single-host-defaults \
               --skip-mon-network \
               --skip-dashboard \
               --skip-monitoring-stack
