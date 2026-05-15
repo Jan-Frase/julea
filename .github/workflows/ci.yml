@@ -217,16 +217,21 @@ jobs:
         if: ${{matrix.julea.object == 'rados' }}
         run: |
           apt update
-          apt --yes --no-install-recommends install python-yaml
+          apt --yes --no-install-recommends install libyaml
           apt --yes --no-install-recommends install docker 
           apt --yes --no-install-recommends install cephadm
       - name: Bootstraph ceph
+        if: ${{matrix.julea.object == 'rados' }}
         run: cephadm --docker bootstrap \
               --mon-ip 127.0.01 \
               --single-host-defaults \
               --skip-mon-network \
               --skip-dashboard \
               --skip-monitoring-stack
+      - name: Add loop devices
+        if: ${{matrix.julea.object == 'rados' }}
+        run: |
+
       - name: Checkout
         uses: actions/checkout@v6
         with:
