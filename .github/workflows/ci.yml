@@ -213,19 +213,12 @@ jobs:
     env:
       JULEA_SPACK_DIR: /julea-dependencies
     steps:
-      - name: Get Docker
-        if: ${{matrix.julea.object == 'rados' }}
-        run: |
-          apt update
-          apt --yes --no-install-recommends install curl
-          curl -fsSL https://get.docker.com -o get-docker.sh
-          sh get-docker.sh
       - name: Get cephadm
         if: ${{matrix.julea.object == 'rados' }}
         run: |
           apt update
           apt --yes --no-install-recommends install python3-yaml python3-jinja2 
-          apt --yes --no-install-recommends install cephadm
+          apt --yes install cephadm
       - name: Bootstraph ceph
         if: ${{matrix.julea.object == 'rados' }}
         run: |
@@ -234,7 +227,8 @@ jobs:
               --single-host-defaults \
               --skip-mon-network \
               --skip-dashboard \
-              --skip-time-sync-check \
+              --skip-firewalld \
+              --skip-prepare-host \ 
               --skip-monitoring-stack
       - name: Add loop devices
         if: ${{matrix.julea.object == 'rados' }}
