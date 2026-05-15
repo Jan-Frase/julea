@@ -128,7 +128,11 @@ jobs:
     name: Tests
     needs: dependencies
     runs-on: ubuntu-24.04
-    container: ${{ matrix.os.registry }}/${{ matrix.os.image }}
+    container:
+      image: ${{ matrix.os.registry }}/${{ matrix.os.image }}
+      options: >-
+        --privileged
+        -v /var/run/docker.sock:/var/run/docker.sock
     timeout-minutes: 60
     strategy:
       fail-fast: false
@@ -211,9 +215,15 @@ jobs:
     env:
       JULEA_SPACK_DIR: /julea-dependencies
     steps:
-      - name: Ceph Check
-        if: ${{ matrix.julea.object == 'rados' }}
-        run: ceph -s
+      - name: Get cephadm
+        run: apt --yes --no-install-recommends install cephadm
+      - name: Bootstraph ceph
+        run: cephadm --docker bootstrap \
+              --mon-ip 127.0.01 \
+              --signle-host-defaults \
+              --skip-mon-network \
+              --skip-dashboard \
+              --skip-monitoring-stack
       - name: Checkout
         uses: actions/checkout@v6
         with:
