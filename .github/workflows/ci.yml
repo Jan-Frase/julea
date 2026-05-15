@@ -234,6 +234,7 @@ jobs:
               --single-host-defaults \
               --skip-mon-network \
               --skip-dashboard \
+              --skip-time-sync-check \
               --skip-monitoring-stack
       - name: Add loop devices
         if: ${{matrix.julea.object == 'rados' }}
