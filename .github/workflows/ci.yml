@@ -216,7 +216,9 @@ jobs:
       JULEA_SPACK_DIR: /julea-dependencies
     steps:
       - name: Get cephadm
-        run: apt --yes --no-install-recommends install cephadm
+        run: |
+          apt update
+          apt --yes --no-install-recommends install cephadm
       - name: Bootstraph ceph
         run: cephadm --docker bootstrap \
               --mon-ip 127.0.01 \
