@@ -223,7 +223,7 @@ jobs:
         if: ${{matrix.julea.object == 'rados' }}
         run: |
           cephadm --docker bootstrap \
-              --mon-ip 127.0.01 \
+              --mon-ip 127.0.0.1 \
               --single-host-defaults \
               --skip-mon-network \
               --skip-dashboard \
