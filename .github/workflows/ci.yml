@@ -219,7 +219,7 @@ jobs:
           apt update
           apt --yes --no-install-recommends install python3-yaml python3-jinja2 
           apt --yes install podman fuse-overlayfs catatonit curl
-          export CEPH_RELEASE=20.2.1 
+          export CEPH_RELEASE=19.2.3
           curl --silent --remote-name --location https://download.ceph.com/rpm-${CEPH_RELEASE}/el9/noarch/cephadm
           chmod +x cephadm
       - name: Bootstraph ceph
