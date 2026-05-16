@@ -36,7 +36,7 @@ jobs:
         env:
           CC: clang
         run: |
-          ./scripts/ci/build.sh analysis
+          ./scripts/ci/build.sh analysis ""
       - name: Run CodeChecker
         uses: whisperity/CodeChecker-Action@v1.0.4
         with:
