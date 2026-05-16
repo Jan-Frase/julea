@@ -74,7 +74,9 @@ if get_option('debug')
 	])
 endif
 
-add_project_arguments(cc_args, language: 'c')
+if get_option('is_analysis_build') == false
+    add_project_arguments(cc_args, language: 'c')
+endif
 
 sanitize_cflags = ''
 

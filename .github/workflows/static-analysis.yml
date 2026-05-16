@@ -36,7 +36,7 @@ jobs:
         env:
           CC: clang
         run: |
-          ./scripts/ci/build.sh analysis ""
+          meson setup -Dis_analysis_build=true bld
       - name: Run CodeChecker
         uses: whisperity/CodeChecker-Action@v1.0.4
         with:
