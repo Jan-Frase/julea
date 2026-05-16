@@ -44,7 +44,7 @@ jobs:
 
       # Lastly, upload the results to the CI.
       - name: Upload results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: "CodeChecker Bug Reports"
           path: ${{ steps.codechecker.outputs.result-html-dir }}
