@@ -22,6 +22,7 @@ jobs:
   code-checker:
     name: Code checker
     runs-on: ubuntu-24.04
+    container: ghcr.io/parcio/julea/ubuntu:24.04-base
     timeout-minutes: 60
     steps:
       # First, checkout julea.
