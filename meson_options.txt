@@ -4,3 +4,9 @@ option('gdbm_prefix',
 	value: '',
 	description: 'Prefix for GDBM',
 )
+
+option('is_analysis_build',
+    type: 'boolean',
+    value: false,
+    description: 'Should be true, when generating compile_commands.json for CodeChecker.'
+)

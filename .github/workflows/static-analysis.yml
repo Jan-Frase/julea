@@ -1,0 +1,51 @@
+# JULEA - Flexible storage framework
+# Copyright (C) 2026 Jan Frase
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+name: static-analysis.yml
+on: [push, pull_request]
+
+jobs:
+  # This job is responsible for running Codechecker.
+  code-checker:
+    name: Code checker
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      # First, checkout julea.
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+
+      # Then, generate compile_commands.json.
+      - name: Generate compile_commands.json
+        env:
+          CC: clang
+        run: |
+          ./scripts/ci/build.sh analysis
+      - name: Run CodeChecker
+        uses: whisperity/CodeChecker-Action@v1.0.4
+        with:
+          build-command: "cd ${{ github.workspace }}; ninja -C bld ."
+
+      # Lastly, upload the results to the CI.
+      - name: Upload results
+        uses: actions/upload-artifact@v2
+        with:
+          name: "CodeChecker Bug Reports"
+          path: ${{ steps.codechecker.outputs.result-html-dir }}
+          
