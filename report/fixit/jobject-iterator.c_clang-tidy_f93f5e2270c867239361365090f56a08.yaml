@@ -1,0 +1,38 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/lib/object/jobject-iterator.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-branch-clone
+    DiagnosticMessage:
+      Message:         if with identical then and else branches
+      FilePath:        '/home/jan/parcio/julea/lib/object/jobject-iterator.c'
+      FileOffset:      3001
+      Replacements:    []
+    Notes:
+      - Message:         else branch starts here
+        FilePath:        '/home/jan/parcio/julea/lib/object/jobject-iterator.c'
+        FileOffset:      3128
+        Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-branch-clone
+    DiagnosticMessage:
+      Message:         if with identical then and else branches
+      FilePath:        '/home/jan/parcio/julea/lib/object/jobject-iterator.c'
+      FileOffset:      4072
+      Replacements:    []
+    Notes:
+      - Message:         else branch starts here
+        FilePath:        '/home/jan/parcio/julea/lib/object/jobject-iterator.c'
+        FileOffset:      4199
+        Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''JMessage **'' (aka ''struct JMessage **'') to ''void *'', please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/object/jobject-iterator.c'
+      FileOffset:      4621
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

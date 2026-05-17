@@ -1,0 +1,69 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/test/hdf5/hdf.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint'' (aka ''unsigned int'') to signed type ''int'' is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/test/hdf5/hdf.c'
+      FileOffset:      1456
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''guint64'' (aka ''unsigned long'') of a multiplication performed in type ''int'''
+      FilePath:        '/home/jan/parcio/julea/test/hdf5/hdf.c'
+      FileOffset:      2782
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/test/hdf5/hdf.c'
+        FileOffset:      2782
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/test/hdf5/hdf.c'
+            Offset:          2782
+            Length:          0
+            ReplacementText: '(guint64)('
+        Ranges:
+          - FilePath:        ''
+            FileOffset:      0
+            Length:          0
+      - Message:         'expanded from macro ''g_assert_cmpuint'''
+        FilePath:        '/usr/include/glib-2.0/glib/gtestutils.h'
+        FileOffset:      4189
+        Replacements:    []
+        Ranges:
+          - FilePath:        '/usr/include/glib-2.0/glib/gtestutils.h'
+            FileOffset:      4189
+            Length:          2
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/test/hdf5/hdf.c'
+        FileOffset:      2782
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/test/hdf5/hdf.c'
+            Offset:          2782
+            Length:          0
+            ReplacementText: '(long)'
+        Ranges:
+          - FilePath:        ''
+            FileOffset:      0
+            Length:          0
+      - Message:         'expanded from macro ''g_assert_cmpuint'''
+        FilePath:        '/usr/include/glib-2.0/glib/gtestutils.h'
+        FileOffset:      4189
+        Replacements:    []
+        Ranges:
+          - FilePath:        '/usr/include/glib-2.0/glib/gtestutils.h'
+            FileOffset:      4189
+            Length:          2
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint'' (aka ''unsigned int'') to signed type ''int'' is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/test/hdf5/hdf.c'
+      FileOffset:      4329
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

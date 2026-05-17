@@ -1,0 +1,52 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/lib/db-util/sql-generic-dql.c'
+Diagnostics:
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_bind_selector_query'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/lib/db-util/sql-generic-dql.c'
+      FileOffset:      10908
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_backend_schema_get'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/lib/db-util/sql-generic-internal.h'
+      FileOffset:      7171
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_backend_query_ids'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/lib/db-util/sql-generic-internal.h'
+      FileOffset:      10481
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_backend_batch_start'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/lib/db-util/sql-generic-internal.h'
+      FileOffset:      10951
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_backend_batch_execute'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/lib/db-util/sql-generic-internal.h'
+      FileOffset:      11358
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_backend_batch_abort'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/lib/db-util/sql-generic-internal.h'
+      FileOffset:      11763
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

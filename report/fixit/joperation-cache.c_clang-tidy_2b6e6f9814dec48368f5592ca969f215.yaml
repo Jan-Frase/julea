@@ -1,0 +1,45 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/lib/core/joperation-cache.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''guint64'' (aka ''unsigned long'') of a multiplication performed in type ''int'''
+      FilePath:        '/home/jan/parcio/julea/lib/core/joperation-cache.c'
+      FileOffset:      4047
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/lib/core/joperation-cache.c'
+        FileOffset:      4047
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/lib/core/joperation-cache.c'
+            Offset:          1066
+            Length:          0
+            ReplacementText: "#include <stddef.h>\n"
+          - FilePath:        '/home/jan/parcio/julea/lib/core/joperation-cache.c'
+            Offset:          4047
+            Length:          0
+            ReplacementText: '(guint64)('
+          - FilePath:        '/home/jan/parcio/julea/lib/core/joperation-cache.c'
+            Offset:          4063
+            Length:          0
+            ReplacementText: ')'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/lib/core/joperation-cache.c'
+            FileOffset:      4047
+            Length:          16
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/lib/core/joperation-cache.c'
+        FileOffset:      4047
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/lib/core/joperation-cache.c'
+            Offset:          4047
+            Length:          0
+            ReplacementText: '(long)'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/lib/core/joperation-cache.c'
+            FileOffset:      4047
+            Length:          9
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

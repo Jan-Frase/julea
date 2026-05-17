@@ -1,0 +1,108 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/backend/db/sqlite.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''void *'' to ''sqlite3_stmt **'' (aka ''struct sqlite3_stmt **''), please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/backend/db/sqlite.c'
+      FileOffset:      1671
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''sqlite3_int64'' (aka ''long long'') to signed type ''gint32'' (aka ''int'') is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/backend/db/sqlite.c'
+      FileOffset:      2819
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint'' (aka ''unsigned int'') to signed type ''int'' is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/backend/db/sqlite.c'
+      FileOffset:      2846
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint'' (aka ''unsigned int'') to signed type ''int'' is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/backend/db/sqlite.c'
+      FileOffset:      2937
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint'' (aka ''unsigned int'') to signed type ''int'' is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/backend/db/sqlite.c'
+      FileOffset:      3028
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint'' (aka ''unsigned int'') to signed type ''int'' is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/backend/db/sqlite.c'
+      FileOffset:      3119
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''double'' to ''gfloat'' (aka ''float'')'
+      FilePath:        '/home/jan/parcio/julea/backend/db/sqlite.c'
+      FileOffset:      3185
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint'' (aka ''unsigned int'') to signed type ''int'' is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/backend/db/sqlite.c'
+      FileOffset:      3213
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint'' (aka ''unsigned int'') to signed type ''int'' is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/backend/db/sqlite.c'
+      FileOffset:      3307
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint'' (aka ''unsigned int'') to signed type ''int'' is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/backend/db/sqlite.c'
+      FileOffset:      3410
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint'' (aka ''unsigned int'') to signed type ''int'' is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/backend/db/sqlite.c'
+      FileOffset:      3496
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint'' (aka ''unsigned int'') to signed type ''int'' is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/backend/db/sqlite.c'
+      FileOffset:      3557
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''sqlite3_stmt **'' (aka ''struct sqlite3_stmt **'') to ''void *'', please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/backend/db/sqlite.c'
+      FileOffset:      7727
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

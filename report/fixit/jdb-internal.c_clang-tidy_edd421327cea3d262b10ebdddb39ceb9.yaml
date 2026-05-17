@@ -1,0 +1,60 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/lib/db/jdb-internal.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''GError **'' (aka ''struct _GError **'') to ''const void *'', please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/db/jdb-internal.c'
+      FileOffset:      4669
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''GError **'' (aka ''struct _GError **'') to ''const void *'', please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/db/jdb-internal.c'
+      FileOffset:      5738
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''GError **'' (aka ''struct _GError **'') to ''const void *'', please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/db/jdb-internal.c'
+      FileOffset:      6764
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''GError **'' (aka ''struct _GError **'') to ''const void *'', please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/db/jdb-internal.c'
+      FileOffset:      7876
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''GError **'' (aka ''struct _GError **'') to ''const void *'', please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/db/jdb-internal.c'
+      FileOffset:      9034
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''GError **'' (aka ''struct _GError **'') to ''const void *'', please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/db/jdb-internal.c'
+      FileOffset:      10255
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''GError **'' (aka ''struct _GError **'') to ''const void *'', please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/db/jdb-internal.c'
+      FileOffset:      11738
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

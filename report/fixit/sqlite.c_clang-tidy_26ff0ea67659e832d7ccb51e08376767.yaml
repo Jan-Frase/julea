@@ -1,0 +1,12 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/backend/kv/sqlite.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint32'' (aka ''unsigned int'') to signed type ''int'' is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/backend/kv/sqlite.c'
+      FileOffset:      2834
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

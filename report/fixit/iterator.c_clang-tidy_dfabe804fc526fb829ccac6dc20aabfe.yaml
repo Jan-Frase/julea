@@ -1,0 +1,60 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/benchmark/db/iterator.c'
+Diagnostics:
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_db_get_identifier'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/db/common.c'
+      FileOffset:      1172
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_db_prepare_scheme'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/db/common.c'
+      FileOffset:      1324
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_db_insert'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/db/common.c'
+      FileOffset:      3536
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''gint64'' (aka ''long'') to ''double'''
+      FilePath:        '/home/jan/parcio/julea/benchmark/db/common.c'
+      FileOffset:      4639
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-suspicious-include
+    DiagnosticMessage:
+      Message:         'suspicious #include of file with ''.c'' extension'
+      FilePath:        '/home/jan/parcio/julea/benchmark/db/iterator.c'
+      FileOffset:      907
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_db_get_simple'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/db/iterator.c'
+      FileOffset:      930
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_db_get_range'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/db/iterator.c'
+      FileOffset:      2818
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

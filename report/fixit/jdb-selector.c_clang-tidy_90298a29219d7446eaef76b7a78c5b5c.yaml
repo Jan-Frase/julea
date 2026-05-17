@@ -1,0 +1,17 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/lib/db/jdb-selector.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-branch-clone
+    DiagnosticMessage:
+      Message:         switch has 2 consecutive identical branches
+      FilePath:        '/home/jan/parcio/julea/lib/db/jdb-selector.c'
+      FileOffset:      4083
+      Replacements:    []
+    Notes:
+      - Message:         last of these clones ends here
+        FilePath:        '/home/jan/parcio/julea/lib/db/jdb-selector.c'
+        FileOffset:      4235
+        Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

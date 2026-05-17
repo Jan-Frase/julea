@@ -1,0 +1,25 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/lib/core/jconnection-pool.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-branch-clone
+    DiagnosticMessage:
+      Message:         repeated branch body in conditional chain
+      FilePath:        '/home/jan/parcio/julea/lib/core/jconnection-pool.c'
+      FileOffset:      6008
+      Replacements:    []
+    Notes:
+      - Message:         end of the original
+        FilePath:        '/home/jan/parcio/julea/lib/core/jconnection-pool.c'
+        FileOffset:      6063
+        Replacements:    []
+      - Message:         clone 1 starts here
+        FilePath:        '/home/jan/parcio/julea/lib/core/jconnection-pool.c'
+        FileOffset:      6112
+        Replacements:    []
+      - Message:         clone 2 starts here
+        FilePath:        '/home/jan/parcio/julea/lib/core/jconnection-pool.c'
+        FileOffset:      6212
+        Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

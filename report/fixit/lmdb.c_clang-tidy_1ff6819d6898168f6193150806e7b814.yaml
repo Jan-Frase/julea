@@ -1,0 +1,16 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/backend/kv/lmdb.c'
+Diagnostics:
+  - DiagnosticName:  clang-diagnostic-incompatible-pointer-types-discards-qualifiers
+    DiagnosticMessage:
+      Message:         'assigning to ''void *'' from ''gconstpointer'' (aka ''const void *'') discards qualifiers'
+      FilePath:        '/home/jan/parcio/julea/backend/kv/lmdb.c'
+      FileOffset:      2732
+      Replacements:    []
+      Ranges:
+        - FilePath:        '/home/jan/parcio/julea/backend/kv/lmdb.c'
+          FileOffset:      2734
+          Length:          5
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

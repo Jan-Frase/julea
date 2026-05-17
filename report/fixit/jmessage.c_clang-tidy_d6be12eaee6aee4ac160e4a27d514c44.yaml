@@ -1,0 +1,27 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/lib/core/jmessage.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''double'' to ''gsize'' (aka ''unsigned long'')'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jmessage.c'
+      FileOffset:      4510
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-float-conversion
+    DiagnosticMessage:
+      Message:         'implicit conversion turns floating-point number into integer: ''double'' to ''gsize'' (aka ''unsigned long'')'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jmessage.c'
+      FileOffset:      4510
+      Replacements:    []
+      Ranges:
+        - FilePath:        '/home/jan/parcio/julea/lib/core/jmessage.c'
+          FileOffset:      4510
+          Length:          28
+        - FilePath:        '/home/jan/parcio/julea/lib/core/jmessage.c'
+          FileOffset:      4508
+          Length:          1
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

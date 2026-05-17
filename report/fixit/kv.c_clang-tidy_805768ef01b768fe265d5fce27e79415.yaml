@@ -1,0 +1,52 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/benchmark/kv/kv.c'
+Diagnostics:
+  - DiagnosticName:  clang-diagnostic-error
+    DiagnosticMessage:
+      Message:         'unknown argument: ''-fhardened'''
+      FilePath:        ''
+      FileOffset:      0
+      Replacements:    []
+    Level:           Error
+    BuildDirectory:  ''
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_kv_put'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+      FileOffset:      901
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_kv_get_callback'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+      FileOffset:      2072
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_kv_get'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+      FileOffset:      2202
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_kv_delete'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+      FileOffset:      3688
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_kv_unordered_put_delete'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+      FileOffset:      4976
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

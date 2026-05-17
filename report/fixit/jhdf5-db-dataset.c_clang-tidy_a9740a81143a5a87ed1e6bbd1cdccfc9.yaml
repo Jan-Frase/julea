@@ -1,0 +1,73 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/lib/hdf5-db/jhdf5-db-dataset.c'
+Diagnostics:
+  - DiagnosticName:  clang-diagnostic-error
+    DiagnosticMessage:
+      Message:         'unknown argument: ''-fhardened'''
+      FilePath:        ''
+      FileOffset:      0
+      Replacements:    []
+    Level:           Error
+    BuildDirectory:  ''
+  - DiagnosticName:  cert-err33-c
+    DiagnosticMessage:
+      Message:         'the value returned by this function should not be disregarded; neglecting it may lead to errors'
+      FilePath:        '/home/jan/parcio/julea/dependencies/opt/spack/linux-skylake/libbson-1.27.2-q6ixyfnyitetz5jcqdebf5uxlqzco6jo/include/libbson-1.0/bson/bson-atomic.h'
+      FileOffset:      34369
+      Replacements:    []
+      Ranges:
+        - FilePath:        ''
+          FileOffset:      0
+          Length:          0
+    Notes:
+      - Message:         'expanded from macro ''BSON_UNREACHABLE'''
+        FilePath:        '/home/jan/parcio/julea/dependencies/opt/spack/linux-skylake/libbson-1.27.2-q6ixyfnyitetz5jcqdebf5uxlqzco6jo/include/libbson-1.0/bson/bson-macros.h'
+        FileOffset:      10334
+        Replacements:    []
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/dependencies/opt/spack/linux-skylake/libbson-1.27.2-q6ixyfnyitetz5jcqdebf5uxlqzco6jo/include/libbson-1.0/bson/bson-macros.h'
+            FileOffset:      10334
+            Length:          99
+      - Message:         cast the expression to void to silence this warning
+        FilePath:        '/home/jan/parcio/julea/dependencies/opt/spack/linux-skylake/libbson-1.27.2-q6ixyfnyitetz5jcqdebf5uxlqzco6jo/include/libbson-1.0/bson/bson-atomic.h'
+        FileOffset:      34369
+        Replacements:    []
+      - Message:         'expanded from macro ''BSON_UNREACHABLE'''
+        FilePath:        '/home/jan/parcio/julea/dependencies/opt/spack/linux-skylake/libbson-1.27.2-q6ixyfnyitetz5jcqdebf5uxlqzco6jo/include/libbson-1.0/bson/bson-macros.h'
+        FileOffset:      10334
+        Replacements:    []
+      - Message:         'assuming that this constant is just an auxiliary value and not used for indicating a valid union data member [bugprone-tagged-union-member-count]'
+        FilePath:        '/home/jan/parcio/julea/lib/hdf5-db/jhdf5-db.h'
+        FileOffset:      1130
+        Replacements:    []
+      - Message:         'assuming that this constant is just an auxiliary value and not used for indicating a valid union data member [bugprone-tagged-union-member-count]'
+        FilePath:        '/home/jan/parcio/julea/lib/hdf5-db/jhdf5-db.h'
+        FileOffset:      1130
+        Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-signed-char-misuse
+    DiagnosticMessage:
+      Message:         '''signed char'' to ''gint64'' (aka ''long'') conversion; consider casting to ''unsigned char'' first.'
+      FilePath:        '/home/jan/parcio/julea/lib/hdf5-db/jhdf5-db-dataset.c'
+      FileOffset:      19214
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-signed-char-misuse
+    DiagnosticMessage:
+      Message:         '''signed char'' to ''gint64'' (aka ''long'') conversion; consider casting to ''unsigned char'' first.'
+      FilePath:        '/home/jan/parcio/julea/lib/hdf5-db/jhdf5-db-dataset.c'
+      FileOffset:      19670
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_J_HDF5_OBJECT_TYPE_COUNT'' is reserved because it starts with ''_'' followed by a capital letter'
+      FilePath:        '/home/jan/parcio/julea/lib/hdf5-db/jhdf5-db.h'
+      FileOffset:      1130
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

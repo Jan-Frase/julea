@@ -1,0 +1,46 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/lib/object/jobject.c'
+Diagnostics:
+  - DiagnosticName:  clang-diagnostic-conditional-uninitialized
+    DiagnosticMessage:
+      Message:         'variable ''object_handle'' may be uninitialized when used here'
+      FilePath:        '/home/jan/parcio/julea/lib/object/jobject.c'
+      FileOffset:      10837
+      Replacements:    []
+      Ranges:
+        - FilePath:        '/home/jan/parcio/julea/lib/object/jobject.c'
+          FileOffset:      10837
+          Length:          13
+    Notes:
+      - Message:         'initialize the variable ''object_handle'' to silence this warning'
+        FilePath:        '/home/jan/parcio/julea/lib/object/jobject.c'
+        FileOffset:      9188
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/lib/object/jobject.c'
+            Offset:          9188
+            Length:          0
+            ReplacementText: ' = NULL'
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-conditional-uninitialized
+    DiagnosticMessage:
+      Message:         'variable ''object_handle'' may be uninitialized when used here'
+      FilePath:        '/home/jan/parcio/julea/lib/object/jobject.c'
+      FileOffset:      15154
+      Replacements:    []
+      Ranges:
+        - FilePath:        '/home/jan/parcio/julea/lib/object/jobject.c'
+          FileOffset:      15154
+          Length:          13
+    Notes:
+      - Message:         'initialize the variable ''object_handle'' to silence this warning'
+        FilePath:        '/home/jan/parcio/julea/lib/object/jobject.c'
+        FileOffset:      13146
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/lib/object/jobject.c'
+            Offset:          13146
+            Length:          0
+            ReplacementText: ' = NULL'
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

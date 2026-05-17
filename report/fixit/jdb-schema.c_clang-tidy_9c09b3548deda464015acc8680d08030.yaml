@@ -1,0 +1,12 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/lib/db/jdb-schema.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''gchar **'' (aka ''char **'') to ''void *'', please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/db/jdb-schema.c'
+      FileOffset:      5695
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

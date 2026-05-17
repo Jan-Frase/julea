@@ -1,0 +1,29 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/fuse/julea-fuse.c'
+Diagnostics:
+  - DiagnosticName:  clang-diagnostic-error
+    DiagnosticMessage:
+      Message:         'unknown argument: ''-fhardened'''
+      FilePath:        ''
+      FileOffset:      0
+      Replacements:    []
+    Level:           Error
+    BuildDirectory:  ''
+  - DiagnosticName:  cert-err33-c
+    DiagnosticMessage:
+      Message:         'the value returned by this function should not be disregarded; neglecting it may lead to errors'
+      FilePath:        '/home/jan/parcio/julea/fuse/julea-fuse.c'
+      FileOffset:      1373
+      Replacements:    []
+      Ranges:
+        - FilePath:        '/home/jan/parcio/julea/fuse/julea-fuse.c'
+          FileOffset:      1373
+          Length:          28
+    Notes:
+      - Message:         cast the expression to void to silence this warning
+        FilePath:        '/home/jan/parcio/julea/fuse/julea-fuse.c'
+        FileOffset:      1373
+        Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

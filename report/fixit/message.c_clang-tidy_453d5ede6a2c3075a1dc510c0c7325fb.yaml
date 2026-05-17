@@ -1,0 +1,61 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/benchmark/message.c'
+Diagnostics:
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_message_new'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/message.c'
+      FileOffset:      881
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_message_add_operation'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/message.c'
+      FileOffset:      1654
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''unsigned long'' of a multiplication performed in type ''guint'' (aka ''unsigned int'')'
+      FilePath:        '/home/jan/parcio/julea/benchmark/message.c'
+      FileOffset:      2239
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/benchmark/message.c'
+        FileOffset:      2239
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/message.c'
+            Offset:          844
+            Length:          0
+            ReplacementText: "#include <stddef.h>\n"
+          - FilePath:        '/home/jan/parcio/julea/benchmark/message.c'
+            Offset:          2239
+            Length:          0
+            ReplacementText: '(unsigned long)('
+          - FilePath:        '/home/jan/parcio/julea/benchmark/message.c'
+            Offset:          2244
+            Length:          0
+            ReplacementText: ')'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/message.c'
+            FileOffset:      2239
+            Length:          5
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/benchmark/message.c'
+        FileOffset:      2239
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/message.c'
+            Offset:          2239
+            Length:          0
+            ReplacementText: '(unsigned long)'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/message.c'
+            FileOffset:      2239
+            Length:          1
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

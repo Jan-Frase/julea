@@ -1,0 +1,442 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/benchmark/item/item.c'
+Diagnostics:
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_item_create'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+      FileOffset:      903
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_item_delete'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+      FileOffset:      2315
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_item_get_status'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+      FileOffset:      5044
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_item_read'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+      FileOffset:      6387
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''guint64'' (aka ''unsigned long'') of a multiplication performed in type ''guint'' (aka ''unsigned int'')'
+      FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+      FileOffset:      7027
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+        FileOffset:      7027
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          802
+            Length:          0
+            ReplacementText: "#include <stddef.h>\n"
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          7027
+            Length:          0
+            ReplacementText: '(guint64)('
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          7041
+            Length:          0
+            ReplacementText: ')'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            FileOffset:      7027
+            Length:          14
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+        FileOffset:      7027
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          7027
+            Length:          0
+            ReplacementText: '(guint64)'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            FileOffset:      7027
+            Length:          1
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''guint64'' (aka ''unsigned long'') of a multiplication performed in type ''guint'' (aka ''unsigned int'')'
+      FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+      FileOffset:      7138
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+        FileOffset:      7138
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          7138
+            Length:          0
+            ReplacementText: '(guint64)('
+        Ranges:
+          - FilePath:        ''
+            FileOffset:      0
+            Length:          0
+      - Message:         'expanded from macro ''g_assert_cmpuint'''
+        FilePath:        '/usr/include/glib-2.0/glib/gtestutils.h'
+        FileOffset:      4189
+        Replacements:    []
+        Ranges:
+          - FilePath:        '/usr/include/glib-2.0/glib/gtestutils.h'
+            FileOffset:      4189
+            Length:          2
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+        FileOffset:      7138
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          7138
+            Length:          0
+            ReplacementText: '(guint64)'
+        Ranges:
+          - FilePath:        ''
+            FileOffset:      0
+            Length:          0
+      - Message:         'expanded from macro ''g_assert_cmpuint'''
+        FilePath:        '/usr/include/glib-2.0/glib/gtestutils.h'
+        FileOffset:      4189
+        Replacements:    []
+        Ranges:
+          - FilePath:        '/usr/include/glib-2.0/glib/gtestutils.h'
+            FileOffset:      4189
+            Length:          2
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''guint64'' (aka ''unsigned long'') of a multiplication performed in type ''guint'' (aka ''unsigned int'')'
+      FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+      FileOffset:      7301
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+        FileOffset:      7301
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          7301
+            Length:          0
+            ReplacementText: '(guint64)('
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          7315
+            Length:          0
+            ReplacementText: ')'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            FileOffset:      7301
+            Length:          14
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+        FileOffset:      7301
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          7301
+            Length:          0
+            ReplacementText: '(guint64)'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            FileOffset:      7301
+            Length:          1
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''guint64'' (aka ''unsigned long'') of a multiplication performed in type ''guint'' (aka ''unsigned int'')'
+      FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+      FileOffset:      7570
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+        FileOffset:      7570
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          7570
+            Length:          0
+            ReplacementText: '(guint64)('
+        Ranges:
+          - FilePath:        ''
+            FileOffset:      0
+            Length:          0
+      - Message:         'expanded from macro ''g_assert_cmpuint'''
+        FilePath:        '/usr/include/glib-2.0/glib/gtestutils.h'
+        FileOffset:      4189
+        Replacements:    []
+        Ranges:
+          - FilePath:        '/usr/include/glib-2.0/glib/gtestutils.h'
+            FileOffset:      4189
+            Length:          2
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+        FileOffset:      7570
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          7570
+            Length:          0
+            ReplacementText: '(guint64)'
+        Ranges:
+          - FilePath:        ''
+            FileOffset:      0
+            Length:          0
+      - Message:         'expanded from macro ''g_assert_cmpuint'''
+        FilePath:        '/usr/include/glib-2.0/glib/gtestutils.h'
+        FileOffset:      4189
+        Replacements:    []
+        Ranges:
+          - FilePath:        '/usr/include/glib-2.0/glib/gtestutils.h'
+            FileOffset:      4189
+            Length:          2
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''guint64'' (aka ''unsigned long'') of a multiplication performed in type ''guint'' (aka ''unsigned int'')'
+      FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+      FileOffset:      7785
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+        FileOffset:      7785
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          7785
+            Length:          0
+            ReplacementText: '(guint64)('
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          7799
+            Length:          0
+            ReplacementText: ')'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            FileOffset:      7785
+            Length:          14
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+        FileOffset:      7785
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          7785
+            Length:          0
+            ReplacementText: '(guint64)'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            FileOffset:      7785
+            Length:          1
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_item_write'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+      FileOffset:      8023
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''guint64'' (aka ''unsigned long'') of a multiplication performed in type ''guint'' (aka ''unsigned int'')'
+      FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+      FileOffset:      8788
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+        FileOffset:      8788
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          8788
+            Length:          0
+            ReplacementText: '(guint64)('
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          8802
+            Length:          0
+            ReplacementText: ')'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            FileOffset:      8788
+            Length:          14
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+        FileOffset:      8788
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          8788
+            Length:          0
+            ReplacementText: '(guint64)'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            FileOffset:      8788
+            Length:          1
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''guint64'' (aka ''unsigned long'') of a multiplication performed in type ''guint'' (aka ''unsigned int'')'
+      FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+      FileOffset:      9057
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+        FileOffset:      9057
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          9057
+            Length:          0
+            ReplacementText: '(guint64)('
+        Ranges:
+          - FilePath:        ''
+            FileOffset:      0
+            Length:          0
+      - Message:         'expanded from macro ''g_assert_cmpuint'''
+        FilePath:        '/usr/include/glib-2.0/glib/gtestutils.h'
+        FileOffset:      4189
+        Replacements:    []
+        Ranges:
+          - FilePath:        '/usr/include/glib-2.0/glib/gtestutils.h'
+            FileOffset:      4189
+            Length:          2
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+        FileOffset:      9057
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          9057
+            Length:          0
+            ReplacementText: '(guint64)'
+        Ranges:
+          - FilePath:        ''
+            FileOffset:      0
+            Length:          0
+      - Message:         'expanded from macro ''g_assert_cmpuint'''
+        FilePath:        '/usr/include/glib-2.0/glib/gtestutils.h'
+        FileOffset:      4189
+        Replacements:    []
+        Ranges:
+          - FilePath:        '/usr/include/glib-2.0/glib/gtestutils.h'
+            FileOffset:      4189
+            Length:          2
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''guint64'' (aka ''unsigned long'') of a multiplication performed in type ''guint'' (aka ''unsigned int'')'
+      FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+      FileOffset:      9272
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+        FileOffset:      9272
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          9272
+            Length:          0
+            ReplacementText: '(guint64)('
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          9286
+            Length:          0
+            ReplacementText: ')'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            FileOffset:      9272
+            Length:          14
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+        FileOffset:      9272
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          9272
+            Length:          0
+            ReplacementText: '(guint64)'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            FileOffset:      9272
+            Length:          1
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_item_unordered_create_delete'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+      FileOffset:      9514
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''guint64'' (aka ''unsigned long'') of a multiplication performed in type ''guint'' (aka ''unsigned int'')'
+      FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+      FileOffset:      10564
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+        FileOffset:      10564
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          10564
+            Length:          0
+            ReplacementText: '(guint64)('
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          10569
+            Length:          0
+            ReplacementText: ')'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            FileOffset:      10564
+            Length:          5
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+        FileOffset:      10564
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            Offset:          10564
+            Length:          0
+            ReplacementText: '(guint64)'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/item/item.c'
+            FileOffset:      10564
+            Length:          1
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  misc-header-include-cycle
+    DiagnosticMessage:
+      Message:         'circular header file dependency detected while including ''jcollection.h'', please check the include path'
+      FilePath:        '/home/jan/parcio/julea/include/item/jitem.h'
+      FileOffset:      1173
+      Replacements:    []
+    Notes:
+      - Message:         '''jitem.h'' included from here'
+        FilePath:        '/home/jan/parcio/julea/include/item/jcollection.h'
+        FileOffset:      1104
+        Replacements:    []
+      - Message:         '''jcollection.h'' included from here'
+        FilePath:        '/home/jan/parcio/julea/include/julea-item.h'
+        FileOffset:      827
+        Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

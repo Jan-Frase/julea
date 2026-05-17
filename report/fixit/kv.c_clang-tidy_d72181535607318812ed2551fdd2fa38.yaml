@@ -1,0 +1,85 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/benchmark/kv/kv.c'
+Diagnostics:
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_kv_put'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+      FileOffset:      901
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_kv_get_callback'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+      FileOffset:      2072
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_kv_get'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+      FileOffset:      2202
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_kv_delete'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+      FileOffset:      3688
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-reserved-identifier
+    DiagnosticMessage:
+      Message:         'identifier ''_benchmark_kv_unordered_put_delete'' is reserved because it starts with ''_'' at global scope'
+      FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+      FileOffset:      4976
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''guint64'' (aka ''unsigned long'') of a multiplication performed in type ''guint'' (aka ''unsigned int'')'
+      FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+      FileOffset:      5819
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+        FileOffset:      5819
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+            Offset:          802
+            Length:          0
+            ReplacementText: "#include <stddef.h>\n"
+          - FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+            Offset:          5819
+            Length:          0
+            ReplacementText: '(guint64)('
+          - FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+            Offset:          5824
+            Length:          0
+            ReplacementText: ')'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+            FileOffset:      5819
+            Length:          5
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+        FileOffset:      5819
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+            Offset:          5819
+            Length:          0
+            ReplacementText: '(guint64)'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/benchmark/kv/kv.c'
+            FileOffset:      5819
+            Length:          1
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

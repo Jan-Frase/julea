@@ -1,0 +1,12 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/test/object/object.c'
+Diagnostics:
+  - DiagnosticName:  clang-diagnostic-error
+    DiagnosticMessage:
+      Message:         'unknown argument: ''-fhardened'''
+      FilePath:        ''
+      FileOffset:      0
+      Replacements:    []
+    Level:           Error
+    BuildDirectory:  ''
+...

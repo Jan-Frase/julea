@@ -1,0 +1,28 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/lib/core/distribution/round-robin.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint'' (aka ''unsigned int'') to signed type ''gint32'' (aka ''int'') is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/lib/core/distribution/round-robin.c'
+      FileOffset:      2841
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint64'' (aka ''unsigned long'') to signed type ''int64_t'' (aka ''long'') is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/lib/core/distribution/round-robin.c'
+      FileOffset:      4335
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint'' (aka ''unsigned int'') to signed type ''int32_t'' (aka ''int'') is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/lib/core/distribution/round-robin.c'
+      FileOffset:      4403
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

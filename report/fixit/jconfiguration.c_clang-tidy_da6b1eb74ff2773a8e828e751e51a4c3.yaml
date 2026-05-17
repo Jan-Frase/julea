@@ -1,0 +1,82 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/lib/core/jconfiguration.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''guint64'' (aka ''unsigned long'') of a multiplication performed in type ''int'''
+      FilePath:        '/home/jan/parcio/julea/lib/core/jconfiguration.c'
+      FileOffset:      7443
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/lib/core/jconfiguration.c'
+        FileOffset:      7443
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/lib/core/jconfiguration.c'
+            Offset:          821
+            Length:          0
+            ReplacementText: "#include <stddef.h>\n"
+          - FilePath:        '/home/jan/parcio/julea/lib/core/jconfiguration.c'
+            Offset:          7443
+            Length:          0
+            ReplacementText: '(guint64)('
+          - FilePath:        '/home/jan/parcio/julea/lib/core/jconfiguration.c'
+            Offset:          7458
+            Length:          0
+            ReplacementText: ')'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/lib/core/jconfiguration.c'
+            FileOffset:      7443
+            Length:          15
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/lib/core/jconfiguration.c'
+        FileOffset:      7443
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/lib/core/jconfiguration.c'
+            Offset:          7443
+            Length:          0
+            ReplacementText: '(long)'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/lib/core/jconfiguration.c'
+            FileOffset:      7443
+            Length:          8
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''guint64'' (aka ''unsigned long'') of a multiplication performed in type ''int'''
+      FilePath:        '/home/jan/parcio/julea/lib/core/jconfiguration.c'
+      FileOffset:      7947
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/lib/core/jconfiguration.c'
+        FileOffset:      7947
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/lib/core/jconfiguration.c'
+            Offset:          7947
+            Length:          0
+            ReplacementText: '(guint64)('
+          - FilePath:        '/home/jan/parcio/julea/lib/core/jconfiguration.c'
+            Offset:          7962
+            Length:          0
+            ReplacementText: ')'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/lib/core/jconfiguration.c'
+            FileOffset:      7947
+            Length:          15
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/lib/core/jconfiguration.c'
+        FileOffset:      7947
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/lib/core/jconfiguration.c'
+            Offset:          7947
+            Length:          0
+            ReplacementText: '(long)'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/lib/core/jconfiguration.c'
+            FileOffset:      7947
+            Length:          8
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

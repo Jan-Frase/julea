@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>diagnostics</key>
+	<array>
+		<dict>
+			<key>category</key>
+			<string>bugprone</string>
+			<key>check_name</key>
+			<string>bugprone-narrowing-conversions</string>
+			<key>description</key>
+			<string>narrowing conversion from 'guint' (aka 'unsigned int') to signed type 'gint' (aka 'int') is implementation-defined</string>
+			<key>issue_hash_content_of_line_in_context</key>
+			<string>ff12535dd647fa9c2e10dcfdcff006d7</string>
+			<key>location</key>
+			<dict>
+				<key>col</key>
+				<integer>71</integer>
+				<key>file</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>128</integer>
+			</dict>
+			<key>path</key>
+			<array>
+				<dict>
+					<key>depth</key>
+					<integer>0</integer>
+					<key>kind</key>
+					<string>event</string>
+					<key>location</key>
+					<dict>
+						<key>col</key>
+						<integer>71</integer>
+						<key>file</key>
+						<integer>0</integer>
+						<key>line</key>
+						<integer>128</integer>
+					</dict>
+					<key>message</key>
+					<string>narrowing conversion from 'guint' (aka 'unsigned int') to signed type 'gint' (aka 'int') is implementation-defined</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>files</key>
+	<array>
+		<string>/home/jan/parcio/julea/lib/core/jbackground-operation.c</string>
+	</array>
+	<key>metadata</key>
+	<dict>
+		<key>analyzer</key>
+		<dict>
+			<key>name</key>
+			<string>clang-tidy</string>
+		</dict>
+		<key>generated_by</key>
+		<dict>
+			<key>name</key>
+			<string>CodeChecker</string>
+			<key>version</key>
+			<string>6.27.1</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

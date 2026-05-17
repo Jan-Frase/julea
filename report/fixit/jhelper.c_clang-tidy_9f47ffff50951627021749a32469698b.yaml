@@ -1,0 +1,12 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/lib/core/jhelper.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''JBackgroundOperation **'' (aka ''struct JBackgroundOperation **'') to ''void *'', please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jhelper.c'
+      FileOffset:      3536
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

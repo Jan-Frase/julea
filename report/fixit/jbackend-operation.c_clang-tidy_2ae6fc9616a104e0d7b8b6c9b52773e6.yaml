@@ -1,0 +1,140 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/lib/core/jbackend-operation.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''void *'' to ''GError **'' (aka ''struct _GError **''), please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jbackend-operation.c'
+      FileOffset:      1242
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''void *'' to ''GError **'' (aka ''struct _GError **''), please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jbackend-operation.c'
+      FileOffset:      1503
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''void *'' to ''GError **'' (aka ''struct _GError **''), please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jbackend-operation.c'
+      FileOffset:      1746
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''void *'' to ''GError **'' (aka ''struct _GError **''), please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jbackend-operation.c'
+      FileOffset:      2080
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''void *'' to ''GError **'' (aka ''struct _GError **''), please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jbackend-operation.c'
+      FileOffset:      2437
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''void *'' to ''GError **'' (aka ''struct _GError **''), please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jbackend-operation.c'
+      FileOffset:      2689
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''void *'' to ''GError **'' (aka ''struct _GError **''), please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jbackend-operation.c'
+      FileOffset:      3134
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''void *'' to ''GError **'' (aka ''struct _GError **''), please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jbackend-operation.c'
+      FileOffset:      3333
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''void *'' to ''GError **'' (aka ''struct _GError **''), please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jbackend-operation.c'
+      FileOffset:      3521
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''unsigned long'' to signed type ''gint'' (aka ''int'') is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jbackend-operation.c'
+      FileOffset:      4170
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''uint32_t'' (aka ''unsigned int'') to signed type ''gint'' (aka ''int'') is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jbackend-operation.c'
+      FileOffset:      4435
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''unsigned long'' to signed type ''gint'' (aka ''int'') is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jbackend-operation.c'
+      FileOffset:      4827
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''unsigned long'' to signed type ''gint'' (aka ''int'') is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jbackend-operation.c'
+      FileOffset:      4890
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint'' (aka ''unsigned int'') to signed type ''gint'' (aka ''int'') is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jbackend-operation.c'
+      FileOffset:      6934
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint'' (aka ''unsigned int'') to signed type ''gint'' (aka ''int'') is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jbackend-operation.c'
+      FileOffset:      7899
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint'' (aka ''unsigned int'') to signed type ''gint'' (aka ''int'') is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jbackend-operation.c'
+      FileOffset:      8845
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-multi-level-implicit-pointer-conversion
+    DiagnosticMessage:
+      Message:         'multilevel pointer conversion from ''GError **'' (aka ''struct _GError **'') to ''void *'', please use explicit cast'
+      FilePath:        '/home/jan/parcio/julea/lib/core/jbackend-operation.c'
+      FileOffset:      9340
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

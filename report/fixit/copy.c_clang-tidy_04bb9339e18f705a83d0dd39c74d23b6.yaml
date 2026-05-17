@@ -1,0 +1,238 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/cli/copy.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''gsize'' (aka ''unsigned long'') of a multiplication performed in type ''int'''
+      FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+      FileOffset:      3331
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+        FileOffset:      3331
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            Offset:          3331
+            Length:          0
+            ReplacementText: '(gsize)('
+        Ranges:
+          - FilePath:        ''
+            FileOffset:      0
+            Length:          0
+      - Message:         'expanded from macro ''g_new'''
+        FilePath:        '/usr/include/glib-2.0/glib/gmem.h'
+        FileOffset:      11718
+        Replacements:    []
+        Ranges:
+          - FilePath:        '/usr/include/glib-2.0/glib/gmem.h'
+            FileOffset:      11718
+            Length:          9
+      - Message:         'expanded from macro ''_G_NEW'''
+        FilePath:        '/usr/include/glib-2.0/glib/gmem.h'
+        FileOffset:      10847
+        Replacements:    []
+        Ranges:
+          - FilePath:        '/usr/include/glib-2.0/glib/gmem.h'
+            FileOffset:      10847
+            Length:          9
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+        FileOffset:      3331
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            Offset:          3331
+            Length:          0
+            ReplacementText: '(long)'
+        Ranges:
+          - FilePath:        ''
+            FileOffset:      0
+            Length:          0
+      - Message:         'expanded from macro ''g_new'''
+        FilePath:        '/usr/include/glib-2.0/glib/gmem.h'
+        FileOffset:      11718
+        Replacements:    []
+        Ranges:
+          - FilePath:        '/usr/include/glib-2.0/glib/gmem.h'
+            FileOffset:      11718
+            Length:          9
+      - Message:         'expanded from macro ''_G_NEW'''
+        FilePath:        '/usr/include/glib-2.0/glib/gmem.h'
+        FileOffset:      10847
+        Replacements:    []
+        Ranges:
+          - FilePath:        '/usr/include/glib-2.0/glib/gmem.h'
+            FileOffset:      10847
+            Length:          9
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''guint64'' (aka ''unsigned long'') of a multiplication performed in type ''int'''
+      FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+      FileOffset:      3597
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+        FileOffset:      3597
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            Offset:          822
+            Length:          0
+            ReplacementText: "#include <stddef.h>\n"
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            Offset:          3597
+            Length:          0
+            ReplacementText: '(guint64)('
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            Offset:          3608
+            Length:          0
+            ReplacementText: ')'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            FileOffset:      3597
+            Length:          11
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+        FileOffset:      3597
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            Offset:          3597
+            Length:          0
+            ReplacementText: '(long)'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            FileOffset:      3597
+            Length:          4
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''guint64'' (aka ''unsigned long'') of a multiplication performed in type ''int'''
+      FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+      FileOffset:      3836
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+        FileOffset:      3836
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            Offset:          3836
+            Length:          0
+            ReplacementText: '(guint64)('
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            Offset:          3847
+            Length:          0
+            ReplacementText: ')'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            FileOffset:      3836
+            Length:          11
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+        FileOffset:      3836
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            Offset:          3836
+            Length:          0
+            ReplacementText: '(long)'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            FileOffset:      3836
+            Length:          4
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''gsize'' (aka ''unsigned long'') of a multiplication performed in type ''int'''
+      FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+      FileOffset:      4161
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+        FileOffset:      4161
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            Offset:          4161
+            Length:          0
+            ReplacementText: '(gsize)('
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            Offset:          4172
+            Length:          0
+            ReplacementText: ')'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            FileOffset:      4161
+            Length:          11
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+        FileOffset:      4161
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            Offset:          4161
+            Length:          0
+            ReplacementText: '(long)'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            FileOffset:      4161
+            Length:          4
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-implicit-widening-of-multiplication-result
+    DiagnosticMessage:
+      Message:         'performing an implicit widening conversion to type ''guint64'' (aka ''unsigned long'') of a multiplication performed in type ''int'''
+      FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+      FileOffset:      4911
+      Replacements:    []
+    Notes:
+      - Message:         make conversion explicit to silence this warning
+        FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+        FileOffset:      4911
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            Offset:          4911
+            Length:          0
+            ReplacementText: '(guint64)('
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            Offset:          4922
+            Length:          0
+            ReplacementText: ')'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            FileOffset:      4911
+            Length:          11
+      - Message:         perform multiplication in a wider type
+        FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+        FileOffset:      4911
+        Replacements:
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            Offset:          4911
+            Length:          0
+            ReplacementText: '(long)'
+        Ranges:
+          - FilePath:        '/home/jan/parcio/julea/cli/copy.c'
+            FileOffset:      4911
+            Length:          4
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  misc-header-include-cycle
+    DiagnosticMessage:
+      Message:         'circular header file dependency detected while including ''jcollection.h'', please check the include path'
+      FilePath:        '/home/jan/parcio/julea/include/item/jitem.h'
+      FileOffset:      1173
+      Replacements:    []
+    Notes:
+      - Message:         '''jitem.h'' included from here'
+        FilePath:        '/home/jan/parcio/julea/include/item/jcollection.h'
+        FileOffset:      1104
+        Replacements:    []
+      - Message:         '''jcollection.h'' included from here'
+        FilePath:        '/home/jan/parcio/julea/include/julea-item.h'
+        FileOffset:      827
+        Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

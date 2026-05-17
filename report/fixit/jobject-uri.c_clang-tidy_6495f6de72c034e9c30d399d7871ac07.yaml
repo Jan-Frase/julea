@@ -1,0 +1,12 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/lib/object/jobject-uri.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint'' (aka ''unsigned int'') to signed type ''gint'' (aka ''int'') is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/lib/object/jobject-uri.c'
+      FileOffset:      2545
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

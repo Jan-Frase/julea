@@ -1,0 +1,20 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/test/hdf5/hdf-attribute.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''hsize_t'' (aka ''unsigned long'') to signed type ''int'' is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/test/hdf5/hdf-attribute.c'
+      FileOffset:      1429
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''hsize_t'' (aka ''unsigned long'') to signed type ''int'' is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/test/hdf5/hdf-attribute.c'
+      FileOffset:      5510
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

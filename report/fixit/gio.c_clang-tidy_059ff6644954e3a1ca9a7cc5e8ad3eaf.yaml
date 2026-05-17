@@ -1,0 +1,20 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/backend/object/gio.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint64'' (aka ''unsigned long'') to signed type ''goffset'' (aka ''long'') is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/backend/object/gio.c'
+      FileOffset:      5739
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint64'' (aka ''unsigned long'') to signed type ''goffset'' (aka ''long'') is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/backend/object/gio.c'
+      FileOffset:      6527
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

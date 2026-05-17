@@ -1,0 +1,20 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/fuse/write.c'
+Diagnostics:
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''guint64'' (aka ''unsigned long'') to signed type ''int'' is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/fuse/write.c'
+      FileOffset:      1457
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-narrowing-conversions
+    DiagnosticMessage:
+      Message:         'narrowing conversion from ''size_t'' (aka ''unsigned long'') to signed type ''int64_t'' (aka ''long'') is implementation-defined'
+      FilePath:        '/home/jan/parcio/julea/fuse/write.c'
+      FileOffset:      1751
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...

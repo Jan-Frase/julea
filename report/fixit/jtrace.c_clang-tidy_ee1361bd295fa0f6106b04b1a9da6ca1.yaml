@@ -1,0 +1,12 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/lib/core/jtrace.c'
+Diagnostics:
+  - DiagnosticName:  clang-diagnostic-error
+    DiagnosticMessage:
+      Message:         'unknown argument: ''-fhardened'''
+      FilePath:        ''
+      FileOffset:      0
+      Replacements:    []
+    Level:           Error
+    BuildDirectory:  ''
+...

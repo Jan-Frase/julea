@@ -1,0 +1,60 @@
+---
+MainSourceFile:  '/home/jan/parcio/julea/backend/db/mysql.c'
+Diagnostics:
+  - DiagnosticName:  clang-diagnostic-error
+    DiagnosticMessage:
+      Message:         'unknown argument: ''-fhardened'''
+      FilePath:        ''
+      FileOffset:      0
+      Replacements:    []
+    Level:           Error
+    BuildDirectory:  ''
+  - DiagnosticName:  bugprone-signed-char-misuse
+    DiagnosticMessage:
+      Message:         '''signed char'' to ''gint'' (aka ''int'') conversion; consider casting to ''unsigned char'' first.'
+      FilePath:        '/home/jan/parcio/julea/backend/db/mysql.c'
+      FileOffset:      1911
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-incompatible-pointer-types-discards-qualifiers
+    DiagnosticMessage:
+      Message:         'assigning to ''void *'' from ''const gchar *'' (aka ''const char *'') discards qualifiers'
+      FilePath:        '/home/jan/parcio/julea/backend/db/mysql.c'
+      FileOffset:      11144
+      Replacements:    []
+      Ranges:
+        - FilePath:        '/home/jan/parcio/julea/backend/db/mysql.c'
+          FileOffset:      11146
+          Length:          17
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  clang-diagnostic-incompatible-pointer-types-discards-qualifiers
+    DiagnosticMessage:
+      Message:         'assigning to ''void *'' from ''const gchar *'' (aka ''const char *'') discards qualifiers'
+      FilePath:        '/home/jan/parcio/julea/backend/db/mysql.c'
+      FileOffset:      11442
+      Replacements:    []
+      Ranges:
+        - FilePath:        '/home/jan/parcio/julea/backend/db/mysql.c'
+          FileOffset:      11444
+          Length:          15
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-signed-char-misuse
+    DiagnosticMessage:
+      Message:         '''signed char'' to ''gint'' (aka ''int'') conversion; consider casting to ''unsigned char'' first.'
+      FilePath:        '/home/jan/parcio/julea/backend/db/mysql.c'
+      FileOffset:      13401
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+  - DiagnosticName:  bugprone-signed-char-misuse
+    DiagnosticMessage:
+      Message:         '''signed char'' to ''gint'' (aka ''int'') conversion; consider casting to ''unsigned char'' first.'
+      FilePath:        '/home/jan/parcio/julea/backend/db/mysql.c'
+      FileOffset:      13695
+      Replacements:    []
+    Level:           Warning
+    BuildDirectory:  '/home/jan/parcio/julea/bld'
+...
