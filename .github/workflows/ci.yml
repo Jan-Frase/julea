@@ -299,17 +299,7 @@ jobs:
       - name: Create configuration
         run: |
           . scripts/environment.sh
-          
-          julea-config --user \
-            --object-servers="$(hostname)" \
-            --kv-servers="$(hostname)" \ 
-            --db-servers="$(hostname)" \
-            --object-backend=rados \
-            --object-path=/var/snap/microceph/current/conf/ceph.conf:julea \
-            --kv-backend=lmdb \
-            --kv-path=/tmp/julea/kv/lmdb \
-            --db-backend=sqlite \
-            --db-path=/tmp/julea/db/sqlite
+          julea-config --user --object-servers="$(hostname)" --kv-servers="$(hostname)" --db-servers="$(hostname)" --object-backend=rados --object-path=/var/snap/microceph/current/conf/ceph.conf:julea --kv-backend=lmdb --kv-path=/tmp/julea/kv/lmdb --db-backend=sqlite --db-path=/tmp/julea/db/sqlite
 
       - name: Microceph setup
         run: sudo ./scripts/rados-util.sh bootstrap
