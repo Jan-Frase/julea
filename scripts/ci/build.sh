@@ -47,10 +47,10 @@ case "${MODE}" in
 		meson setup -Db_sanitize=address,undefined ${CLANG_LUNDEF} ${GDBM_PREFIX} bld
 		ninja -C bld
 		;;
-  rados)
+  debug-no-sanitize)
       CLANG_LUNDEF='-Db_lundef=false'
     # shellcheck disable=SC2086
-    meson setup ${CLANG_LUNDEF} ${GDBM_PREFIX} bld
+    meson setup -Db_sanitize=address ${CLANG_LUNDEF} ${GDBM_PREFIX} bld
     ninja -C bld
     ;;
 	coverage)
