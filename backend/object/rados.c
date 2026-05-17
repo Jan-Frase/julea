@@ -59,6 +59,10 @@ backend_create(gpointer backend_data, gchar const* namespace, gchar const* name,
 	JBackendObject* bo;
 	gint ret = 0;
 
+	g_return_val_if_fail(bd != NULL, FALSE);
+	g_return_val_if_fail(bd->backend_io != NULL, FALSE);
+	g_return_val_if_fail(namespace != NULL, FALSE);
+
 	j_trace_file_begin(name, J_TRACE_FILE_CREATE);
 	rados_ioctx_set_namespace(bd->backend_io, namespace);
 	ret = rados_write_full(bd->backend_io, name, "", 0);
@@ -197,6 +201,11 @@ backend_read(gpointer backend_data, gpointer backend_object, gpointer buffer, gu
 	JBackendObject* bo = backend_object;
 	gint ret = 0;
 
+	g_return_val_if_fail(bd != NULL, FALSE);
+	g_return_val_if_fail(bd->backend_io != NULL, FALSE);
+	g_return_val_if_fail(bo != NULL, FALSE);
+	g_return_val_if_fail(bo->namespace != NULL, FALSE);
+
 	j_trace_file_begin(bo->name, J_TRACE_FILE_READ);
 	rados_ioctx_set_namespace(bd->backend_io, bo->namespace);
 	ret = rados_read(bd->backend_io, bo->name, buffer, length, offset);
@@ -218,6 +227,11 @@ backend_write(gpointer backend_data, gpointer backend_object, gconstpointer buff
 	JBackendData* bd = backend_data;
 	JBackendObject* bo = backend_object;
 	gint ret = 0;
+
+	g_return_val_if_fail(bd != NULL, FALSE);
+	g_return_val_if_fail(bd->backend_io != NULL, FALSE);
+	g_return_val_if_fail(bo != NULL, FALSE);
+	g_return_val_if_fail(bo->namespace != NULL, FALSE);
 
 	j_trace_file_begin(bo->name, J_TRACE_FILE_WRITE);
 	rados_ioctx_set_namespace(bd->backend_io, bo->namespace);
