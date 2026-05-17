@@ -294,7 +294,7 @@ jobs:
         env:
           CC: clang
         run: |
-          ./scripts/ci/build.sh debug system
+          ./scripts/ci/build.sh rados system
 
       - name: Create configuration
         run: |
