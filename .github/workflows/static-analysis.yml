@@ -43,7 +43,7 @@ jobs:
         id: cache
         uses: actions/cache/restore@v5
         with:
-          path: ${{ env.JULEA_SPACK_DIR }}
+          path: ${{ github.workspace }}/dependencies
           key: ubuntu:24.04-base-clang-18.1.3-${{ hashFiles('scripts/spack', 'scripts/install-dependencies.sh') }}
       - name: Check dependencies
         if: ${{ steps.cache.outputs.cache-hit != 'true' }}
@@ -55,13 +55,15 @@ jobs:
         env:
           CC: clang
         run: |
+          pwd
+          ls 
           . scripts/environment.sh
           meson setup -Dis_analysis_build=true bld
       - name: Run CodeChecker
         id: codechecker
         uses: whisperity/CodeChecker-Action@v1.0.4
         with:
-          build-command: "cd ${{ github.workspace }} && ninja -C bld"
+          build-command: "ninja -C bld"
 
       # Lastly, upload the results to the CI.
       - name: Upload results
