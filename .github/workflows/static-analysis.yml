@@ -16,6 +16,9 @@
 
 name: static-analysis.yml
 on: [push, pull_request]
+defaults:
+  run:
+    shell: bash
 
 jobs:
   # This job is responsible for running Codechecker.
