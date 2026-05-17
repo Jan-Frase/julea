@@ -53,6 +53,7 @@ jobs:
         env:
           CC: clang
         run: |
+          . scripts/environment.sh
           meson setup -Dis_analysis_build=true bld
       - name: Run CodeChecker
         id: codechecker
