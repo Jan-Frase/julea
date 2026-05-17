@@ -50,7 +50,7 @@ case "${MODE}" in
   debug-no-sanitize)
       CLANG_LUNDEF='-Db_lundef=false'
     # shellcheck disable=SC2086
-    meson setup -Db_sanitize=undefined ${CLANG_LUNDEF} ${GDBM_PREFIX} bld
+    meson setup ${CLANG_LUNDEF} ${GDBM_PREFIX} bld
     ninja -C bld
     ;;
 	coverage)
