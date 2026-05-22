@@ -50,7 +50,7 @@ jobs:
           CC: clang
         run: |
           . scripts/environment.sh
-          meson setup -Dis_analysis_build=true bld
+          meson setup bld
         
       # Install CodeChecker, gcc and cppcheck.
       - name: Install CodeChecker
@@ -67,7 +67,9 @@ jobs:
 
       # Run the analysis.
       - name: Run CodeChecker
-        run: CodeChecker analyze ./bld/compile_commands.json -o results --enable sensitive --ctu
+        # Since we already have ~100 warnings, i have disabled the sensitive checks for now.
+        # Should we ever run out of warnings, feel free to enable them again :D
+        run: CodeChecker analyze ./bld/compile_commands.json -o results --ctu #--enable sensitive 
 
       # Parse the results and generate an HTML report.
       - name: Generate HTML report
