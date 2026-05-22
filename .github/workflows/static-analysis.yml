@@ -62,11 +62,11 @@ jobs:
 
       # Parse the results and generate an HTML report.
       - name: Generate HTML report
-        run: CodeChecker parse results -o results --report-format html
+        run: CodeChecker parse --export html --output ./reports_html ./results
 
       # Lastly, upload the results to the CI.
       - name: Upload results
         uses: actions/upload-artifact@v7.0.1
         with:
           name: "CodeChecker Bug Reports"
-          path: results         
+          path: ./reports_html
