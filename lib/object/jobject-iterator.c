@@ -155,7 +155,7 @@ j_object_iterator_new(gchar const* namespace, gchar const* prefix)
 		// Iterate over the objects until we reach the end and keep all resulting names.
 		while (j_backend_object_iterate(iterator->object_backend, iterator->cursor, &curr_name))
 		{
-			gchar* dup = g_strdup(curr_name);
+			gchar* dup = curr_name;
 			iterator->cached_names = g_array_append_val(iterator->cached_names, dup);
 		}
 	}
@@ -211,6 +211,7 @@ j_object_iterator_new_for_index(guint32 index, gchar const* namespace, gchar con
 		while (j_backend_object_iterate(iterator->object_backend, iterator->cursor, &curr_name))
 		{
 			gchar* dup = g_strdup(curr_name);
+			g_free(curr_name);
 			iterator->cached_names = g_array_append_val(iterator->cached_names, dup);
 		}
 	}
