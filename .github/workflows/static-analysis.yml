@@ -56,7 +56,7 @@ jobs:
       - name: Install CodeChecker
         run: |
           pip install codechecker
-          sudo apt install --yes --no-install-recommends cppcheck gcc infer
+          sudo apt install --yes --no-install-recommends cppcheck gcc 
 
       - name: Install Infer
         run: |
