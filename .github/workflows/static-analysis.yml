@@ -67,7 +67,7 @@ jobs:
 
       # Run the analysis.
       - name: Run CodeChecker
-        run: CodeChecker analyze ./bld/compile_commands.json -o results
+        run: CodeChecker analyze ./bld/compile_commands.json -o results --enable sensitive --ctu
 
       # Parse the results and generate an HTML report.
       - name: Generate HTML report
