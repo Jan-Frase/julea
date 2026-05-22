@@ -306,6 +306,7 @@ backend_iterate(gpointer backend_data, gpointer backend_iterator, gchar const** 
 {
 	JBackendIterator* iterator = backend_iterator;
 	gchar const* current_name;
+	gchar** split_namespace_and_name;
 
 	// Avoid unused parameter warning :)
 	(void)backend_data;
@@ -325,7 +326,10 @@ backend_iterate(gpointer backend_data, gpointer backend_iterator, gchar const** 
 		}
 	} while (!g_str_has_prefix(current_name, iterator->prefix));
 
-	*name = current_name;
+	// Separate the current_name and only return the name part.
+	split_namespace_and_name = g_strsplit(current_name, " ", 2);
+	*name = g_strdup(split_namespace_and_name[1]);
+	g_strfreev(split_namespace_and_name);
 	return TRUE;
 end:
 	rados_nobjects_list_close(iterator->rados_list);
