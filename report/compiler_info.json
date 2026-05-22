@@ -1,1 +1,0 @@
-{"[\"cc\", \"c\", [\"-std=c11\"]]": {"compiler_includes": ["/usr/lib/gcc/x86_64-redhat-linux/15/include", "/usr/local/include", "/usr/include"], "compiler_standard": "-std=gnu17", "target": "x86_64-redhat-linux"}}
