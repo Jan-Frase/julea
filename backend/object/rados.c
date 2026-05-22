@@ -46,33 +46,38 @@ typedef struct JBackendIterator JBackendIterator;
 
 struct JBackendObject
 {
-	gchar* namespace;
-	gchar* name;
+	// This is a concatenation of the namespace and name of an object separated by a whitespace.
+	// Ideally, these would get stored as two separate strings and used with rados's `set_namespace` function.
+	// However, this can cause problems when multiple threads are attempting to set the namespace at the same time.
+	// This could be managed by having an independent `rados_ioctx_t` for each thread but for now this implementation will do.
+	gchar* namespace_and_name;
 };
 
 typedef struct JBackendObject JBackendObject;
 
 static gboolean
-backend_create(gpointer backend_data, gchar const* namespace, gchar const* name, gpointer* backend_object)
+backend_create(const gpointer backend_data, gchar const* namespace, gchar const* name, gpointer* backend_object)
 {
 	JBackendData* bd = backend_data;
 	JBackendObject* bo;
 	gint ret = 0;
+	gchar* namespace_and_name;
 
-	g_return_val_if_fail(bd != NULL, FALSE);
+	g_return_val_if_fail(backend_data != NULL, FALSE);
 	g_return_val_if_fail(bd->backend_io != NULL, FALSE);
+	g_return_val_if_fail(name != NULL, FALSE);
 	g_return_val_if_fail(namespace != NULL, FALSE);
 
-	j_trace_file_begin(name, J_TRACE_FILE_CREATE);
-	rados_ioctx_set_namespace(bd->backend_io, namespace);
-	ret = rados_write_full(bd->backend_io, name, "", 0);
-	j_trace_file_end(name, J_TRACE_FILE_CREATE, 0, 0);
+	namespace_and_name = g_strconcat(namespace, " ", name, NULL);
+
+	j_trace_file_begin(namespace_and_name, J_TRACE_FILE_CREATE);
+	ret = rados_write_full(bd->backend_io, namespace_and_name, "", 0);
+	j_trace_file_end(namespace_and_name, J_TRACE_FILE_CREATE, 0, 0);
 
 	g_return_val_if_fail(ret == 0, FALSE);
 
 	bo = g_new(JBackendObject, 1);
-	bo->name = g_strdup(name);
-	bo->namespace = g_strdup(namespace);
+	bo->namespace_and_name = namespace_and_name;
 
 	*backend_object = bo;
 
@@ -85,19 +90,21 @@ backend_open(gpointer backend_data, gchar const* namespace, gchar const* name, g
 	JBackendData* bd = backend_data;
 	JBackendObject* bo;
 	gint ret = 0;
+	gchar* namespace_and_name;
 
 	g_return_val_if_fail(bd != NULL, FALSE);
 	g_return_val_if_fail(bd->backend_io != NULL, FALSE);
 	g_return_val_if_fail(namespace != NULL, FALSE);
 
-	j_trace_file_begin(name, J_TRACE_FILE_OPEN);
-	rados_ioctx_set_namespace(bd->backend_io, namespace);
-	ret = rados_stat(bd->backend_io, name, NULL, NULL);
-	j_trace_file_end(name, J_TRACE_FILE_OPEN, 0, 0);
+	namespace_and_name = g_strconcat(namespace, " ", name, NULL);
+
+	j_trace_file_begin(namespace_and_name, J_TRACE_FILE_OPEN);
+	ret = rados_stat(bd->backend_io, namespace_and_name, NULL, NULL);
+	j_trace_file_end(namespace_and_name, J_TRACE_FILE_OPEN, 0, 0);
 
 	if (ret != 0)
 	{
-		// ENOENT (somehow) stands for "no such file or directory".
+		// ENOENT (Error NO ENTry)
 		// It is an expected "error" here because we are using the stat command to check if the object exists.
 		// This is done to ensure that the object was created before opening it, just as it has to be done with other APIs.
 		// As such, we only print other error kinds.
@@ -110,8 +117,7 @@ backend_open(gpointer backend_data, gchar const* namespace, gchar const* name, g
 	}
 
 	bo = g_new(JBackendObject, 1);
-	bo->name = g_strdup(name);
-	bo->namespace = g_strdup(namespace);
+	bo->namespace_and_name = namespace_and_name;
 
 	*backend_object = bo;
 
@@ -128,15 +134,12 @@ backend_delete(gpointer backend_data, gpointer backend_object)
 	g_return_val_if_fail(bd != NULL, FALSE);
 	g_return_val_if_fail(bd->backend_io != NULL, FALSE);
 	g_return_val_if_fail(bo != NULL, FALSE);
-	g_return_val_if_fail(bo->namespace != NULL, FALSE);
 
-	j_trace_file_begin(bo->name, J_TRACE_FILE_DELETE);
-	rados_ioctx_set_namespace(bd->backend_io, bo->namespace);
-	ret = rados_remove(bd->backend_io, bo->name);
-	j_trace_file_end(bo->name, J_TRACE_FILE_DELETE, 0, 0);
+	j_trace_file_begin(bo->namespace_and_name, J_TRACE_FILE_DELETE);
+	ret = rados_remove(bd->backend_io, bo->namespace_and_name);
+	j_trace_file_end(bo->namespace_and_name, J_TRACE_FILE_DELETE, 0, 0);
 
-	g_clear_pointer(&bo->name, g_free);
-	g_clear_pointer(&bo->namespace, g_free);
+	g_clear_pointer(&bo->namespace_and_name, g_free);
 	g_free(bo);
 
 	return (ret == 0 ? TRUE : FALSE);
@@ -149,11 +152,10 @@ backend_close(gpointer backend_data, gpointer backend_object)
 
 	(void)backend_data;
 
-	j_trace_file_begin(bo->name, J_TRACE_FILE_CLOSE);
-	j_trace_file_end(bo->name, J_TRACE_FILE_CLOSE, 0, 0);
+	j_trace_file_begin(bo->namespace_and_name, J_TRACE_FILE_CLOSE);
+	j_trace_file_end(bo->namespace_and_name, J_TRACE_FILE_CLOSE, 0, 0);
 
-	g_clear_pointer(&bo->name, g_free);
-	g_clear_pointer(&bo->namespace, g_free);
+	g_clear_pointer(&bo->namespace_and_name, g_free);
 	g_free(bo);
 
 	return TRUE;
@@ -171,14 +173,13 @@ backend_status(gpointer backend_data, gpointer backend_object, gint64* modificat
 	g_return_val_if_fail(bd != NULL, FALSE);
 	g_return_val_if_fail(bd->backend_io != NULL, FALSE);
 	g_return_val_if_fail(bo != NULL, FALSE);
-	g_return_val_if_fail(bo->namespace != NULL, FALSE);
+	g_return_val_if_fail(bo->namespace_and_name != NULL, FALSE);
 
 	if (modification_time != NULL || size != NULL)
 	{
-		j_trace_file_begin(bo->name, J_TRACE_FILE_STATUS);
-		rados_ioctx_set_namespace(bd->backend_io, bo->namespace);
-		ret = (rados_stat(bd->backend_io, bo->name, &size_, &modification_time_) == 0);
-		j_trace_file_end(bo->name, J_TRACE_FILE_STATUS, 0, 0);
+		j_trace_file_begin(bo->namespace_and_name, J_TRACE_FILE_STATUS);
+		ret = (rados_stat(bd->backend_io, bo->namespace_and_name, &size_, &modification_time_) == 0);
+		j_trace_file_end(bo->namespace_and_name, J_TRACE_FILE_STATUS, 0, 0);
 
 		if (ret && modification_time != NULL)
 		{
@@ -202,8 +203,8 @@ backend_sync(gpointer backend_data, gpointer backend_object)
 
 	(void)backend_data;
 
-	j_trace_file_begin(bo->name, J_TRACE_FILE_SYNC);
-	j_trace_file_end(bo->name, J_TRACE_FILE_SYNC, 0, 0);
+	j_trace_file_begin(bo->namespace_and_name, J_TRACE_FILE_SYNC);
+	j_trace_file_end(bo->namespace_and_name, J_TRACE_FILE_SYNC, 0, 0);
 
 	return TRUE;
 }
@@ -218,12 +219,11 @@ backend_read(gpointer backend_data, gpointer backend_object, gpointer buffer, gu
 	g_return_val_if_fail(bd != NULL, FALSE);
 	g_return_val_if_fail(bd->backend_io != NULL, FALSE);
 	g_return_val_if_fail(bo != NULL, FALSE);
-	g_return_val_if_fail(bo->namespace != NULL, FALSE);
+	g_return_val_if_fail(bo->namespace_and_name != NULL, FALSE);
 
-	j_trace_file_begin(bo->name, J_TRACE_FILE_READ);
-	rados_ioctx_set_namespace(bd->backend_io, bo->namespace);
-	ret = rados_read(bd->backend_io, bo->name, buffer, length, offset);
-	j_trace_file_end(bo->name, J_TRACE_FILE_READ, length, offset);
+	j_trace_file_begin(bo->namespace_and_name, J_TRACE_FILE_READ);
+	ret = rados_read(bd->backend_io, bo->namespace_and_name, buffer, length, offset);
+	j_trace_file_end(bo->namespace_and_name, J_TRACE_FILE_READ, length, offset);
 
 	g_return_val_if_fail(ret >= 0, FALSE);
 
@@ -245,12 +245,11 @@ backend_write(gpointer backend_data, gpointer backend_object, gconstpointer buff
 	g_return_val_if_fail(bd != NULL, FALSE);
 	g_return_val_if_fail(bd->backend_io != NULL, FALSE);
 	g_return_val_if_fail(bo != NULL, FALSE);
-	g_return_val_if_fail(bo->namespace != NULL, FALSE);
+	g_return_val_if_fail(bo->namespace_and_name != NULL, FALSE);
 
-	j_trace_file_begin(bo->name, J_TRACE_FILE_WRITE);
-	rados_ioctx_set_namespace(bd->backend_io, bo->namespace);
-	ret = rados_write(bd->backend_io, bo->name, buffer, length, offset);
-	j_trace_file_end(bo->name, J_TRACE_FILE_WRITE, length, offset);
+	j_trace_file_begin(bo->namespace_and_name, J_TRACE_FILE_WRITE);
+	ret = rados_write(bd->backend_io, bo->namespace_and_name, buffer, length, offset);
+	j_trace_file_end(bo->namespace_and_name, J_TRACE_FILE_WRITE, length, offset);
 
 	g_return_val_if_fail(ret == 0, FALSE);
 
@@ -273,9 +272,8 @@ backend_get_all(gpointer backend_data, gchar const* namespace, gpointer* backend
 	g_return_val_if_fail(namespace != NULL, FALSE);
 	g_return_val_if_fail(bd->backend_io != NULL, FALSE);
 
-	iterator->prefix = NULL;
+	iterator->prefix = g_strdup(namespace);
 
-	rados_ioctx_set_namespace(bd->backend_io, namespace);
 	err = rados_nobjects_list_open(bd->backend_io, &iterator->rados_list);
 	g_return_val_if_fail(err == 0, FALSE);
 
@@ -294,9 +292,8 @@ backend_get_by_prefix(gpointer backend_data, gchar const* namespace, gchar const
 	g_return_val_if_fail(namespace != NULL, FALSE);
 	g_return_val_if_fail(prefix != NULL, FALSE);
 
-	iterator->prefix = g_strdup(prefix);
+	iterator->prefix = g_strconcat(namespace, " ", prefix, NULL);
 
-	rados_ioctx_set_namespace(bd->backend_io, namespace);
 	err = rados_nobjects_list_open(bd->backend_io, &iterator->rados_list);
 	g_return_val_if_fail(err == 0, FALSE);
 
@@ -313,7 +310,7 @@ backend_iterate(gpointer backend_data, gpointer backend_iterator, gchar const** 
 	// Avoid unused parameter warning :)
 	(void)backend_data;
 
-	// If we have a prefix to filter by, loop until we have an object that matches
+	// Loop until we have an object that matches the prefix
 	do
 	{
 		const int err = rados_nobjects_list_next(iterator->rados_list, &current_name, NULL, NULL);
@@ -326,7 +323,7 @@ backend_iterate(gpointer backend_data, gpointer backend_iterator, gchar const** 
 		{
 			g_error("rados_nobjects_list_next() failed: %s", strerror(-err));
 		}
-	} while (iterator->prefix != NULL && !g_str_has_prefix(current_name, iterator->prefix));
+	} while (!g_str_has_prefix(current_name, iterator->prefix));
 
 	*name = current_name;
 	return TRUE;
