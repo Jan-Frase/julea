@@ -71,7 +71,14 @@ jobs:
 
       # Parse the results and generate an HTML report.
       - name: Generate HTML report
-        run: CodeChecker parse --export html --output ./reports_html ./results
+        run: |
+          CodeChecker parse --export html --output ./reports_html ./results
+
+          # CodeChecker returns 0 if no bugs were found, 1 if it crashed and 2 if it found bugs.
+          if [ $? -eq 1]; then
+            echo "CodeChecker crashed."
+            exit 1
+          fi
 
       # Lastly, upload the results to the CI.
       - name: Upload results
