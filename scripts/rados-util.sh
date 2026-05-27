@@ -45,7 +45,7 @@ bootstrap ()
 
 teardown ()
 {
-  snap remove microceph
+  snap remove --purge microceph
 }
 
 

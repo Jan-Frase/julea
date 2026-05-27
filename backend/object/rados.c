@@ -134,6 +134,7 @@ backend_delete(gpointer backend_data, gpointer backend_object)
 	g_return_val_if_fail(bd != NULL, FALSE);
 	g_return_val_if_fail(bd->backend_io != NULL, FALSE);
 	g_return_val_if_fail(bo != NULL, FALSE);
+	g_return_val_if_fail(bo->namespace_and_name != NULL, FALSE);
 
 	j_trace_file_begin(bo->namespace_and_name, J_TRACE_FILE_DELETE);
 	ret = rados_remove(bd->backend_io, bo->namespace_and_name);
