@@ -94,6 +94,7 @@ glib_version = '2.58'
 # Ubuntu 22.04 has libfabric 1.11.0
 libfabric_version = '1.11.0'
 # bson_array_builder_t needs libbson 1.25.0
+# Ubuntu 24.04 has libbson 1.26.0
 libbson_version = '1.25.0'
 
 hdf_version = '1.14.0'
@@ -790,7 +791,7 @@ endif
 #add_languages('cpp')
 
 #foreach lang: ['c', 'cc']
-#	executable('hello-word-@0@'.format(lang), files('example/hello-world.@0@'.format(lang)),
+#	executable('hello-world-@0@'.format(lang), files('example/hello-world.@0@'.format(lang)),
 #		dependencies: [glib_dep, libbson_dep, julea_dep, julea_client_deps['object'], julea_client_deps['kv'], julea_client_deps['db']],
 #		include_directories: julea_incs,
 #	)
