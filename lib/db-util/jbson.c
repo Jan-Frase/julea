@@ -25,7 +25,7 @@
 
 #include <glib.h>
 
-#include <bson.h>
+#include <bson/bson.h>
 
 #include <julea.h>
 #include <julea-db.h>
@@ -658,7 +658,7 @@ _error:
 	return FALSE;
 }
 
-/// \todo does more or less the same as j_helper_get_number_string
+/// \todo does more or less the same as j_helper_get_number_string/bson_uint32_to_string
 gboolean
 j_bson_array_generate_key(guint32 index, const char** key, char* buf, guint buf_length, GError** error)
 {

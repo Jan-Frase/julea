@@ -43,17 +43,6 @@ G_BEGIN_DECLS
  **/
 
 /**
- * Convert a number to a string.
- *
- * \param string The buffer to be filled with the number string.
- * \param length The size of the string buffer.
- * \param number The number to convert.
- *
- * \remark If the buffer is to small not the whole number will be written.
- **/
-void j_helper_get_number_string(gchar* string, guint32 length, guint32 number);
-
-/**
  * Set the TCP_CORK flag to the value of enable
  *
  * \param connection The connection to manipulate.

@@ -26,7 +26,7 @@
 
 #include <string.h>
 
-#include <bson.h>
+#include <bson/bson.h>
 
 #include <db/jdb-error.h>
 #include <db/jdb-internal.h>

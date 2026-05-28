@@ -29,7 +29,7 @@
 
 #include <glib.h>
 
-#include <bson.h>
+#include <bson/bson.h>
 
 #include <core/jconfiguration.h>
 #include <core/jdistribution.h>
