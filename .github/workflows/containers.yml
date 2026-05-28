@@ -43,11 +43,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
+        image:
           - file: ubuntu-24.04
-            image: ubuntu:24.04-base
+            tag: ubuntu:24.04-base
           - file: ubuntu-26.04
-            image: ubuntu:26.04-base
+            tag: ubuntu:26.04-base
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -65,8 +65,8 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           context: containers
-          file: containers/${{ matrix.file }}
+          file: containers/${{ matrix.image.file }}
           no-cache: true
           pull: true
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/parcio/julea/${{ matrix.image }}
+          tags: ghcr.io/parcio/julea/${{ matrix.image.tag }}
