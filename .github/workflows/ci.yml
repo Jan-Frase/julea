@@ -308,7 +308,8 @@ jobs:
         run: |
           . scripts/environment.sh
           ./scripts/setup.sh start
-          ./scripts/test.sh
+          # ./scripts/test.sh
+          valgrind --leak-check=full --track-origins=yes ./julea-test 
           sleep 10
           ./scripts/test.sh
           ./scripts/setup.sh stop

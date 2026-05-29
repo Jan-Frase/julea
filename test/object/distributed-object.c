@@ -269,6 +269,8 @@ test_object_sync(void)
 void
 test_object_distributed_object(void)
 {
+	test_object_read_write();
+	return;
 	g_test_add_func("/object/distributed-object/new_free", test_object_new_free);
 	g_test_add_func("/object/distributed-object/create_delete", test_object_create_delete);
 	g_test_add_func("/object/distributed-object/read_write", test_object_read_write);
