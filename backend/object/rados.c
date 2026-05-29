@@ -248,6 +248,17 @@ backend_write(gpointer backend_data, gpointer backend_object, gconstpointer buff
 	g_return_val_if_fail(bo != NULL, FALSE);
 	g_return_val_if_fail(bo->namespace_and_name != NULL, FALSE);
 
+	if (length == 0)
+	{
+		if (bytes_written != NULL)
+		{
+			*bytes_written = 0;
+		}
+		return TRUE;
+	}
+
+	g_return_val_if_fail(buffer != NULL, FALSE);
+
 	j_trace_file_begin(bo->namespace_and_name, J_TRACE_FILE_WRITE);
 	ret = rados_write(bd->backend_io, bo->namespace_and_name, buffer, length, offset);
 	j_trace_file_end(bo->namespace_and_name, J_TRACE_FILE_WRITE, length, offset);
