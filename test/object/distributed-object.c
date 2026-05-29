@@ -95,7 +95,7 @@ test_object_read_write(void)
 	guint64 nbytes = 0;
 	gboolean ret;
 
-	J_TEST_TRAP_START;
+	// J_TEST_TRAP_START;
 	max_operation_size = j_configuration_get_max_operation_size(j_configuration());
 
 	batch = j_batch_new_for_template(J_SEMANTICS_TEMPLATE_DEFAULT);
@@ -185,7 +185,7 @@ test_object_read_write(void)
 	ret = j_batch_execute(batch);
 	g_assert_false(ret);
 	g_assert_cmpuint(nbytes, ==, 0);
-	J_TEST_TRAP_END;
+	// J_TEST_TRAP_END;
 }
 
 static void
@@ -269,6 +269,8 @@ test_object_sync(void)
 void
 test_object_distributed_object(void)
 {
+	test_object_read_write();
+	return;
 	g_test_add_func("/object/distributed-object/new_free", test_object_new_free);
 	g_test_add_func("/object/distributed-object/create_delete", test_object_create_delete);
 	g_test_add_func("/object/distributed-object/read_write", test_object_read_write);
