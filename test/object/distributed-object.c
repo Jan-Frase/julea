@@ -95,7 +95,7 @@ test_object_read_write(void)
 	guint64 nbytes = 0;
 	gboolean ret;
 
-	J_TEST_TRAP_START;
+	// J_TEST_TRAP_START;
 	max_operation_size = j_configuration_get_max_operation_size(j_configuration());
 
 	batch = j_batch_new_for_template(J_SEMANTICS_TEMPLATE_DEFAULT);
@@ -185,7 +185,7 @@ test_object_read_write(void)
 	ret = j_batch_execute(batch);
 	g_assert_false(ret);
 	g_assert_cmpuint(nbytes, ==, 0);
-	J_TEST_TRAP_END;
+	// J_TEST_TRAP_END;
 }
 
 static void
