@@ -30,7 +30,7 @@
 #include "common.c"
 
 static void
-_benchmark_db_delete(BenchmarkRun* run, gchar const* namespace, gboolean use_batch, gboolean use_index_all, gboolean use_index_single)
+helper_fn_benchmark_db_delete(BenchmarkRun* run, gchar const* namespace, gboolean use_batch, gboolean use_index_all, gboolean use_index_single)
 {
 	gboolean ret;
 	g_autoptr(JBatch) delete_batch = NULL;
@@ -91,7 +91,7 @@ _benchmark_db_delete(BenchmarkRun* run, gchar const* namespace, gboolean use_bat
 }
 
 static void
-_benchmark_db_update(BenchmarkRun* run, gchar const* namespace, gboolean use_batch, gboolean use_index_all, gboolean use_index_single)
+helper_fn_benchmark_db_update(BenchmarkRun* run, gchar const* namespace, gboolean use_batch, gboolean use_index_all, gboolean use_index_single)
 {
 	gboolean ret;
 	g_autoptr(JBatch) delete_batch = NULL;
@@ -209,97 +209,97 @@ benchmark_db_insert_batch_index_mixed(BenchmarkRun* run)
 static void
 benchmark_db_delete(BenchmarkRun* run)
 {
-	_benchmark_db_delete(run, "benchmark_delete", false, false, false);
+	helper_fn_benchmark_db_delete(run, "benchmark_delete", false, false, false);
 }
 
 static void
 benchmark_db_delete_batch(BenchmarkRun* run)
 {
-	_benchmark_db_delete(run, "benchmark_delete_batch", true, false, false);
+	helper_fn_benchmark_db_delete(run, "benchmark_delete_batch", true, false, false);
 }
 
 static void
 benchmark_db_delete_index_single(BenchmarkRun* run)
 {
-	_benchmark_db_delete(run, "benchmark_delete_index_single", false, false, true);
+	helper_fn_benchmark_db_delete(run, "benchmark_delete_index_single", false, false, true);
 }
 
 static void
 benchmark_db_delete_batch_index_single(BenchmarkRun* run)
 {
-	_benchmark_db_delete(run, "benchmark_delete_batch_index_single", true, false, true);
+	helper_fn_benchmark_db_delete(run, "benchmark_delete_batch_index_single", true, false, true);
 }
 
 static void
 benchmark_db_delete_index_all(BenchmarkRun* run)
 {
-	_benchmark_db_delete(run, "benchmark_delete_index_all", false, true, false);
+	helper_fn_benchmark_db_delete(run, "benchmark_delete_index_all", false, true, false);
 }
 
 static void
 benchmark_db_delete_batch_index_all(BenchmarkRun* run)
 {
-	_benchmark_db_delete(run, "benchmark_delete_batch_index_all", true, true, false);
+	helper_fn_benchmark_db_delete(run, "benchmark_delete_batch_index_all", true, true, false);
 }
 
 static void
 benchmark_db_delete_index_mixed(BenchmarkRun* run)
 {
-	_benchmark_db_delete(run, "benchmark_delete_index_mixed", false, true, true);
+	helper_fn_benchmark_db_delete(run, "benchmark_delete_index_mixed", false, true, true);
 }
 
 static void
 benchmark_db_delete_batch_index_mixed(BenchmarkRun* run)
 {
-	_benchmark_db_delete(run, "benchmark_delete_batch_index_mixed", true, true, true);
+	helper_fn_benchmark_db_delete(run, "benchmark_delete_batch_index_mixed", true, true, true);
 }
 
 static void
 benchmark_db_update(BenchmarkRun* run)
 {
-	_benchmark_db_update(run, "benchmark_update", false, false, false);
+	helper_fn_benchmark_db_update(run, "benchmark_update", false, false, false);
 }
 
 static void
 benchmark_db_update_batch(BenchmarkRun* run)
 {
-	_benchmark_db_update(run, "benchmark_update_batch", true, false, false);
+	helper_fn_benchmark_db_update(run, "benchmark_update_batch", true, false, false);
 }
 
 static void
 benchmark_db_update_index_single(BenchmarkRun* run)
 {
-	_benchmark_db_update(run, "benchmark_update_index_single", false, false, true);
+	helper_fn_benchmark_db_update(run, "benchmark_update_index_single", false, false, true);
 }
 
 static void
 benchmark_db_update_batch_index_single(BenchmarkRun* run)
 {
-	_benchmark_db_update(run, "benchmark_update_batch_index_single", true, false, true);
+	helper_fn_benchmark_db_update(run, "benchmark_update_batch_index_single", true, false, true);
 }
 
 static void
 benchmark_db_update_index_all(BenchmarkRun* run)
 {
-	_benchmark_db_update(run, "benchmark_update_index_all", false, true, false);
+	helper_fn_benchmark_db_update(run, "benchmark_update_index_all", false, true, false);
 }
 
 static void
 benchmark_db_update_batch_index_all(BenchmarkRun* run)
 {
-	_benchmark_db_update(run, "benchmark_update_batch_index_all", true, true, false);
+	helper_fn_benchmark_db_update(run, "benchmark_update_batch_index_all", true, true, false);
 }
 
 static void
 benchmark_db_update_index_mixed(BenchmarkRun* run)
 {
-	_benchmark_db_update(run, "benchmark_update_index_mixed", false, true, true);
+	helper_fn_benchmark_db_update(run, "benchmark_update_index_mixed", false, true, true);
 }
 
 static void
 benchmark_db_update_batch_index_mixed(BenchmarkRun* run)
 {
-	_benchmark_db_update(run, "benchmark_update_batch_index_mixed", true, true, true);
+	helper_fn_benchmark_db_update(run, "benchmark_update_batch_index_mixed", true, true, true);
 }
 
 void

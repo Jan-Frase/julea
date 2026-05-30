@@ -335,7 +335,7 @@ benchmark_hdf_attribute_read(BenchmarkRun* run)
 }
 
 static void
-_benchmark_hdf_dataset_create(BenchmarkRun* run, guint dimensions)
+helper_fn_benchmark_hdf_dataset_create(BenchmarkRun* run, guint dimensions)
 {
 	guint const n = 1000;
 
