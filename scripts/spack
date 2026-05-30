@@ -204,8 +204,6 @@ spack_install_dependencies ()
 		spack_cmd config --scope spack add 'modules:prefix_inspections:lib:[LD_LIBRARY_PATH]'
 		spack_cmd config --scope spack add 'modules:prefix_inspections:lib64:[LD_LIBRARY_PATH]'
 
-		spack_cmd compiler list
-
 		if test -n "${CI}"
 		then
 			spack_cmd config --scope spack add 'packages:all:target:[x86_64]'
