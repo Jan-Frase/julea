@@ -35,9 +35,6 @@ main(int argc, char** argv)
 	setlocale(LC_ALL, "C.UTF-8");
 
 
-	test_object_distributed_object();
-	return 0;
-
 	g_test_init(&argc, &argv, NULL);
 
 	// Failing assertions will not abort all coming tests but call g_test_fail and continue
