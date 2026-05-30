@@ -50,7 +50,7 @@ helper_fn_benchmark_db_delete(BenchmarkRun* run, gchar const* namespace, gboolea
 
 	while (j_benchmark_iterate(run))
 	{
-		_benchmark_db_insert(NULL, b_scheme, NULL, true, false, false, false);
+		helper_fn_benchmark_db_insert(NULL, b_scheme, NULL, true, false, false, false);
 
 		j_benchmark_timer_start(run);
 
@@ -109,7 +109,7 @@ helper_fn_benchmark_db_update(BenchmarkRun* run, gchar const* namespace, gboolea
 	g_assert_nonnull(b_scheme);
 	g_assert_nonnull(run);
 
-	_benchmark_db_insert(NULL, b_scheme, NULL, true, false, false, false);
+	helper_fn_benchmark_db_insert(NULL, b_scheme, NULL, true, false, false, false);
 
 	j_benchmark_timer_start(run);
 
@@ -161,49 +161,49 @@ helper_fn_benchmark_db_update(BenchmarkRun* run, gchar const* namespace, gboolea
 static void
 benchmark_db_insert(BenchmarkRun* run)
 {
-	_benchmark_db_insert(run, NULL, "benchmark_insert", false, false, false, true);
+	helper_fn_benchmark_db_insert(run, NULL, "benchmark_insert", false, false, false, true);
 }
 
 static void
 benchmark_db_insert_batch(BenchmarkRun* run)
 {
-	_benchmark_db_insert(run, NULL, "benchmark_insert_batch", true, false, false, true);
+	helper_fn_benchmark_db_insert(run, NULL, "benchmark_insert_batch", true, false, false, true);
 }
 
 static void
 benchmark_db_insert_index_single(BenchmarkRun* run)
 {
-	_benchmark_db_insert(run, NULL, "benchmark_insert_index_single", false, false, true, true);
+	helper_fn_benchmark_db_insert(run, NULL, "benchmark_insert_index_single", false, false, true, true);
 }
 
 static void
 benchmark_db_insert_batch_index_single(BenchmarkRun* run)
 {
-	_benchmark_db_insert(run, NULL, "benchmark_insert_batch_index_single", true, false, true, true);
+	helper_fn_benchmark_db_insert(run, NULL, "benchmark_insert_batch_index_single", true, false, true, true);
 }
 
 static void
 benchmark_db_insert_index_all(BenchmarkRun* run)
 {
-	_benchmark_db_insert(run, NULL, "benchmark_insert_index_all", false, true, false, true);
+	helper_fn_benchmark_db_insert(run, NULL, "benchmark_insert_index_all", false, true, false, true);
 }
 
 static void
 benchmark_db_insert_batch_index_all(BenchmarkRun* run)
 {
-	_benchmark_db_insert(run, NULL, "benchmark_insert_batch_index_all", true, true, false, true);
+	helper_fn_benchmark_db_insert(run, NULL, "benchmark_insert_batch_index_all", true, true, false, true);
 }
 
 static void
 benchmark_db_insert_index_mixed(BenchmarkRun* run)
 {
-	_benchmark_db_insert(run, NULL, "benchmark_insert_index_mixed", false, true, true, true);
+	helper_fn_benchmark_db_insert(run, NULL, "benchmark_insert_index_mixed", false, true, true, true);
 }
 
 static void
 benchmark_db_insert_batch_index_mixed(BenchmarkRun* run)
 {
-	_benchmark_db_insert(run, NULL, "benchmark_insert_batch_index_mixed", true, true, true, true);
+	helper_fn_benchmark_db_insert(run, NULL, "benchmark_insert_batch_index_mixed", true, true, true, true);
 }
 
 static void
