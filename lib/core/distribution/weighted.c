@@ -24,7 +24,7 @@
 
 #include <glib.h>
 
-#include <bson.h>
+#include <bson/bson.h>
 
 #include <jconfiguration.h>
 #include <jhelper.h>
@@ -239,23 +239,20 @@ distribution_serialize(gpointer data, bson_t* b)
 
 	JDistributionWeighted* distribution = data;
 
-	bson_t b_array[1];
-	gchar numstr[16];
+	bson_array_builder_t* b_array;
 
 	g_return_if_fail(distribution != NULL);
 
 	bson_append_int64(b, "block_size", -1, distribution->block_size);
 
-	bson_append_array_begin(b, "weights", -1, b_array);
+	bson_append_array_builder_begin(b, "weights", -1, &b_array);
 
 	for (guint i = 0; i < distribution->server_count; i++)
 	{
-		/// \todo
-		j_helper_get_number_string(numstr, sizeof(numstr), i);
-		bson_append_int32(b_array, numstr, -1, distribution->weights[i]);
+		bson_array_builder_append_int32(b_array, distribution->weights[i]);
 	}
 
-	bson_append_array_end(b, b_array);
+	bson_append_array_builder_end(b, b_array);
 }
 
 /**

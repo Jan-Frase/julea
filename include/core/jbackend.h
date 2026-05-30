@@ -32,7 +32,7 @@
 #include <glib.h>
 #include <gmodule.h>
 
-#include <bson.h>
+#include <bson/bson.h>
 
 #include <core/jsemantics.h>
 

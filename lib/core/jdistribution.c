@@ -24,7 +24,7 @@
 
 #include <glib.h>
 
-#include <bson.h>
+#include <bson/bson.h>
 
 #include <jdistribution.h>
 #include <jdistribution-internal.h>

@@ -93,16 +93,17 @@ endif
 glib_version = '2.58'
 # Ubuntu 22.04 has libfabric 1.11.0
 libfabric_version = '1.11.0'
-# Ubuntu 18.04 has libbson 1.9.2
-libbson_version = '1.9.0'
+# bson_array_builder_t needs libbson 1.25.0
+# Ubuntu 24.04 has libbson 1.26.0
+libbson_version = '1.25.0'
 
 hdf_version = '1.14.0'
 # Ubuntu 18.04 has LevelDB 1.20
 leveldb_version = '1.20'
 # Ubuntu 18.04 has LMDB 0.9.21
 lmdb_version = '0.9.21'
-# Ubuntu 18.04 has libmongoc 1.9.2
-libmongoc_version = '1.9.0'
+# Ubuntu 24.04 has libmongoc 1.26.0
+libmongoc_version = '1.25.0'
 # Ubuntu 18.04 has SQLite 3.22.0
 sqlite_version = '3.22.0'
 # Ubuntu 18.04 has MariaDB Connector/C 3.0.3
@@ -144,16 +145,32 @@ libfabric_dep = dependency('libfabric',
 	include_type: 'system',
 )
 
-libbson_dep = dependency('libbson-1.0',
+libbson_dep = dependency('bson2',
 	version: '>= @0@'.format(libbson_version),
+	required: false,
 	include_type: 'system',
 )
 
-libmongoc_dep = dependency('libmongoc-1.0',
+if not libbson_dep.found()
+	libbson_dep = dependency('libbson-1.0',
+		version: '>= @0@'.format(libbson_version),
+		include_type: 'system',
+	)
+endif
+
+libmongoc_dep = dependency('mongoc2',
 	version: '>= @0@'.format(libmongoc_version),
 	required: false,
 	include_type: 'system',
 )
+
+if not libmongoc_dep.found()
+	libmongoc_dep = dependency('libmongoc-1.0',
+		version: '>= @0@'.format(libmongoc_version),
+		required: false,
+		include_type: 'system',
+	)
+endif
 
 rados_dep = cc.find_library('rados',
 	has_headers: ['rados/librados.h'],
@@ -774,7 +791,7 @@ endif
 #add_languages('cpp')
 
 #foreach lang: ['c', 'cc']
-#	executable('hello-word-@0@'.format(lang), files('example/hello-world.@0@'.format(lang)),
+#	executable('hello-world-@0@'.format(lang), files('example/hello-world.@0@'.format(lang)),
 #		dependencies: [glib_dep, libbson_dep, julea_dep, julea_client_deps['object'], julea_client_deps['kv'], julea_client_deps['db']],
 #		include_directories: julea_incs,
 #	)
