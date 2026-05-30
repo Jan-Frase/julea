@@ -198,7 +198,7 @@ j_benchmark_run_one(BenchmarkRun* run)
 		{
 			g_autofree gchar* size = NULL;
 
-			size = g_format_size((gdouble)run->bytes / elapsed_time);
+			size = g_format_size((guint64)((gdouble)run->bytes / elapsed_time));
 			g_print(" (%s/s)", size);
 		}
 
