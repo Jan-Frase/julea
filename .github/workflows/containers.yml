@@ -34,12 +34,20 @@ defaults:
   run:
     shell: bash
 jobs:
-  ubuntu:
-    name: Ubuntu
+  build-push:
+    name: Build and Push
     runs-on: ubuntu-24.04
     permissions:
       packages: write
     timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        image:
+          - file: ubuntu-24.04
+            tag: ubuntu:24.04-base
+          - file: ubuntu-26.04
+            tag: ubuntu:26.04-base
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -57,8 +65,8 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           context: containers
-          file: containers/ubuntu-24.04
+          file: containers/${{ matrix.image.file }}
           no-cache: true
           pull: true
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/parcio/julea/ubuntu:24.04-base
+          tags: ghcr.io/parcio/julea/${{ matrix.image.tag }}

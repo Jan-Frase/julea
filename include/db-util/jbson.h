@@ -26,7 +26,7 @@
 
 #include <glib.h>
 
-#include <bson.h>
+#include <bson/bson.h>
 
 #include <julea-db.h>
 

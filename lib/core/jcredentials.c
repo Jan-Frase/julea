@@ -27,7 +27,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include <bson.h>
+#include <bson/bson.h>
 
 #include <jcredentials.h>
 

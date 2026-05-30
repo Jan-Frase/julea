@@ -26,7 +26,7 @@
 
 #include <string.h>
 
-#include <bson.h>
+#include <bson/bson.h>
 
 #include <item/jitem.h>
 #include <item/jitem-internal.h>

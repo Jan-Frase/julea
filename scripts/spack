@@ -27,7 +27,7 @@ spack_clone ()
 {
 	local spack_packages_commit
 
-	spack_packages_commit='eebf27ac6110ff9b9d9d6bf87ef55e749d3bf578'
+	spack_packages_commit='bdf1252c2bf1aea729e8921a899a50a9a5651535'
 
 	test -n "${JULEA_SPACK_DIR}" || return 1
 
@@ -153,6 +153,7 @@ spack_get_dependencies ()
 	dependencies="${dependencies} sqlite"
 
 	# Optional dependencies
+	#dependencies="${dependencies} duckdb"
 	dependencies="${dependencies} gdbm"
 	dependencies="${dependencies} leveldb"
 	dependencies="${dependencies} mariadb-c-client"

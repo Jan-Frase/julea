@@ -34,7 +34,7 @@
 
 #include <glib.h>
 
-#include <bson.h>
+#include <bson/bson.h>
 
 #include <hdf5.h>
 #include <H5PLextern.h>

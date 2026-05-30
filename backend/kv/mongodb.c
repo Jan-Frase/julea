@@ -21,7 +21,7 @@
 #include <glib.h>
 #include <gmodule.h>
 
-#include <mongoc.h>
+#include <mongoc/mongoc.h>
 
 #include <julea.h>
 
@@ -56,10 +56,10 @@ backend_batch_start(gpointer backend_data, gchar const* namespace, JSemantics* s
 	JMongoDBData* bd = backend_data;
 	bson_t command[1];
 	bson_t index[1];
-	bson_t indexes[1];
 	bson_t key[1];
 	bson_t opts[1];
 	bson_t reply[1];
+	bson_array_builder_t* indexes;
 	mongoc_bulk_operation_t* bulk_op;
 	mongoc_collection_t* m_collection;
 	mongoc_database_t* m_database;
@@ -77,13 +77,13 @@ backend_batch_start(gpointer backend_data, gchar const* namespace, JSemantics* s
 
 	bson_init(command);
 	bson_append_utf8(command, "createIndexes", -1, namespace, -1);
-	bson_append_array_begin(command, "indexes", -1, indexes);
-	bson_append_document_begin(indexes, "0", -1, index);
+	bson_append_array_builder_begin(command, "indexes", -1, &indexes);
+	bson_array_builder_append_document_begin(indexes, index);
 	bson_append_document(index, "key", -1, key);
 	bson_append_utf8(index, "name", -1, index_name, -1);
 	bson_append_bool(index, "unique", -1, TRUE);
-	bson_append_document_end(indexes, index);
-	bson_append_array_end(command, indexes);
+	bson_array_builder_append_document_end(indexes, index);
+	bson_append_array_builder_end(command, indexes);
 
 	bson_destroy(key);
 	bson_free(index_name);

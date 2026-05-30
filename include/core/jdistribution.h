@@ -29,7 +29,7 @@
 
 #include <glib.h>
 
-#include <bson.h>
+#include <bson/bson.h>
 
 G_BEGIN_DECLS
 

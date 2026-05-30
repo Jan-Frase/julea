@@ -85,18 +85,6 @@ j_helper_set_cork(GSocketConnection* connection, gboolean enable)
 	setsockopt(fd, IPPROTO_TCP, TCP_CORK, &flag, sizeof(gint));
 }
 
-void
-j_helper_get_number_string(gchar* string, guint32 length, guint32 number)
-{
-	J_TRACE_FUNCTION(NULL);
-
-	gint ret;
-
-	/// \todo improve
-	ret = g_snprintf(string, length, "%d", number);
-	g_return_if_fail((guint)ret <= length);
-}
-
 gchar*
 j_helper_str_replace(gchar const* str, gchar const* old, gchar const* new)
 {
