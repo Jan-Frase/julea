@@ -43,7 +43,7 @@ _benchmark_db_delete(BenchmarkRun* run, gchar const* namespace, gboolean use_bat
 	delete_batch = j_batch_new(semantics);
 	batch = j_batch_new(semantics);
 
-	b_scheme = _benchmark_db_prepare_scheme(namespace, false, use_index_all, use_index_single, batch, delete_batch);
+	b_scheme =helper_fn_benchmark_db_prepare_scheme(namespace, false, use_index_all, use_index_single, batch, delete_batch);
 
 	g_assert_nonnull(b_scheme);
 	g_assert_nonnull(run);
@@ -57,7 +57,7 @@ _benchmark_db_delete(BenchmarkRun* run, gchar const* namespace, gboolean use_bat
 		for (gint i = 0; i < ((use_index_all || use_index_single) ? N : (N / N_GET_DIVIDER)); i++)
 		{
 			g_autoptr(JDBEntry) entry = j_db_entry_new(b_scheme, &b_s_error);
-			g_autofree gchar* string = _benchmark_db_get_identifier(i);
+			g_autofree gchar* string =helper_fn_benchmark_db_get_identifier(i);
 			g_autoptr(JDBSelector) selector = j_db_selector_new(b_scheme, J_DB_SELECTOR_MODE_AND, &b_s_error);
 
 			ret = j_db_selector_add_field(selector, "string", J_DB_SELECTOR_OPERATOR_EQ, string, 0, &b_s_error);
@@ -104,7 +104,7 @@ _benchmark_db_update(BenchmarkRun* run, gchar const* namespace, gboolean use_bat
 	delete_batch = j_batch_new(semantics);
 	batch = j_batch_new(semantics);
 
-	b_scheme = _benchmark_db_prepare_scheme(namespace, false, use_index_all, use_index_single, batch, delete_batch);
+	b_scheme =helper_fn_benchmark_db_prepare_scheme(namespace, false, use_index_all, use_index_single, batch, delete_batch);
 
 	g_assert_nonnull(b_scheme);
 	g_assert_nonnull(run);
@@ -120,7 +120,7 @@ _benchmark_db_update(BenchmarkRun* run, gchar const* namespace, gboolean use_bat
 			gint64 i_signed = (((i + N_PRIME) * SIGNED_FACTOR) % CLASS_MODULUS) - CLASS_LIMIT;
 			g_autoptr(JDBSelector) selector = j_db_selector_new(b_scheme, J_DB_SELECTOR_MODE_AND, &b_s_error);
 			g_autoptr(JDBEntry) entry = j_db_entry_new(b_scheme, &b_s_error);
-			g_autofree gchar* string = _benchmark_db_get_identifier(i);
+			g_autofree gchar* string =helper_fn_benchmark_db_get_identifier(i);
 
 			g_assert_null(b_s_error);
 

@@ -139,7 +139,7 @@ _benchmark_kv_get(BenchmarkRun* run, gboolean use_batch)
 
 			name = g_strdup_printf("benchmark-%d", i);
 			object = j_kv_new("benchmark", name);
-			j_kv_get_callback(object, _benchmark_kv_get_callback, NULL, batch);
+			j_kv_get_callback(object,helper_fn_benchmark_kv_get_callback, NULL, batch);
 
 			if (!use_batch)
 			{

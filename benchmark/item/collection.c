@@ -26,7 +26,7 @@
 #include "benchmark.h"
 
 static void
-_benchmark_collection_create(BenchmarkRun* run, gboolean use_batch)
+helper_fn_benchmark_collection_create(BenchmarkRun* run, gboolean use_batch)
 {
 	guint const n = 1000;
 
@@ -78,17 +78,17 @@ _benchmark_collection_create(BenchmarkRun* run, gboolean use_batch)
 static void
 benchmark_collection_create(BenchmarkRun* run)
 {
-	_benchmark_collection_create(run, FALSE);
+	helper_fn_benchmark_collection_create(run, FALSE);
 }
 
 static void
 benchmark_collection_create_batch(BenchmarkRun* run)
 {
-	_benchmark_collection_create(run, TRUE);
+	helper_fn_benchmark_collection_create(run, TRUE);
 }
 
 static void
-_benchmark_collection_delete(BenchmarkRun* run, gboolean use_batch)
+helper_fn_benchmark_collection_delete(BenchmarkRun* run, gboolean use_batch)
 {
 	guint const n = 1000;
 
@@ -149,13 +149,13 @@ _benchmark_collection_delete(BenchmarkRun* run, gboolean use_batch)
 static void
 benchmark_collection_delete(BenchmarkRun* run)
 {
-	_benchmark_collection_delete(run, FALSE);
+	helper_fn_benchmark_collection_delete(run, FALSE);
 }
 
 static void
 benchmark_collection_delete_batch(BenchmarkRun* run)
 {
-	_benchmark_collection_delete(run, TRUE);
+	helper_fn_benchmark_collection_delete(run, TRUE);
 }
 
 static void
@@ -200,7 +200,7 @@ benchmark_collection_delete_batch_without_get(BenchmarkRun* run)
 }
 
 static void
-_benchmark_collection_unordered_create_delete(BenchmarkRun* run, gboolean use_batch)
+helper_fn_benchmark_collection_unordered_create_delete(BenchmarkRun* run, gboolean use_batch)
 {
 	guint const n = 1000;
 
@@ -246,13 +246,13 @@ _benchmark_collection_unordered_create_delete(BenchmarkRun* run, gboolean use_ba
 static void
 benchmark_collection_unordered_create_delete(BenchmarkRun* run)
 {
-	_benchmark_collection_unordered_create_delete(run, FALSE);
+	helper_fn_benchmark_collection_unordered_create_delete(run, FALSE);
 }
 
 static void
 benchmark_collection_unordered_create_delete_batch(BenchmarkRun* run)
 {
-	_benchmark_collection_unordered_create_delete(run, TRUE);
+	helper_fn_benchmark_collection_unordered_create_delete(run, TRUE);
 }
 
 void
