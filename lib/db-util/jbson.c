@@ -658,7 +658,6 @@ _error:
 	return FALSE;
 }
 
-/// \todo does more or less the same as j_helper_get_number_string/bson_uint32_to_string
 gboolean
 j_bson_array_generate_key(guint32 index, const char** key, char* buf, guint buf_length, GError** error)
 {
@@ -714,11 +713,11 @@ _error:
 }
 
 gboolean
-j_bson_append_array_begin(bson_t* bson, const char* key, bson_t* bson_child, GError** error)
+j_bson_append_array_builder_begin(bson_t* bson, const char* key, bson_array_builder_t** array_builder, GError** error)
 {
 	J_TRACE_FUNCTION(NULL);
 
-	if (G_UNLIKELY(!bson || !bson_child))
+	if (G_UNLIKELY(!bson))
 	{
 		g_set_error_literal(error, J_BACKEND_BSON_ERROR, J_BACKEND_BSON_ERROR_BSON_NULL, "bson must not be NULL");
 		goto _error;
@@ -730,7 +729,13 @@ j_bson_append_array_begin(bson_t* bson, const char* key, bson_t* bson_child, GEr
 		goto _error;
 	}
 
-	if (G_UNLIKELY(!bson_append_array_begin(bson, key, -1, bson_child)))
+	if (G_UNLIKELY(!array_builder))
+	{
+		g_set_error_literal(error, J_BACKEND_BSON_ERROR, J_BACKEND_BSON_ERROR_ARRAY_BUILDER_NULL, "array_builder must not be NULL");
+		goto _error;
+	}
+
+	if (G_UNLIKELY(!bson_append_array_builder_begin(bson, key, -1, array_builder)))
 	{
 		g_set_error_literal(error, J_BACKEND_BSON_ERROR, J_BACKEND_BSON_ERROR_BSON_APPEND_ARRAY_FAILED, "bson append array failed");
 		goto _error;
@@ -743,20 +748,132 @@ _error:
 }
 
 gboolean
-j_bson_append_array_end(bson_t* bson, bson_t* bson_child, GError** error)
+j_bson_append_array_builder_end(bson_t* bson, bson_array_builder_t* array_builder, GError** error)
 {
 	J_TRACE_FUNCTION(NULL);
 
-	if (G_UNLIKELY(!bson || !bson_child))
+	if (G_UNLIKELY(!bson))
 	{
 		g_set_error_literal(error, J_BACKEND_BSON_ERROR, J_BACKEND_BSON_ERROR_BSON_NULL, "bson must not be NULL");
 		goto _error;
 	}
 
-	if (G_UNLIKELY(!bson_append_array_end(bson, bson_child)))
+	if (G_UNLIKELY(!array_builder))
+	{
+		g_set_error_literal(error, J_BACKEND_BSON_ERROR, J_BACKEND_BSON_ERROR_ARRAY_BUILDER_NULL, "array_builder must not be NULL");
+		goto _error;
+	}
+
+	if (G_UNLIKELY(!bson_append_array_builder_end(bson, array_builder)))
 	{
 		g_set_error_literal(error, J_BACKEND_BSON_ERROR, J_BACKEND_BSON_ERROR_BSON_APPEND_ARRAY_FAILED, "bson append array failed");
 		goto _error;
+	}
+
+	return TRUE;
+
+_error:
+	return FALSE;
+}
+
+gboolean
+j_bson_array_builder_append_value(bson_array_builder_t* array_builder, JDBType type, JDBTypeValue* value, GError** error)
+{
+	J_TRACE_FUNCTION(NULL);
+
+	if (G_UNLIKELY(!array_builder))
+	{
+		g_set_error_literal(error, J_BACKEND_BSON_ERROR, J_BACKEND_BSON_ERROR_ARRAY_BUILDER_NULL, "array_builder must not be NULL");
+		goto _error;
+	}
+
+	if (G_UNLIKELY(!value))
+	{
+		g_set_error_literal(error, J_BACKEND_BSON_ERROR, J_BACKEND_BSON_ERROR_BSON_VALUE_NULL, "value must not be NULL");
+		goto _error;
+	}
+
+	switch (type)
+	{
+		case J_DB_TYPE_SINT32:
+			if (G_UNLIKELY(!bson_array_builder_append_int32(array_builder, value->val_sint32)))
+			{
+				g_set_error_literal(error, J_BACKEND_BSON_ERROR, J_BACKEND_BSON_ERROR_ARRAY_BUILDER_APPEND_FAILED, "array_builder append failed");
+				goto _error;
+			}
+
+			break;
+		case J_DB_TYPE_UINT32:
+			if (G_UNLIKELY(!bson_array_builder_append_int32(array_builder, value->val_uint32)))
+			{
+				g_set_error_literal(error, J_BACKEND_BSON_ERROR, J_BACKEND_BSON_ERROR_ARRAY_BUILDER_APPEND_FAILED, "array_builder append failed");
+				goto _error;
+			}
+
+			break;
+		case J_DB_TYPE_SINT64:
+			if (G_UNLIKELY(!bson_array_builder_append_int64(array_builder, value->val_sint64)))
+			{
+				g_set_error_literal(error, J_BACKEND_BSON_ERROR, J_BACKEND_BSON_ERROR_ARRAY_BUILDER_APPEND_FAILED, "array_builder append failed");
+				goto _error;
+			}
+
+			break;
+		case J_DB_TYPE_UINT64:
+			if (G_UNLIKELY(!bson_array_builder_append_int64(array_builder, value->val_uint64)))
+			{
+				g_set_error_literal(error, J_BACKEND_BSON_ERROR, J_BACKEND_BSON_ERROR_ARRAY_BUILDER_APPEND_FAILED, "array_builder append failed");
+				goto _error;
+			}
+
+			break;
+		case J_DB_TYPE_FLOAT64:
+			if (G_UNLIKELY(!bson_array_builder_append_double(array_builder, value->val_float64)))
+			{
+				g_set_error_literal(error, J_BACKEND_BSON_ERROR, J_BACKEND_BSON_ERROR_ARRAY_BUILDER_APPEND_FAILED, "array_builder append failed");
+				goto _error;
+			}
+
+			break;
+		case J_DB_TYPE_FLOAT32:
+			if (G_UNLIKELY(!bson_array_builder_append_double(array_builder, (gdouble)value->val_float32)))
+			{
+				g_set_error_literal(error, J_BACKEND_BSON_ERROR, J_BACKEND_BSON_ERROR_ARRAY_BUILDER_APPEND_FAILED, "array_builder append failed");
+				goto _error;
+			}
+
+			break;
+		case J_DB_TYPE_STRING:
+			if (G_UNLIKELY(!bson_array_builder_append_utf8(array_builder, value->val_string, -1)))
+			{
+				g_set_error_literal(error, J_BACKEND_BSON_ERROR, J_BACKEND_BSON_ERROR_ARRAY_BUILDER_APPEND_FAILED, "array_builder append failed");
+				goto _error;
+			}
+
+			break;
+		case J_DB_TYPE_BLOB:
+			if (!value->val_blob)
+			{
+				if (G_UNLIKELY(!bson_array_builder_append_null(array_builder)))
+				{
+					g_set_error_literal(error, J_BACKEND_BSON_ERROR, J_BACKEND_BSON_ERROR_ARRAY_BUILDER_APPEND_FAILED, "array_builder append failed");
+					goto _error;
+				}
+			}
+			else
+			{
+				if (G_UNLIKELY(!bson_array_builder_append_binary(array_builder, BSON_SUBTYPE_BINARY, (const uint8_t*)value->val_blob, value->val_blob_length)))
+				{
+					g_set_error_literal(error, J_BACKEND_BSON_ERROR, J_BACKEND_BSON_ERROR_ARRAY_BUILDER_APPEND_FAILED, "array_builder append failed");
+					goto _error;
+				}
+			}
+
+			break;
+		case J_DB_TYPE_ID:
+		default:
+			g_set_error_literal(error, J_BACKEND_BSON_ERROR, J_BACKEND_BSON_ERROR_ITER_INVALID_TYPE, "bson iter invalid type");
+			goto _error;
 	}
 
 	return TRUE;

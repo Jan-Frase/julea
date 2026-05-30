@@ -278,7 +278,7 @@ j_db_schema_add_index(JDBSchema* schema, gchar const** names, GError** error)
 	JDBSchemaIndex index;
 	JDBSchemaIndex* index_tmp;
 	guint i;
-	bson_t bson;
+	bson_array_builder_t* array_builder;
 	JDBTypeValue val;
 	const char* key;
 	char buf[20];
@@ -355,7 +355,7 @@ _not_equal:
 		goto _error;
 	}
 
-	if (G_UNLIKELY(!j_bson_append_array_begin(&schema->bson_index, key, &bson, error)))
+	if (G_UNLIKELY(!j_bson_append_array_builder_begin(&schema->bson_index, key, &array_builder, error)))
 	{
 		goto _error;
 	}
@@ -364,23 +364,17 @@ _not_equal:
 
 	while (*name)
 	{
-		if (G_UNLIKELY(!j_bson_array_generate_key(i, &key, buf, sizeof(buf), error)))
-		{
-			goto _error;
-		}
-
 		val.val_string = *name;
 
-		if (G_UNLIKELY(!j_bson_append_value(&bson, key, J_DB_TYPE_STRING, &val, error)))
+		if (G_UNLIKELY(!j_bson_array_builder_append_value(array_builder, J_DB_TYPE_STRING, &val, error)))
 		{
 			goto _error;
 		}
 
 		name++;
-		i++;
 	}
 
-	if (G_UNLIKELY(!j_bson_append_array_end(&schema->bson_index, &bson, error)))
+	if (G_UNLIKELY(!j_bson_append_array_builder_end(&schema->bson_index, array_builder, error)))
 	{
 		goto _error;
 	}

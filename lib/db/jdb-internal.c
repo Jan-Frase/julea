@@ -553,12 +553,10 @@ j_db_selector_finalize(JDBSelector* selector, GError** error)
 	{
 		GHashTableIter iter;
 		g_autoptr(GString) value_str = g_string_new(NULL);
-		g_autoptr(GString) key_str = g_string_new(NULL);
-		bson_t tables;
-		guint table_count = 0;
+		bson_array_builder_t* tables;
 		gpointer key;
 
-		if (G_UNLIKELY(!j_bson_append_array_begin(&selector->final, "t", &tables, error)))
+		if (G_UNLIKELY(!j_bson_append_array_builder_begin(&selector->final, "t", &tables, error)))
 		{
 			goto _error;
 		}
@@ -567,19 +565,16 @@ j_db_selector_finalize(JDBSelector* selector, GError** error)
 		g_hash_table_iter_init(&iter, selector->join_schema);
 		while (g_hash_table_iter_next(&iter, &key, NULL))
 		{
-			g_string_printf(key_str, "%i", table_count);
 			g_string_assign(value_str, (gchar*)key);
 			val.val_string = value_str->str;
 
-			if (G_UNLIKELY(!j_bson_append_value(&tables, key_str->str, J_DB_TYPE_STRING, &val, error)))
+			if (G_UNLIKELY(!j_bson_array_builder_append_value(tables, J_DB_TYPE_STRING, &val, error)))
 			{
 				goto _error;
 			}
-
-			++table_count;
 		}
 
-		if (G_UNLIKELY(!j_bson_append_array_end(&selector->final, &tables, error)))
+		if (G_UNLIKELY(!j_bson_append_array_builder_end(&selector->final, tables, error)))
 		{
 			goto _error;
 		}
