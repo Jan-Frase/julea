@@ -492,11 +492,7 @@ j_kv_get_exec(JList* operations, JSemantics* semantics)
 				data = j_message_get_n(reply, len);
 
 				// data belongs to the message, create a copy
-#if GLIB_CHECK_VERSION(2, 68, 0)
 				value = g_memdup2(data, len);
-#else
-				value = g_memdup(data, len);
-#endif
 			}
 
 			// We need to call the callback even if the key is not found

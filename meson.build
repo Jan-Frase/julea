@@ -86,11 +86,10 @@ endif
 # FIXME Also check for pkg-config files in /usr (worked around in environment.sh)
 # FIXME Allow specifying dependency prefixes?
 
+# g_aligned_alloc/g_aligned_free needs GLib 2.72
 # G_ALIGNOF needs GLib 2.60
-# g_test_incomplete needs GLib 2.58
-# Structured logging needs GLib 2.56
 # Ubuntu 24.04 has GLib 2.80
-glib_version = '2.60'
+glib_version = '2.72'
 # Ubuntu 22.04 has libfabric 1.11.0
 libfabric_version = '1.11.0'
 # bson_array_builder_t needs libbson 1.25.0

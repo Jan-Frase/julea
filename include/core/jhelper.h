@@ -104,16 +104,6 @@ guint32 j_helper_hash(gchar const* str);
 gchar* j_helper_str_replace(gchar const* str, gchar const* old, gchar const* new);
 
 /**
- * Error checking wrapper for aligned_alloc().
- *
- * \param align The alignment to use. Must be support by implementation.
- * \param len   The number of bytes to allocate.
- *
- * \return A pointer to allocated memory or NULL on failure. Memory should be freed with free().
- **/
-gpointer j_helper_alloc_aligned(gsize align, gsize len);
-
-/**
  * Synchronizes the file described by \p path with the storage device.
  *
  * \param path The file to sync.

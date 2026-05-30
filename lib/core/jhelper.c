@@ -198,22 +198,6 @@ j_helper_hash(gchar const* str)
 	return hash;
 }
 
-/// \todo can be replaced with g_aligned_alloc/g_aligned_free (in GLib 2.72)
-gpointer
-j_helper_alloc_aligned(gsize align, gsize len)
-{
-	gpointer buf;
-
-	buf = aligned_alloc(align, len);
-
-	if (buf == NULL)
-	{
-		g_error("Failed to allocate %" G_GSIZE_FORMAT " bytes with %" G_GSIZE_FORMAT " byte alignment", len, align);
-	}
-
-	return buf;
-}
-
 gboolean
 j_helper_file_sync(gchar const* path)
 {
@@ -224,11 +208,7 @@ j_helper_file_sync(gchar const* path)
 		return FALSE;
 	}
 
-#if GLIB_CHECK_VERSION(2, 64, 0)
 	if (g_fsync(fd) == -1)
-#else
-	if (fsync(fd) == -1)
-#endif
 	{
 		return FALSE;
 	}
@@ -246,11 +226,7 @@ j_helper_file_discard(gchar const* path)
 		return FALSE;
 	}
 
-#if GLIB_CHECK_VERSION(2, 64, 0)
 	if (g_fsync(fd) == -1)
-#else
-	if (fsync(fd) == -1)
-#endif
 	{
 		return FALSE;
 	}
