@@ -294,7 +294,7 @@ jobs:
         env:
           CC: clang
         run: |
-          ./scripts/ci/build.sh debug-no-sanitize system
+          ./scripts/ci/build.sh debug system
 
       - name: Create configuration
         run: |
@@ -309,8 +309,6 @@ jobs:
           . scripts/environment.sh
           ./scripts/setup.sh start
           ./scripts/test.sh
-          # sudo apt --yes --no-install-recommends install valgrind
-          # valgrind --leak-check=full --track-origins=yes julea-test 
           sleep 10
           ./scripts/test.sh
           ./scripts/setup.sh stop

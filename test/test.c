@@ -41,7 +41,6 @@ main(int argc, char** argv)
 	// This is necessary because we call g_test_trap_assert_passed() in J_TEST_TRAP_END
 	g_test_set_nonfatal_assertions();
 
-	/*
 	// Core
 	test_core_background_operation();
 	test_core_batch();
@@ -55,14 +54,12 @@ main(int argc, char** argv)
 	test_core_memory_chunk();
 	test_core_message();
 	test_core_semantics();
-	*/
 
 	// Object client
 	test_object_distributed_object();
 	test_object_object();
 	test_object_object_iterator();
 
-	/*
 	// KV client
 	test_kv_kv();
 	test_kv_kv_iterator();
@@ -87,7 +84,6 @@ main(int argc, char** argv)
 	test_hdf_file();
 	test_hdf_group_link();
 	test_hdf_object();
-	*/
 
 	ret = g_test_run();
 
