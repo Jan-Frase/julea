@@ -42,7 +42,8 @@ j_db_entry_new(JDBSchema* schema, GError** error)
 	g_return_val_if_fail(schema != NULL, NULL);
 	g_return_val_if_fail(error == NULL || *error == NULL, NULL);
 
-	entry = j_helper_alloc_aligned(128, sizeof(JDBEntry));
+	/// \todo can be replaced with g_new once we require libbson 2.x
+	entry = j_helper_alloc_aligned(G_ALIGNOF(JDBEntry), sizeof(JDBEntry));
 
 	if (G_UNLIKELY(!j_bson_init(&entry->bson, error)))
 	{

@@ -198,6 +198,7 @@ j_helper_hash(gchar const* str)
 	return hash;
 }
 
+/// \todo can be replaced with g_aligned_alloc/g_aligned_free (in GLib 2.72)
 gpointer
 j_helper_alloc_aligned(gsize align, gsize len)
 {

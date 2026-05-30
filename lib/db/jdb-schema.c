@@ -45,7 +45,8 @@ j_db_schema_new(gchar const* namespace, gchar const* name, GError** error)
 
 	(void)error;
 
-	schema = j_helper_alloc_aligned(128, sizeof(JDBSchema));
+	/// \todo can be replaced with g_new once we require libbson 2.x
+	schema = j_helper_alloc_aligned(G_ALIGNOF(JDBSchema), sizeof(JDBSchema));
 	schema->namespace = g_strdup(namespace);
 	schema->name = g_strdup(name);
 	schema->variables = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);

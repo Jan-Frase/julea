@@ -46,7 +46,8 @@ j_db_iterator_new(JDBSchema* schema, JDBSelector* selector, GError** error)
 	g_return_val_if_fail((selector == NULL) || (selector->schema == schema), NULL);
 	g_return_val_if_fail(error == NULL || *error == NULL, NULL);
 
-	iterator = j_helper_alloc_aligned(128, sizeof(JDBIterator));
+	/// \todo can be replaced with g_new once we require libbson 2.x
+	iterator = j_helper_alloc_aligned(G_ALIGNOF(JDBIterator), sizeof(JDBIterator));
 	iterator->schema = j_db_schema_ref(schema);
 
 	if (G_UNLIKELY(!iterator->schema))

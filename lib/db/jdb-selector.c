@@ -43,7 +43,8 @@ j_db_selector_new(JDBSchema* schema, JDBSelectorMode mode, GError** error)
 	g_return_val_if_fail(error == NULL || *error == NULL, NULL);
 	g_return_val_if_fail(schema != NULL, NULL);
 
-	selector = j_helper_alloc_aligned(128, sizeof(JDBSelector));
+	/// \todo can be replaced with g_new once we require libbson 2.x
+	selector = j_helper_alloc_aligned(G_ALIGNOF(JDBSelector), sizeof(JDBSelector));
 	selector->ref_count = 1;
 	selector->mode = mode;
 	selector->selection_count = 0;

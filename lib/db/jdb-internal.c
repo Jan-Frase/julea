@@ -201,7 +201,8 @@ j_db_internal_schema_create(JDBSchema* j_db_schema, JBatch* batch, GError** erro
 
 	g_return_val_if_fail(error == NULL || *error == NULL, FALSE);
 
-	data = g_new(JBackendOperation, 1);
+	/// \todo can be replaced with g_new once we require libbson 2.x
+	data = j_helper_alloc_aligned(G_ALIGNOF(JBackendOperation), sizeof(JBackendOperation));
 	memcpy(data, &j_backend_operation_db_schema_create, sizeof(JBackendOperation));
 	data->in_param[0].ptr_const = j_db_schema->namespace;
 	data->in_param[1].ptr_const = j_db_schema->name;
@@ -241,7 +242,8 @@ j_db_internal_schema_get(JDBSchema* j_db_schema, JBatch* batch, GError** error)
 
 	g_return_val_if_fail(error == NULL || *error == NULL, FALSE);
 
-	data = g_new(JBackendOperation, 1);
+	/// \todo can be replaced with g_new once we require libbson 2.x
+	data = j_helper_alloc_aligned(G_ALIGNOF(JBackendOperation), sizeof(JBackendOperation));
 	memcpy(data, &j_backend_operation_db_schema_get, sizeof(JBackendOperation));
 	data->in_param[0].ptr_const = j_db_schema->namespace;
 	data->in_param[1].ptr_const = j_db_schema->name;
@@ -281,7 +283,8 @@ j_db_internal_schema_delete(JDBSchema* j_db_schema, JBatch* batch, GError** erro
 
 	g_return_val_if_fail(error == NULL || *error == NULL, FALSE);
 
-	data = g_new(JBackendOperation, 1);
+	/// \todo can be replaced with g_new once we require libbson 2.x
+	data = j_helper_alloc_aligned(G_ALIGNOF(JBackendOperation), sizeof(JBackendOperation));
 	memcpy(data, &j_backend_operation_db_schema_delete, sizeof(JBackendOperation));
 	data->in_param[0].ptr_const = j_db_schema->namespace;
 	data->in_param[1].ptr_const = j_db_schema->name;
@@ -320,7 +323,8 @@ j_db_internal_insert(JDBEntry* j_db_entry, JBatch* batch, GError** error)
 
 	g_return_val_if_fail(error == NULL || *error == NULL, FALSE);
 
-	data = g_new(JBackendOperation, 1);
+	/// \todo can be replaced with g_new once we require libbson 2.x
+	data = j_helper_alloc_aligned(G_ALIGNOF(JBackendOperation), sizeof(JBackendOperation));
 	memcpy(data, &j_backend_operation_db_insert, sizeof(JBackendOperation));
 	data->in_param[0].ptr_const = j_db_entry->schema->namespace;
 	data->in_param[1].ptr_const = j_db_entry->schema->name;
@@ -361,7 +365,8 @@ j_db_internal_update(JDBEntry* j_db_entry, JDBSelector* j_db_selector, JBatch* b
 
 	g_return_val_if_fail(error == NULL || *error == NULL, FALSE);
 
-	data = g_new(JBackendOperation, 1);
+	/// \todo can be replaced with g_new once we require libbson 2.x
+	data = j_helper_alloc_aligned(G_ALIGNOF(JBackendOperation), sizeof(JBackendOperation));
 	memcpy(data, &j_backend_operation_db_update, sizeof(JBackendOperation));
 	data->in_param[0].ptr_const = j_db_entry->schema->namespace;
 	data->in_param[1].ptr_const = j_db_entry->schema->name;
@@ -404,7 +409,8 @@ j_db_internal_delete(JDBEntry* j_db_entry, JDBSelector* j_db_selector, JBatch* b
 
 	g_return_val_if_fail(error == NULL || *error == NULL, FALSE);
 
-	data = g_new(JBackendOperation, 1);
+	/// \todo can be replaced with g_new once we require libbson 2.x
+	data = j_helper_alloc_aligned(G_ALIGNOF(JBackendOperation), sizeof(JBackendOperation));
 	memcpy(data, &j_backend_operation_db_delete, sizeof(JBackendOperation));
 	data->in_param[0].ptr_const = j_db_entry->schema->namespace;
 	data->in_param[1].ptr_const = j_db_entry->schema->name;
@@ -447,12 +453,14 @@ j_db_internal_query(JDBSchema* j_db_schema, JDBSelector* j_db_selector, JDBItera
 
 	g_return_val_if_fail(error == NULL || *error == NULL, FALSE);
 
-	helper = j_helper_alloc_aligned(128, sizeof(JDBIteratorHelper));
+	/// \todo can be replaced with g_new once we require libbson 2.x
+	helper = j_helper_alloc_aligned(G_ALIGNOF(JDBIteratorHelper), sizeof(JDBIteratorHelper));
 	helper->initialized = FALSE;
 	memset(&helper->bson, 0, sizeof(bson_t));
 	j_db_iterator->iterator = helper;
 
-	data = g_new(JBackendOperation, 1);
+	/// \todo can be replaced with g_new once we require libbson 2.x
+	data = j_helper_alloc_aligned(G_ALIGNOF(JBackendOperation), sizeof(JBackendOperation));
 	memcpy(data, &j_backend_operation_db_query, sizeof(JBackendOperation));
 	data->in_param[0].ptr_const = j_db_schema->namespace;
 	data->in_param[1].ptr_const = j_db_schema->name;
