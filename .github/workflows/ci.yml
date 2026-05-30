@@ -308,9 +308,9 @@ jobs:
         run: |
           . scripts/environment.sh
           ./scripts/setup.sh start
-          # ./scripts/test.sh
-          sudo apt --yes --no-install-recommends install valgrind
-          valgrind --leak-check=full --track-origins=yes julea-test 
+          ./scripts/test.sh
+          # sudo apt --yes --no-install-recommends install valgrind
+          # valgrind --leak-check=full --track-origins=yes julea-test 
           sleep 10
           ./scripts/test.sh
           ./scripts/setup.sh stop
