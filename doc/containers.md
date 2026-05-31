@@ -9,13 +9,14 @@ Setting up and using the container looks like the following:
 ```console
 git clone https://github.com/parcio/julea.git &&
 
-docker pull ghcr.io/parcio/ubuntu-dev:22.04 &&
-docker run -v $PWD/julea:/julea -it ghcr.io/parcio/ubuntu-dev:22.04
+docker pull ghcr.io/parcio/julea/ubuntu:24.04-base &&
+docker run -v $PWD/julea:/julea -it ghcr.io/parcio/julea/ubuntu:24.04-base
 ```
 
 Continue with the following commands inside the container:
 
 ```console
+cd /julea &&
 . scripts/environment.sh &&
 
 meson setup --prefix="/julea/install" -Db_sanitize=address,undefined bld &&
@@ -34,10 +35,10 @@ julea-config --user \
 
 ### Building Container
 
-The Dockerfile can be found at `containers/ubuntu-22.04-dev`.
-To build the container, use the following commands:
+The Dockerfiles can be found in the `containers` directory.
+To build a container, use the following commands:
 
 ```console
 cd julea/containers &&
-docker build -f ubuntu-22.04-dev -t parcio/ubuntu-dev:22.04 .
+docker build -f ubuntu-24.04 -t parcio/julea/ubuntu:24.04-base .
 ```

@@ -43,7 +43,8 @@ j_db_selector_new(JDBSchema* schema, JDBSelectorMode mode, GError** error)
 	g_return_val_if_fail(error == NULL || *error == NULL, NULL);
 	g_return_val_if_fail(schema != NULL, NULL);
 
-	selector = j_helper_alloc_aligned(128, sizeof(JDBSelector));
+	/// \todo can be replaced with g_new once we require libbson 2.x
+	selector = g_aligned_alloc(1, sizeof(JDBSelector), G_ALIGNOF(JDBSelector));
 	selector->ref_count = 1;
 	selector->mode = mode;
 	selector->selection_count = 0;
@@ -100,7 +101,7 @@ j_db_selector_unref(JDBSelector* selector)
 		bson_destroy(&selector->joins);
 		bson_destroy(&selector->final);
 		// Free Selector.
-		g_free(selector);
+		g_aligned_free(selector);
 	}
 }
 

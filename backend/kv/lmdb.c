@@ -169,11 +169,7 @@ backend_get(gpointer backend_data, gpointer data, gchar const* key, gpointer* va
 	if (mdb_get(batch->txn, bd->dbi, &m_key, &m_value) == 0)
 	{
 		/// \todo check whether copies can be avoided
-#if GLIB_CHECK_VERSION(2, 68, 0)
 		*value = g_memdup2(m_value.mv_data, m_value.mv_size);
-#else
-		*value = g_memdup(m_value.mv_data, m_value.mv_size);
-#endif
 		*len = m_value.mv_size;
 
 		ret = TRUE;
