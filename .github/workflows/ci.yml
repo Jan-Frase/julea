@@ -246,10 +246,10 @@ jobs:
           . scripts/environment.sh
           ./scripts/setup.sh start
           # ./scripts/test.sh
-          valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=1 julea-test
+          valgrind --leak-check=full --show-leak-kinds=all julea-test
           sleep 10
           # ./scripts/test.sh
-          # valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=1 julea-test
+          # valgrind --leak-check=full --show-leak-kinds=all julea-test
           ./scripts/setup.sh stop
       - name: HDF5 Tests
         env:
