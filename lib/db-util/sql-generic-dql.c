@@ -198,12 +198,11 @@ get_schema(gpointer backend_data, gchar const* namespace, gchar const* name, GEr
 		bson_iter_t iter;
 		gboolean has_next;
 		JDBTypeValue value;
-		gboolean schema_initialized = FALSE;
 		char const* string_tmp;
 
 		schema_map = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
 
-		if (!(schema_initialized = internal_backend_schema_get(backend_data, namespace, name, &schema, error)))
+		if (!internal_backend_schema_get(backend_data, namespace, name, &schema, error))
 		{
 			goto _error;
 		}

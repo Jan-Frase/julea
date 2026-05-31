@@ -64,9 +64,6 @@ main(int argc, char** argv)
 	JStatistics* statistics_total;
 	gchar get_all;
 
-	(void)argc;
-	(void)argv;
-
 	// Explicitly enable UTF-8 since functions such as g_format_size might return UTF-8 characters.
 	g_autofree const char* local_result = setlocale(LC_ALL, "C.UTF-8");
 	if (local_result == NULL)
@@ -74,6 +71,9 @@ main(int argc, char** argv)
 		g_warning("Failed to set locale!");
 		return 1;
 	}
+
+	(void)argc;
+	(void)argv;
 
 	get_all = 1;
 	configuration = j_configuration();

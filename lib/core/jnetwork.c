@@ -696,7 +696,6 @@ j_network_connection_init(JNetworkConnection* connection)
 
 	EXE(j_network_connection_create_memory_resources(connection), "Failed to create memory resources for connection!");
 
-	res = fi_cq_open(connection->domain, &(struct fi_cq_attr){ .wait_obj = FI_WAIT_UNSPEC, .format = FI_CQ_FORMAT_CONTEXT, .size = connection->info->tx_attr->size }, &connection->cq.tx, &connection->cq.tx);
 	res = fi_cq_open(connection->domain, &(struct fi_cq_attr){ .wait_obj = FI_WAIT_UNSPEC, .format = FI_CQ_FORMAT_CONTEXT, .size = connection->info->rx_attr->size }, &connection->cq.rx, &connection->cq.rx);
 	CHECK("Failed to create completion queue!");
 
