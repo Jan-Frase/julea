@@ -74,7 +74,7 @@ j_sql_finalize(gpointer backend_db, void* _stmt, GError** error)
 	g_return_val_if_fail(backend_db != NULL, FALSE);
 	g_return_val_if_fail(_stmt != NULL, FALSE);
 
-	if (wrapper->stmt && (status = (unsigned char) mysql_stmt_close(wrapper->stmt)))
+	if (wrapper->stmt && (status = (unsigned char)mysql_stmt_close(wrapper->stmt)))
 	{
 		g_set_error(error, J_BACKEND_SQL_ERROR, J_BACKEND_SQL_ERROR_FINALIZE, "sql finalize failed error was  (%d):'%s'", status, mysql_stmt_error(wrapper->stmt));
 		goto _error;
@@ -477,7 +477,7 @@ j_sql_step(gpointer backend_db, void* _stmt, gboolean* found, GError** error)
 	{
 		if (wrapper->param_count_in)
 		{
-			if ((status = (unsigned char) mysql_stmt_bind_param(wrapper->stmt, wrapper->bind_in)))
+			if ((status = (unsigned char)mysql_stmt_bind_param(wrapper->stmt, wrapper->bind_in)))
 			{
 				g_set_error(error, J_BACKEND_SQL_ERROR, J_BACKEND_SQL_ERROR_STEP, "sql step failed error was  (%d):'%s'", status, mysql_stmt_error(wrapper->stmt));
 				goto _error;
@@ -486,7 +486,7 @@ j_sql_step(gpointer backend_db, void* _stmt, gboolean* found, GError** error)
 
 		if (wrapper->param_count_out)
 		{
-			if ((status = (unsigned char) mysql_stmt_bind_result(wrapper->stmt, wrapper->bind_out)))
+			if ((status = (unsigned char)mysql_stmt_bind_result(wrapper->stmt, wrapper->bind_out)))
 			{
 				g_set_error(error, J_BACKEND_SQL_ERROR, J_BACKEND_SQL_ERROR_STEP, "sql step failed error was  (%d):'%s'", status, mysql_stmt_error(wrapper->stmt));
 				goto _error;
