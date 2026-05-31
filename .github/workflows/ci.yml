@@ -231,7 +231,7 @@ jobs:
         env:
           CC: ${{ matrix.os.compiler }}
         run: |
-          ./scripts/ci/build.sh debug "${{ matrix.dependencies }}"
+          ./scripts/ci/build.sh debug-no-sanitize "${{ matrix.dependencies }}"
           apt --yes --no-install-recommends install valgrind
       - name: Create configuration
         run: |
